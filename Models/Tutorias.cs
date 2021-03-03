@@ -13,5 +13,5 @@ namespace Dory2.Models
         public DateTime Cadastro  { get; set; }
         public bool Ativo  { get; set; }
 
-}
+    }
 }

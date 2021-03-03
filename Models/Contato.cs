@@ -12,5 +12,5 @@ namespace Dory2.Models
         public string Tipo { get; set; }
         public int IdPessoa{ get; set; }
 
-}
+    }
 }

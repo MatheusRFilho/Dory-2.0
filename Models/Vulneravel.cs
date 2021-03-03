@@ -12,5 +12,5 @@ namespace Dory2.Models
         public bool Status { get; set; }
         public int IdPessoa { get; set; }
 
-}
+    }
 }

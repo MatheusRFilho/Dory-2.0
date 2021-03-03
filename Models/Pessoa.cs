@@ -16,5 +16,5 @@ namespace Dory2.Models
         public string Cutis { get; set; }
         public int IdEndereco { get; set; }
 
-}
+    }
 }
