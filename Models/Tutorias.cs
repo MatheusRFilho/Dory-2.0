@@ -12,15 +12,16 @@ namespace Dory2.Models
         public int Id  { get; set; }
         [Required]
         public int ResponsavelId  { get; set; }
-        public virtual Responsavel Responsavel { get; set; }
         [Required]
         public int PessoaId { get; set; }
-        public virtual Pessoa Pessoa { get; set; }
         [Required]
         [DataType(DataType.Date)]
         public DateTime Cadastro  { get; set; }
         [Required]
         public bool Ativo  { get; set; }
+
+        public virtual Responsavel Responsavel { get; set; }
+        public virtual Pessoa Pessoa { get; set; }
 
     }
 }

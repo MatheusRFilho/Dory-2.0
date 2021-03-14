@@ -10,13 +10,17 @@ namespace Dory2.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Display(Name ="Data que a pessoa foi encontrada")]
         [DataType(DataType.Date)]
         public DateTime Encontrado{ get; set; }
+
         [Required]
         public int PessoaId { get; set; }
-        public virtual Pessoa Pessoa { get; set; }
+
         public int VulneravelId { get; set; }
+
+        public virtual Pessoa Pessoa { get; set; }
         public virtual Vulneravel Vulneravel { get; set; }
 
     }
