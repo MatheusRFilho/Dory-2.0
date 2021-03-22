@@ -19,7 +19,6 @@ namespace Dory2.Models
         [Required]
         public string Senha { get; set; }
 
-        [Required]
         public string Celular { get; set; }
 
         public int PessoaId { get; set; }
