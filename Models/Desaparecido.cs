@@ -11,8 +11,6 @@ namespace Dory2.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name ="Data que a pessoa foi encontrada")]
-        [DataType(DataType.Date)]
         public DateTime Encontrado{ get; set; }
 
         [Required]

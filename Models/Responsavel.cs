@@ -20,9 +20,6 @@ namespace Dory2.Models
         public string Senha { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Celular")]
-        [StringLength(14, MinimumLength = 14)]
         public string Celular { get; set; }
 
         public int PessoaId { get; set; }

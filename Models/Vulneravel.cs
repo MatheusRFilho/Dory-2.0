@@ -11,11 +11,9 @@ namespace Dory2.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [Display(Name ="Observações")]
-        [StringLength(50)]
+        [MaxLength(50)]
         public string Observacoes { get; set; }
         [Required]
-        [Display(Name ="Está Desaparecido ?")]
         public bool Status { get; set; }
         [Required]
         public int PessoaId { get; set; }

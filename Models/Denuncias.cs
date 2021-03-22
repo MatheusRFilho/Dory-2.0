@@ -12,7 +12,6 @@ namespace Dory2.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255, MinimumLength = 15)]
         public string Descricao { get; set; }
 
         [Required]
