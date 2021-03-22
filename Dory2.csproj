@@ -136,6 +136,7 @@
     <Compile Include="Models\Denuncias.cs" />
     <Compile Include="Models\Desaparecido.cs" />
     <Compile Include="Models\Endereco.cs" />
+    <Compile Include="Models\Funcoes.cs" />
     <Compile Include="Models\Mais_infos.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Responsavel.cs" />
