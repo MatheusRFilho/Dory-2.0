@@ -10,23 +10,14 @@ namespace Dory2.Models
     {
         [Key]
         public int Id { get; set; }
-        [DataType(DataType.EmailAddress)]
-        [StringLength(30)]
-        public string Email { get; set; }
-
-        [Compare("Email")]
-        [StringLength(30)]
-        public string ConfirmEmail { get; set; }
 
         [Required]
-        [Display(Name ="Senha")]
-        [DataType(DataType.Password)]
-        [StringLength(15, MinimumLength = 8)]
-        public string Senha { get; set; }
+        [MaxLength(200)]
+        [EmailAddress]
+        public string Email { get; set; }
 
-        [Compare("Senha")]
-        [StringLength(15, MinimumLength = 8)]
-        public string ConfirmPassword { get; set; }
+        [Required]
+        public string Senha { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
@@ -36,6 +27,8 @@ namespace Dory2.Models
 
         public int PessoaId { get; set; }
         public virtual Pessoa Pessoa { get; set; }
+
+        public virtual ICollection<Contato> Contato { get; set; }
 
     }
 }

@@ -25,8 +25,8 @@ namespace Dory2.Models
             Comercial = 2,
         }
         [Required]
-        public int PessoaId { get; set; }
-        public virtual Pessoa Pessoa { get; set; }
+        public int ResponsavelId { get; set; }
+        public virtual Responsavel Responsavel { get; set; }
 
 
     }
