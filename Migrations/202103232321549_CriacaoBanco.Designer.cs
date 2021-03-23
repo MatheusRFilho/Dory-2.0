@@ -13,7 +13,7 @@ namespace Dory2.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202103222304313_CriacaoBanco"; }
+            get { return "202103232321549_CriacaoBanco"; }
         }
         
         string IMigrationMetadata.Source

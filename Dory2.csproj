@@ -125,9 +125,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103222304313_CriacaoBanco.cs" />
-    <Compile Include="Migrations\202103222304313_CriacaoBanco.Designer.cs">
-      <DependentUpon>202103222304313_CriacaoBanco.cs</DependentUpon>
+    <Compile Include="Migrations\202103232321549_CriacaoBanco.cs" />
+    <Compile Include="Migrations\202103232321549_CriacaoBanco.Designer.cs">
+      <DependentUpon>202103232321549_CriacaoBanco.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Casos.cs" />
@@ -199,8 +199,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103222304313_CriacaoBanco.resx">
-      <DependentUpon>202103222304313_CriacaoBanco.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103232321549_CriacaoBanco.resx">
+      <DependentUpon>202103232321549_CriacaoBanco.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

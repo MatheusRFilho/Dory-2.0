@@ -23,7 +23,7 @@ namespace Dory2.Models
         public DateTime DataNascimento  { get; set; }
 
         [Required]
-        public char Sexo { get; set; }
+        public string Sexo { get; set; }
 
         public string Cutis { get; set; }
 
