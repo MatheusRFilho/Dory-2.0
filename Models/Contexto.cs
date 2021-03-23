@@ -86,7 +86,7 @@ namespace Dory2.Models
             min.Property(x => x.DeficienciaMental).HasColumnName("min_deficiencia_mental");
             min.Property(x => x.DeficienciaFisica).HasColumnName("min_deficiencia_fisica");
             min.Property(x => x.RestricaoAlimentar).HasColumnName("min_restricao_alimentar");
-            min.Property(x => x.RestricaoMedicamentos).HasColumnName("min_destricao_medicamentos");
+            min.Property(x => x.RestricaoMedicamentos).HasColumnName("min_restricao_medicamentos");
             min.Property(x => x.Doencas).HasColumnName("min_doencas");
             min.Property(x => x.DesaparecidoId).HasColumnName("des_codigo");
             min.Property(x => x.VulneravelId).HasColumnName("vul_codigo");
