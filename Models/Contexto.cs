@@ -31,7 +31,6 @@ namespace Dory2.Models
             end.Property(x => x.Logradouro).HasColumnName("end_logradouro");
             end.Property(x => x.Numero).HasColumnName("end_numero");
 
-
             var pes = mb.Entity<Pessoa>();
             pes.ToTable("pes_pessoa");
             pes.Property(x => x.Id).HasColumnName("pes_codigo");
@@ -41,9 +40,8 @@ namespace Dory2.Models
             pes.Property(x => x.DataNascimento).HasColumnName("pes_nascimento");
             pes.Property(x => x.Sexo).HasColumnName("pes_sexo");
             pes.Property(x => x.Cutis).HasColumnName("pes_cutis");
-            pes.Property(x => x.EnderecoId).HasColumnName("end_codigo");
             pes.Property(x => x.Tipo).HasColumnName("pes_tipo");
-
+            pes.Property(x => x.EnderecoId).HasColumnName("end_codigo");
 
             var res = mb.Entity<Responsavel>();
             res.ToTable("res_responsavel");
@@ -89,25 +87,25 @@ namespace Dory2.Models
             min.Property(x => x.DeficienciaFisica).HasColumnName("min_deficiencia_fisica");
             min.Property(x => x.RestricaoAlimentar).HasColumnName("min_restricao_alimentar");
             min.Property(x => x.RestricaoMedicamentos).HasColumnName("min_destricao_medicamentos");
-            min.Property(x => x.Doencas).HasColumnName("min_soencas");
-            min.Property(x => x.DesaparecidoId).HasColumnName("des_id");
-            min.Property(x => x.VulneravelId).HasColumnName("vul_id");
+            min.Property(x => x.Doencas).HasColumnName("min_doencas");
+            min.Property(x => x.DesaparecidoId).HasColumnName("des_codigo");
+            min.Property(x => x.VulneravelId).HasColumnName("vul_codigo");
 
             var tut = mb.Entity<Tutorias>();
             tut.ToTable("tut_tutorias");
             tut.Property(x => x.Id).HasColumnName("tut_codigo");
             tut.Property(x => x.Ativo).HasColumnName("tut_ativo");
             tut.Property(x => x.Cadastro).HasColumnName("tut_data_cadastro");
-            tut.Property(x => x.PessoaId).HasColumnName("pes_id");
-            tut.Property(x => x.ResponsavelId).HasColumnName("res_id");
+            tut.Property(x => x.PessoaId).HasColumnName("pes_codigo");
+            tut.Property(x => x.ResponsavelId).HasColumnName("res_codigo");
 
             var con = mb.Entity<Contato>();
             con.ToTable("cont_contatos");
             con.Property(x => x.Id).HasColumnName("con_codigo");
             con.Property(x => x.NomeContato).HasColumnName("con_nome_contato");
-            con.Property(x => x.ResponsavelId).HasColumnName("res_id");
             con.Property(x => x.Tipo).HasColumnName("con_tipo");
             con.Property(x => x.Numero).HasColumnName("con_numero");
+            con.Property(x => x.ResponsavelId).HasColumnName("res_codigo");
         }
     }
 }
