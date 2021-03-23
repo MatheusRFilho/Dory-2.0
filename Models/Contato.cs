@@ -25,6 +25,9 @@ namespace Dory2.Models
             Comercial = 2,
         }
         [Required]
+        [Display(Name = "Número pra contato")]
+        public string Numero { get; set; }
+        [Required]
         public int ResponsavelId { get; set; }
         public virtual Responsavel Responsavel { get; set; }
 

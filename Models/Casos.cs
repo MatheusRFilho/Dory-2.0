@@ -12,7 +12,7 @@ namespace Dory2.Models
         public int Id { get; set; }
         [Display(Name = "Últimas Roupas que a pessoa estava")]
         [StringLength(100, MinimumLength = 6)]
-        public string UltimasRoupas { get; set; }
+        public string UltimaRoupa { get; set; }
         [Display(Name = "Últimas Localização da pessoa")]
         [StringLength(100, MinimumLength = 6)]
         public string UltimaLocalizacao { get; set; }

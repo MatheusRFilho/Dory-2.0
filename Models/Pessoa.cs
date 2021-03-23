@@ -30,9 +30,9 @@ namespace Dory2.Models
         public int EnderecoId { get; set; }
 
         [Required]
-        [EnumDataType(typeof(Roles))]
-        public string Role { get; set; }
-        public enum Roles
+        [EnumDataType(typeof(Tipos))]
+        public string Tipo { get; set; }
+        public enum Tipos
         {
             Admin = 0,
             Comum = 1,
