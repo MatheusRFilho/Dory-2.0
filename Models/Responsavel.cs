@@ -11,17 +11,14 @@ namespace Dory2.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(200)]
-        [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
         public string Senha { get; set; }
 
         public string Celular { get; set; }
 
         public int PessoaId { get; set; }
+
         public virtual Pessoa Pessoa { get; set; }
 
         public virtual ICollection<Contato> Contato { get; set; }

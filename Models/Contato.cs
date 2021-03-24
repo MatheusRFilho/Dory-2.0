@@ -30,7 +30,5 @@ namespace Dory2.Models
         [Required]
         public int ResponsavelId { get; set; }
         public virtual Responsavel Responsavel { get; set; }
-
-
     }
 }
