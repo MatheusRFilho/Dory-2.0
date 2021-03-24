@@ -133,7 +133,6 @@ namespace Dory2.Controllers
             if (ModelState.IsValid)
             {
                 string senhacrip = Funcoes.HashTexto(ace.Senha, "SHA512");
-                //Responsavel res = db.Responsavel.Where(x => x.Email == ace.Email && x.Senha == senhacrip).ToList().FirstOrDefault();
                 Responsavel res = db.Responsavel.Where(x => x.Email == ace.Email && x.Senha == senhacrip).ToList().FirstOrDefault();
 
                 if (res == null)
