@@ -30,6 +30,7 @@ namespace Dory2.Models
             end.Property(x => x.Estado).HasColumnName("end_estado");
             end.Property(x => x.Logradouro).HasColumnName("end_logradouro");
             end.Property(x => x.Numero).HasColumnName("end_numero");
+            end.Property(x => x.PessoaId).HasColumnName("pes_codigo");
 
             var pes = mb.Entity<Pessoa>();
             pes.ToTable("pes_pessoa");
@@ -41,7 +42,7 @@ namespace Dory2.Models
             pes.Property(x => x.Sexo).HasColumnName("pes_sexo");
             pes.Property(x => x.Cutis).HasColumnName("pes_cutis");
             pes.Property(x => x.Tipo).HasColumnName("pes_tipo");
-            pes.Property(x => x.EnderecoId).HasColumnName("end_codigo");
+            
 
             var res = mb.Entity<Responsavel>();
             res.ToTable("res_responsavel");

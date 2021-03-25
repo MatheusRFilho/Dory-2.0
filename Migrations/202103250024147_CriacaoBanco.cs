@@ -46,30 +46,11 @@ namespace Dory2.Migrations
                         pes_rg = c.String(unicode: false),
                         pes_nome = c.String(nullable: false, maxLength: 30, storeType: "nvarchar"),
                         pes_nascimento = c.DateTime(nullable: false, precision: 0),
-                        pes_sexo = c.String(nullable: false, unicode: false),
+                        pes_sexo = c.String(unicode: false),
                         pes_cutis = c.String(unicode: false),
-                        end_codigo = c.Int(nullable: false),
-                        pes_tipo = c.String(nullable: false, unicode: false),
-                        Tutorias_Id = c.Int(),
+                        pes_tipo = c.String(unicode: false),
                     })
-                .PrimaryKey(t => t.pes_codigo)
-                .ForeignKey("dbo.end_endereco", t => t.end_codigo, cascadeDelete: true)
-                .ForeignKey("dbo.tut_tutorias", t => t.Tutorias_Id)
-                .Index(t => t.end_codigo)
-                .Index(t => t.Tutorias_Id);
-            
-            CreateTable(
-                "dbo.end_endereco",
-                c => new
-                    {
-                        end_codigo = c.Int(nullable: false, identity: true),
-                        end_logradouro = c.String(nullable: false, unicode: false),
-                        end_numero = c.String(nullable: false, unicode: false),
-                        end_bairro = c.String(nullable: false, unicode: false),
-                        end_cidade = c.String(nullable: false, unicode: false),
-                        end_estado = c.String(nullable: false, unicode: false),
-                    })
-                .PrimaryKey(t => t.end_codigo);
+                .PrimaryKey(t => t.pes_codigo);
             
             CreateTable(
                 "dbo.vul_vulneravel",
@@ -103,17 +84,30 @@ namespace Dory2.Migrations
                 c => new
                     {
                         res_codigo = c.Int(nullable: false, identity: true),
-                        res_email = c.String(nullable: false, maxLength: 200, storeType: "nvarchar"),
-                        res_senha = c.String(nullable: false, unicode: false),
+                        res_email = c.String(unicode: false),
+                        res_senha = c.String(unicode: false),
                         res_celular = c.String(unicode: false),
                         pes_codigo = c.Int(nullable: false),
-                        Tutorias_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.res_codigo)
                 .ForeignKey("dbo.pes_pessoa", t => t.pes_codigo, cascadeDelete: true)
-                .ForeignKey("dbo.tut_tutorias", t => t.Tutorias_Id)
-                .Index(t => t.pes_codigo)
-                .Index(t => t.Tutorias_Id);
+                .Index(t => t.pes_codigo);
+            
+            CreateTable(
+                "dbo.end_endereco",
+                c => new
+                    {
+                        end_codigo = c.Int(nullable: false, identity: true),
+                        end_logradouro = c.String(nullable: false, unicode: false),
+                        end_numero = c.String(nullable: false, unicode: false),
+                        end_bairro = c.String(nullable: false, unicode: false),
+                        end_cidade = c.String(nullable: false, unicode: false),
+                        end_estado = c.String(nullable: false, unicode: false),
+                        pes_codigo = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.end_codigo)
+                .ForeignKey("dbo.pes_pessoa", t => t.pes_codigo, cascadeDelete: true)
+                .Index(t => t.pes_codigo);
             
             CreateTable(
                 "dbo.min_mais_informacoes",
@@ -131,16 +125,14 @@ namespace Dory2.Migrations
                         min_restricao_alimentar = c.String(unicode: false),
                         min_restricao_medicamentos = c.String(unicode: false),
                         min_doencas = c.String(unicode: false),
-                        des_codigo = c.String(unicode: false),
-                        vul_codigo = c.String(unicode: false),
-                        Desaparecido_Id = c.Int(),
-                        Vulneravel_Id = c.Int(),
+                        des_codigo = c.Int(nullable: false),
+                        vul_codigo = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.min_codigo)
-                .ForeignKey("dbo.des_desaparecido", t => t.Desaparecido_Id)
-                .ForeignKey("dbo.vul_vulneravel", t => t.Vulneravel_Id)
-                .Index(t => t.Desaparecido_Id)
-                .Index(t => t.Vulneravel_Id);
+                .ForeignKey("dbo.des_desaparecido", t => t.des_codigo, cascadeDelete: true)
+                .ForeignKey("dbo.vul_vulneravel", t => t.vul_codigo, cascadeDelete: true)
+                .Index(t => t.des_codigo)
+                .Index(t => t.vul_codigo);
             
             CreateTable(
                 "dbo.tut_tutorias",
@@ -163,37 +155,33 @@ namespace Dory2.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.tut_tutorias", "res_codigo", "dbo.res_responsavel");
-            DropForeignKey("dbo.res_responsavel", "Tutorias_Id", "dbo.tut_tutorias");
-            DropForeignKey("dbo.pes_pessoa", "Tutorias_Id", "dbo.tut_tutorias");
             DropForeignKey("dbo.tut_tutorias", "pes_codigo", "dbo.pes_pessoa");
-            DropForeignKey("dbo.min_mais_informacoes", "Vulneravel_Id", "dbo.vul_vulneravel");
-            DropForeignKey("dbo.min_mais_informacoes", "Desaparecido_Id", "dbo.des_desaparecido");
+            DropForeignKey("dbo.min_mais_informacoes", "vul_codigo", "dbo.vul_vulneravel");
+            DropForeignKey("dbo.min_mais_informacoes", "des_codigo", "dbo.des_desaparecido");
+            DropForeignKey("dbo.end_endereco", "pes_codigo", "dbo.pes_pessoa");
             DropForeignKey("dbo.res_responsavel", "pes_codigo", "dbo.pes_pessoa");
             DropForeignKey("dbo.cont_contatos", "res_codigo", "dbo.res_responsavel");
             DropForeignKey("dbo.cas_casos", "des_codigo", "dbo.des_desaparecido");
             DropForeignKey("dbo.des_desaparecido", "vul_codigo", "dbo.vul_vulneravel");
             DropForeignKey("dbo.vul_vulneravel", "pes_codigo", "dbo.pes_pessoa");
             DropForeignKey("dbo.des_desaparecido", "pes_codigo", "dbo.pes_pessoa");
-            DropForeignKey("dbo.pes_pessoa", "end_codigo", "dbo.end_endereco");
             DropIndex("dbo.tut_tutorias", new[] { "pes_codigo" });
             DropIndex("dbo.tut_tutorias", new[] { "res_codigo" });
-            DropIndex("dbo.min_mais_informacoes", new[] { "Vulneravel_Id" });
-            DropIndex("dbo.min_mais_informacoes", new[] { "Desaparecido_Id" });
-            DropIndex("dbo.res_responsavel", new[] { "Tutorias_Id" });
+            DropIndex("dbo.min_mais_informacoes", new[] { "vul_codigo" });
+            DropIndex("dbo.min_mais_informacoes", new[] { "des_codigo" });
+            DropIndex("dbo.end_endereco", new[] { "pes_codigo" });
             DropIndex("dbo.res_responsavel", new[] { "pes_codigo" });
             DropIndex("dbo.cont_contatos", new[] { "res_codigo" });
             DropIndex("dbo.vul_vulneravel", new[] { "pes_codigo" });
-            DropIndex("dbo.pes_pessoa", new[] { "Tutorias_Id" });
-            DropIndex("dbo.pes_pessoa", new[] { "end_codigo" });
             DropIndex("dbo.des_desaparecido", new[] { "vul_codigo" });
             DropIndex("dbo.des_desaparecido", new[] { "pes_codigo" });
             DropIndex("dbo.cas_casos", new[] { "des_codigo" });
             DropTable("dbo.tut_tutorias");
             DropTable("dbo.min_mais_informacoes");
+            DropTable("dbo.end_endereco");
             DropTable("dbo.res_responsavel");
             DropTable("dbo.cont_contatos");
             DropTable("dbo.vul_vulneravel");
-            DropTable("dbo.end_endereco");
             DropTable("dbo.pes_pessoa");
             DropTable("dbo.des_desaparecido");
             DropTable("dbo.cas_casos");

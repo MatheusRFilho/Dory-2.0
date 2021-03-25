@@ -175,5 +175,46 @@ namespace Dory2.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult Cadastro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Cadastro(Cadastro cad)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.Responsavel.Where( x=> x.Email == cad.Email).ToList().Count > 0 )
+                {
+                    ModelState.AddModelError("Email", "Email já cadastrado");
+                    return View();
+                } else if (db.Responsavel.Where(x => x.Celular == cad.Celular).ToList().Count > 0)
+                {
+                    ModelState.AddModelError("Celular", "Celular já cadastrado");
+                    return View();
+                } else
+                {
+                    string NomeCompleto = cad.Nome + " " + cad.Sobrenome;
+
+                    Responsavel res = new Responsavel();
+                    res.Email = cad.Email;
+                    res.Celular = cad.Celular;
+                    res.Senha = Funcoes.HashTexto(cad.Senha, "SHA512");
+                    res.Pessoa = new Pessoa();
+                    res.Pessoa.Nome = NomeCompleto;
+                    res.Pessoa.DataNascimento = cad.DataNascimento;
+                    res.Pessoa.Tipo = "Comum";
+
+                    db.Responsavel.Add(res);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return View();
+        }
+
     }
 }
