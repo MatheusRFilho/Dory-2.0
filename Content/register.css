@@ -1,0 +1,21 @@
+﻿body {
+    padding: 0 !important;
+    margin:50px 0 0 0 !important;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+
+.img-logo {
+    height: 75px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
