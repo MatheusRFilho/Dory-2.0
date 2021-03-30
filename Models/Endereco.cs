@@ -20,5 +20,9 @@ namespace Dory2.Models
         public string Cidade { get; set; }
         [Required]
         public string Estado { get; set; }
+
+        public int PessoaId { get; set; }
+
+        public virtual Pessoa Pessoa { get; set; }
     }
 }

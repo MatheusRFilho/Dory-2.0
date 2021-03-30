@@ -22,14 +22,12 @@ namespace Dory2.Models
         [Required]
         public DateTime DataNascimento  { get; set; }
 
-        [Required]
         public string Sexo { get; set; }
 
         public string Cutis { get; set; }
 
-        public int EnderecoId { get; set; }
+        
 
-        [Required]
         [EnumDataType(typeof(Tipos))]
         public string Tipo { get; set; }
         public enum Tipos
@@ -39,7 +37,7 @@ namespace Dory2.Models
             Pago = 2,
         }
 
-        public virtual Endereco Endereco { get; set; }
+        
 
     }
 }

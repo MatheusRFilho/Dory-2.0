@@ -126,13 +126,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103232321549_CriacaoBanco.cs" />
-    <Compile Include="Migrations\202103232321549_CriacaoBanco.Designer.cs">
-      <DependentUpon>202103232321549_CriacaoBanco.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103240010541_Alteracao.cs" />
-    <Compile Include="Migrations\202103240010541_Alteracao.Designer.cs">
-      <DependentUpon>202103240010541_Alteracao.cs</DependentUpon>
+    <Compile Include="Migrations\202103250024147_CriacaoBanco.cs" />
+    <Compile Include="Migrations\202103250024147_CriacaoBanco.Designer.cs">
+      <DependentUpon>202103250024147_CriacaoBanco.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Casos.cs" />
@@ -155,7 +151,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Home.css" />
+    <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -202,6 +198,8 @@
     <Content Include="Views\Responsavels\Edit.cshtml" />
     <Content Include="Views\Responsavels\Index.cshtml" />
     <Content Include="Views\Responsavels\Acesso.cshtml" />
+    <Content Include="Views\Shared\_Register.cshtml" />
+    <Content Include="Views\Responsavels\Cadastro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -212,11 +210,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103232321549_CriacaoBanco.resx">
-      <DependentUpon>202103232321549_CriacaoBanco.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103240010541_Alteracao.resx">
-      <DependentUpon>202103240010541_Alteracao.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103250024147_CriacaoBanco.resx">
+      <DependentUpon>202103250024147_CriacaoBanco.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

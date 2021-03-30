@@ -21,7 +21,5 @@ namespace Dory2.Models
         public virtual Responsavel Responsavel { get; set; }
         public virtual Pessoa Pessoa { get; set; }
 
-        public virtual ICollection<Responsavel> Responsaveis { get; set; }
-        public virtual ICollection<Pessoa> Pessoas { get; set; }
     }
 }
