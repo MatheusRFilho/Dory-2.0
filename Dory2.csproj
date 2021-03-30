@@ -197,9 +197,9 @@
     <Content Include="Views\Responsavels\Details.cshtml" />
     <Content Include="Views\Responsavels\Edit.cshtml" />
     <Content Include="Views\Responsavels\Index.cshtml" />
-    <Content Include="Views\Responsavels\Acesso.cshtml" />
     <Content Include="Views\Shared\_Register.cshtml" />
     <Content Include="Views\Responsavels\Cadastro.cshtml" />
+    <Content Include="Views\Responsavels\Acesso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
