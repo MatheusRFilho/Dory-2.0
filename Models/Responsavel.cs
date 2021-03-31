@@ -17,6 +17,8 @@ namespace Dory2.Models
 
         public string Celular { get; set; }
 
+        public string Hash { get; set; }
+
         public int PessoaId { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }

@@ -50,6 +50,7 @@ namespace Dory2.Models
             res.Property(x => x.Celular).HasColumnName("res_celular");
             res.Property(x => x.Email).HasColumnName("res_email");
             res.Property(x => x.Senha).HasColumnName("res_senha");
+            res.Property(x => x.Hash).HasColumnName("pes_hash");
             res.Property(x => x.PessoaId).HasColumnName("pes_codigo");
 
             var vul = mb.Entity<Vulneravel>();

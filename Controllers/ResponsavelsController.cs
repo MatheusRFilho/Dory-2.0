@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -216,5 +217,34 @@ namespace Dory2.Controllers
             return View();
         }
 
+        public ActionResult EsqueceuSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EsqueceuSenha(EsqueceuSenha esq)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = db.Responsavel.Where(x => x.Email == esq.Email).ToList().FirstOrDefault();
+                if (res != null)
+                {
+                    res.Hash = Funcoes.Codifica(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss.ffff"));
+                    db.Entry(res).State = EntityState.Modified;
+                    db.SaveChanges();
+                    string msg = "<h3>Redefinir Senha</h3>";
+                    msg += "Para alterar sua senha <a href='" + ConfigurationManager.AppSettings["URLSite"] + "/Responsavels/Redefinir/" + res.Hash + "' target='_blank'>clique aqui</a>";
+                    Funcoes.EnviarEmail(res.Email, "Redefinição de senha", msg);
+                    TempData["MSG"] = "success|Email enviado com sucesso!";
+                    return RedirectToAction("Acesso");
+                }
+                TempData["MSG"] = "error|E-mail não encontrado";
+                return View();
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View();
+        }
     }
 }

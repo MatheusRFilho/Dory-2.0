@@ -130,6 +130,10 @@
     <Compile Include="Migrations\202103250024147_CriacaoBanco.Designer.cs">
       <DependentUpon>202103250024147_CriacaoBanco.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103310004006_AdicaoHash.cs" />
+    <Compile Include="Migrations\202103310004006_AdicaoHash.Designer.cs">
+      <DependentUpon>202103310004006_AdicaoHash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Casos.cs" />
     <Compile Include="Models\Contato.cs" />
@@ -200,6 +204,7 @@
     <Content Include="Views\Shared\_Register.cshtml" />
     <Content Include="Views\Responsavels\Cadastro.cshtml" />
     <Content Include="Views\Responsavels\Acesso.cshtml" />
+    <Content Include="Views\Responsavels\EsqueceuSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -212,6 +217,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202103250024147_CriacaoBanco.resx">
       <DependentUpon>202103250024147_CriacaoBanco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103310004006_AdicaoHash.resx">
+      <DependentUpon>202103310004006_AdicaoHash.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
