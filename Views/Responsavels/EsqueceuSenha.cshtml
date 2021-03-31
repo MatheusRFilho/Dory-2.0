@@ -9,15 +9,18 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-container">
+    <div class="form-container" style="margin-top: 40px">
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <div class="col-md-12">
                     <p>Para continuar com a redefinição de senha, insira seu email cadastrado no Dory</p>
                 </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-md-12">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Insira seu email cadastrado", @style = "width: 440px;" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Insira seu email cadastrado", @style = "max-width: 100%;" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
