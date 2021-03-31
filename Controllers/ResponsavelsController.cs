@@ -246,5 +246,61 @@ namespace Dory2.Controllers
             TempData["MSG"] = "warning|Preencha todos os campos";
             return View();
         }
+
+        public ActionResult Redefinir(string id)
+        {
+            if (!String.IsNullOrEmpty(id))
+            {
+                var res = db.Responsavel.Where(x => x.Hash == id).ToList().FirstOrDefault();
+                if (res != null)
+                {
+                    try
+                    {
+                        DateTime dt = Convert.ToDateTime(Funcoes.Decodifica(res.Hash));
+                        if (dt > DateTime.Now)
+                        {
+                            RedefinirSenha red = new RedefinirSenha();
+                            red.Hash = res.Hash;
+                            red.Email = res.Email;
+                            return View(red);
+                        }
+                        TempData["MSG"] = "warning|Esse link já expirou!";
+                        return RedirectToAction("Index");
+                    }
+                    catch
+                    {
+                        TempData["MSG"] = "error|Hash inválida!";
+                        return RedirectToAction("Index");
+                    }
+                }
+                TempData["MSG"] = "error|Hash inválida!";
+                return RedirectToAction("Index");
+            }
+            TempData["MSG"] = "error|Acesso inválido!";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Redefinir(RedefinirSenha red)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = db.Responsavel.Where(x => x.Hash == red.Hash).ToList().FirstOrDefault();
+                if (res != null)
+                {
+                    res.Hash = null;
+                    res.Senha = Funcoes.HashTexto(red.Senha, "SHA512");
+                    db.Entry(res).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["MSG"] = "success|Senha redefinida com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                TempData["MSG"] = "error|E-mail não encontrado";
+                return View(red);
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View(red);
+        }
     }
 }

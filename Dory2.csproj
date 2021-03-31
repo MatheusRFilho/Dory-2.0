@@ -205,6 +205,7 @@
     <Content Include="Views\Responsavels\Cadastro.cshtml" />
     <Content Include="Views\Responsavels\Acesso.cshtml" />
     <Content Include="Views\Responsavels\EsqueceuSenha.cshtml" />
+    <Content Include="Views\Responsavels\Redefinir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
