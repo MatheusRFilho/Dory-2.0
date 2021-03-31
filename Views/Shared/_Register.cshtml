@@ -17,7 +17,7 @@
 
     <div class="header">
         <a src="~/Home/Index">
-            <img src="~/Images/Logo 3.0.png" alt="logo" class="img-logo"/>
+            <img src="~/Images/Logo 3.0.png" alt="logo" class="img-logo" />
         </a>
     </div>
     <div class="content">
@@ -26,6 +26,32 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if (TempData["MSG"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+            var titulo = "";
+            switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+            case "success":
+                titulo = "Sucesso";
+                break;
+            case "warning":
+                titulo = "Atenção";
+                break;
+            case "error":
+                titulo = "Erro";
+                break;
+            case "info":
+                titulo = "Informação";
+                break;
+                }
+                swal(titulo, "@Html.Raw(TempData["MSG"].ToString().Split('|')[1])", "@TempData["MSG"].ToString().Split('|')[0]");
+      });
+        </script>
+    }
     @RenderSection("scripts", required: false)
 </body>
 </html>
