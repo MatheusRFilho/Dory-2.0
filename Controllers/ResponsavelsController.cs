@@ -144,6 +144,8 @@ namespace Dory2.Controllers
                 else
                 {
                     FormsAuthentication.SetAuthCookie(res.Email, false);
+                    HttpCookie cookie = new HttpCookie("loginData", res.Email);
+                    Response.Cookies.Add(cookie);
 
                     //string permissoes = "";
                     //foreach (UsuarioPerfil p in usu.UsuarioPerfil)
@@ -164,6 +166,7 @@ namespace Dory2.Controllers
         public ActionResult Sair()
         {
             FormsAuthentication.SignOut();
+            Response.Cookies.Remove("loginData");
             return RedirectToAction("Index");
         }
 

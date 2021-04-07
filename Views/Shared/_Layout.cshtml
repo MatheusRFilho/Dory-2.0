@@ -21,18 +21,28 @@
                         <div class="menulink"><p class="link">Desaparecido</p></div>
                     </div>
 
-                    <div class="menuContainer">
-                        <div class="menulink"><p class="link">Pessoas Encontradas</p></div>
-                        <div class="menulink"><p class="link">Meus Desaparecidos</p></div>
-                        <div class="menulink"><p class="link">Meus Vulneráveis</p></div>
-                        <div class="menulink"><p class="link">Estatísticas</p></div>
-                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="menuContainer">
+                            <div class="menulink"><p class="link">Pessoas Encontradas</p></div>
+                            <div class="menulink"><p class="link">Meus Desaparecidos</p></div>
+                            <div class="menulink"><p class="link">Meus Vulneráveis</p></div>
+                            <div class="menulink"><p class="link">Estatísticas</p></div>
+                        </div>
 
-                    <div class="menuContainer">
-                        <div class="menulink"><p class="link">Perfil</p></div>
-                        <div class="menulink"><p class="link">Dory Gold</p></div>
-                        <div class="menulink"><p class="link">Sair</p></div>
-                    </div>
+                        <div class="menuContainer">
+                            <div class="menulink"><p class="link">Perfil</p></div>
+                            <div class="menulink"><p class="link">Dory Gold</p></div>
+                            <div class="menulink"><a href="~/Responsavels/Sair" class="link">Sair</a></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="menuContainer">
+                            <div class="menulink"><a href="~/Responsavels/Acesso" class="link">Entrar</a></div>
+                            <div class="menulink"><a href="~/Responsavels/Cadastro" class="link">Cadastrar</a></div>
+                        </div>
+                    }
                 </div>
 
             </div>
