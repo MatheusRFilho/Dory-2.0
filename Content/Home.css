@@ -1,6 +1,47 @@
-﻿h1{
-    font-size: 100px;
-    color: #0026ff;
+﻿body {
+    padding: 0px;
+}
+
+.homeContent {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.navBarContainer {
+    height: 100vh;
+    width: 13%;
+    position: fixed;
+    -webkit-box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.63);
+    box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.15);
+}
+
+.menulink {
+    padding-left: 20px;
+}
+
+.menuContainer {
+    margin-top: 60px;
+}
+
+.img-logo {
+    height: 50px;
+    width: 80px;
+    margin: 35px 50px;
+}
+
+.link {
+}
+
+
+.contentContainer {
+    width:85%;
+    margin-left: 13%;
+}
+
+.img-banner {
+    height: 20px;
 }
 
 
