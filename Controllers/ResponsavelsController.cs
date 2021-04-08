@@ -166,7 +166,11 @@ namespace Dory2.Controllers
         public ActionResult Sair()
         {
             FormsAuthentication.SignOut();
-            Response.Cookies.Remove("loginData");
+            // Apagar cookie
+            HttpCookie cookie = Request.Cookies["loginData"];
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cookie);
+
             return RedirectToAction("Index");
         }
 
