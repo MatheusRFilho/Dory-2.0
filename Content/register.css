@@ -10,7 +10,9 @@
 }
 
 .img-logo {
-    height: 75px;
+    height: 50px;
+    width: 80px;
+    margin: 35px 50px;
 }
 
 .content {
