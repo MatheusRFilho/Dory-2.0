@@ -224,7 +224,7 @@ namespace Dory2.Controllers
                     db.Responsavel.Add(res);
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View();
@@ -307,7 +307,7 @@ namespace Dory2.Controllers
                     db.Entry(res).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["MSG"] = "success|Senha redefinida com sucesso!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
                 TempData["MSG"] = "error|E-mail não encontrado";
                 return View(red);

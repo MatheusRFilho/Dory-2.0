@@ -21,7 +21,7 @@
             <div class="form-group">
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Insira seu email cadastrado", @style = "max-width: 100%;" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger mensagem-erro" })
                 </div>
             </div>
 
