@@ -211,6 +211,7 @@
     <Content Include="Views\Responsavels\Acesso.cshtml" />
     <Content Include="Views\Responsavels\EsqueceuSenha.cshtml" />
     <Content Include="Views\Responsavels\Redefinir.cshtml" />
+    <Content Include="Views\Responsavels\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

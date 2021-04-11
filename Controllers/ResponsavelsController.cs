@@ -146,6 +146,8 @@ namespace Dory2.Controllers
                     FormsAuthentication.SetAuthCookie(res.Email, false);
                     HttpCookie cookie = new HttpCookie("loginData", res.Pessoa.Nome);
                     Response.Cookies.Add(cookie);
+                    cookie = new HttpCookie("userId", res.Id.ToString());
+                    Response.Cookies.Add(cookie);
 
                     //string permissoes = "";
                     //foreach (UsuarioPerfil p in usu.UsuarioPerfil)
@@ -168,6 +170,10 @@ namespace Dory2.Controllers
             FormsAuthentication.SignOut();
             // Apagar cookie
             HttpCookie cookie = Request.Cookies["loginData"];
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cookie);
+
+            cookie = Request.Cookies["userId"];
             cookie.Expires = DateTime.Now.AddDays(-1);
             Response.Cookies.Add(cookie);
 
@@ -308,6 +314,20 @@ namespace Dory2.Controllers
             }
             TempData["MSG"] = "warning|Preencha todos os campos";
             return View(red);
+        }
+
+        public ActionResult Perfil(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Responsavel responsavel = db.Responsavel.Find(id);
+            if (responsavel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(responsavel);
         }
     }
 }
