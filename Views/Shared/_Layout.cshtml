@@ -19,7 +19,7 @@
                     <img src="~/Images/Logo 3.0.png" alt="logo" class="img-logo" />
                     <div class="menuContainer">
                         <div class="menulink"><a href="~/Home" class="link">Home</a></div>
-                        <div class="menulink"><p class="link">Sobre nós</p></div>
+                        <div class="menulink"><a href="#about" class="link">Sobre nós</a></div>
                         <div class="menulink"><p class="link">Desaparecido</p></div>
                     </div>
 
@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="menuContainer">
-                            <div class="menulink"><p class="link">Perfil</p></div>
+                            <div class="menulink"><p class="link">@Request.Cookies.Get("loginData").Value</p></div>
                             <div class="menulink"><p class="link">Dory Gold</p></div>
                             <div class="menulink"><a href="~/Responsavels/Sair" class="link">Sair</a></div>
                         </div>

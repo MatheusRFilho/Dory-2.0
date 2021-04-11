@@ -19,6 +19,7 @@
 
 .menulink {
     padding-left: 20px;
+    margin-top: 12px;
 }
 
 .menuContainer {
@@ -34,12 +35,11 @@
 
 .link {
     margin-top: 20px;
-
 }
 
 
 .contentContainer {
-    width:85%;
+    width: 85%;
     margin-left: 13%;
 }
 
@@ -65,27 +65,31 @@
     margin: 0 25px;
     text-decoration: none;
     transition: .2s;
+}
 
+.btnEntrar:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #1A5182;
 }
 
 .link2 {
-    margin-left: 25px
+    margin-left: 25px;
 }
 
 .aboutProject {
     flex: 1;
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
 }
 
-.aboutProject .about-project-title {
-    font-size: 26px;
-    line-height: 2px;
-    margin-bottom:50px;
-}
+    .aboutProject .about-project-title {
+        font-size: 26px;
+        line-height: 2px;
+        margin-bottom: 50px;
+    }
 
 .peoples-title {
     font-size: 26px;
@@ -215,5 +219,3 @@
         right: -2px;
     }
 }
-
-

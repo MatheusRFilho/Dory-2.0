@@ -144,7 +144,7 @@ namespace Dory2.Controllers
                 else
                 {
                     FormsAuthentication.SetAuthCookie(res.Email, false);
-                    HttpCookie cookie = new HttpCookie("loginData", res.Email);
+                    HttpCookie cookie = new HttpCookie("loginData", res.Pessoa.Nome);
                     Response.Cookies.Add(cookie);
 
                     //string permissoes = "";
@@ -171,7 +171,7 @@ namespace Dory2.Controllers
             cookie.Expires = DateTime.Now.AddDays(-1);
             Response.Cookies.Add(cookie);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)
