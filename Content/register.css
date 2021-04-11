@@ -91,3 +91,13 @@
     background-color: #0094ff;
     color: #fff;
 }
+
+.mensagem-erro {
+    display: block;
+    max-width: 250px;
+    font-size: 11px;
+}
+
+.mensagem-erro span {
+    margin-top: 12px;
+}
