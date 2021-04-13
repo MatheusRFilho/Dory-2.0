@@ -157,6 +157,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\Home.css" />
+    <Content Include="Images\banner 2.jpg" />
+    <Content Include="Images\banner 3.jpg" />
     <Content Include="Images\usuario-de-perfil.png" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\multislider.js" />
