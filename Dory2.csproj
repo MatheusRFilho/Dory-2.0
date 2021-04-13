@@ -159,6 +159,12 @@
     <Content Include="Content\Home.css" />
     <Content Include="Images\banner 2.jpg" />
     <Content Include="Images\banner 3.jpg" />
+    <Content Include="Images\perfil.jpg" />
+    <Content Include="Images\perfil2.jpg" />
+    <Content Include="Images\perfil3.jpg" />
+    <Content Include="Images\perfil4.jpg" />
+    <Content Include="Images\perfil5.jpg" />
+    <Content Include="Images\perfil6.jpg" />
     <Content Include="Images\usuario-de-perfil.png" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\multislider.js" />
