@@ -2,39 +2,49 @@
 
 @{
     ViewBag.Title = "Perfil";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Perfil</h2>
+<link href="~/Content/Perfil.css" rel="stylesheet" />
+
+<div class="img-banner-container">
+    <img src="~/Images/BANNER SITE.jpg" alt="banner" class="img-banner" />
+</div>
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Pessoa.Nome)
-        </dt>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="~/Images/perfil2.jpg" alt="Foto de perfil" class="profile-image" />
+            <div class="profile-name-container">
+                <span class="profile-name text-bold">@Html.DisplayFor(model => model.Pessoa.Nome)</span>
+                <span class="profile-name">
+                    @ViewBag.Idade
+                    anos
+                </span>
+            </div>
+        </div>
+        <div class="profile-body">
+            <div class="profile-data">
+                <span class="text-bold">Contato</span>
+                <span>@Html.DisplayFor(model => model.Celular)</span>
 
-        <dd>
-            @Html.DisplayFor(model => model.Pessoa.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Celular)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Celular)
-        </dd>
-
-    </dl>
+                <span class="text-bold">Email</span>
+                <span>@Html.DisplayFor(model => model.Email)</span>
+            </div>
+            <div class="profile-data">
+                <span class="text-bold">CPF</span>
+                @if (Html.DisplayFor(model => model.Pessoa.Cpf) == null)
+                {
+                    <span>Cadastro não completo</span>
+                }
+                else
+                {
+                    <span>@Html.DisplayFor(model => model.Pessoa.Cpf)</span>
+                }
+                <span class="text-bold">Sexo</span>
+                <span>Conteudo</span>
+            </div>
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id })

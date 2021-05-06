@@ -327,6 +327,15 @@ namespace Dory2.Controllers
             {
                 return HttpNotFound();
             }
+
+            // calculo da idade do responsavel
+            DateTime dataInicial = responsavel.Pessoa.DataNascimento;
+            DateTime dataFinal = DateTime.Now;
+            int ano = dataFinal.Year;
+            int anoInicial = dataInicial.Year;
+            int idade = ano - anoInicial;
+            ViewBag.Idade = idade;
+
             return View(responsavel);
         }
     }
