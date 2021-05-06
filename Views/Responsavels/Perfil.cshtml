@@ -13,7 +13,9 @@
 <div>
     <div class="profile-container">
         <div class="profile-header">
-            <img src="~/Images/perfil2.jpg" alt="Foto de perfil" class="profile-image" />
+            <a href="~/Responsavels/UploadFotoPerfil">
+                <img src="~/Images/perfil2.jpg" alt="Foto de perfil" class="profile-image" />
+            </a>
             <div class="profile-name-container">
                 <span class="profile-name text-bold">@Html.DisplayFor(model => model.Pessoa.Nome)</span>
                 <span class="profile-name">
@@ -24,14 +26,14 @@
         </div>
         <div class="profile-body">
             <div class="profile-data">
-                <span class="text-bold">Contato</span>
+                <span class="profile-title text-bold">Contato</span>
                 <span>@Html.DisplayFor(model => model.Celular)</span>
 
-                <span class="text-bold">Email</span>
+                <span class="profile-title text-bold">Email</span>
                 <span>@Html.DisplayFor(model => model.Email)</span>
             </div>
             <div class="profile-data">
-                <span class="text-bold">CPF</span>
+                <span class="profile-title text-bold">CPF</span>
                 @if (Html.DisplayFor(model => model.Pessoa.Cpf) == null)
                 {
                     <span>Cadastro não completo</span>
@@ -40,7 +42,7 @@
                 {
                     <span>@Html.DisplayFor(model => model.Pessoa.Cpf)</span>
                 }
-                <span class="text-bold">Sexo</span>
+                <span class="profile-title text-bold">Sexo</span>
                 <span>Conteudo</span>
             </div>
         </div>
