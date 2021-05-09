@@ -101,3 +101,12 @@
 .mensagem-erro span {
     margin-top: 12px;
 }
+
+.select {
+    width:250px;
+} 
+.title {
+    margin-top:-20px;
+    margin-bottom:40px;
+    text-align: center;
+}

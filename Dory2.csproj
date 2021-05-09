@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DesaparecidoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResponsavelsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +147,7 @@
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Responsavel.cs" />
     <Compile Include="Models\Tutorias.cs" />
+    <Compile Include="Models\VMDesaparecido.cs" />
     <Compile Include="Models\VMResponsavel.cs" />
     <Compile Include="Models\Vulneravel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,6 +223,7 @@
     <Content Include="Views\Responsavels\EsqueceuSenha.cshtml" />
     <Content Include="Views\Responsavels\Redefinir.cshtml" />
     <Content Include="Views\Responsavels\Perfil.cshtml" />
+    <Content Include="Views\Desaparecido\InitialRegisterDesaparecido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
