@@ -349,14 +349,14 @@ namespace Dory2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UploadFotoPerfil([Bind(Include = "Foto, PessoaId")] UploadFotoPerfil upl, HttpPostedFileBase arq)
         {
-            int pesId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             string valor = "";
             if (ModelState.IsValid)
             {
-                var resFoto = db.Galeria.Where(x => x.PessoaId == pesId);
+                var resFoto = db.Galeria.Where(x => x.Id == resId);
                 if (resFoto == null)
                 {
-                    TempData["MSG"] = "warning|"+ pesId +"";
+                    TempData["MSG"] = "warning|"+ resId +"";
                     if (arq != null)
                     {
                         Upload.CriarDiretorio();
@@ -366,7 +366,7 @@ namespace Dory2.Controllers
                         {
                             Galeria gal = new Galeria();
                             gal.Foto = nomearq;
-                            gal.PessoaId = pesId;
+                            gal.PessoaId = resId;
                             db.Galeria.Add(gal);
                             db.SaveChanges();
                             return RedirectToAction("Index");
@@ -390,6 +390,46 @@ namespace Dory2.Controllers
             }
             TempData["MSG"] = "warning|Preencha todos os campos";
             return View();
+        }
+
+        public ActionResult EditarPerfil(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Responsavel responsavel = db.Responsavel.Find(Convert.ToInt32(id));
+            if (responsavel == null)
+            {
+                return HttpNotFound();
+            }
+            EditarPerfil editar = new EditarPerfil();
+            editar.Nome = responsavel.Pessoa.Nome;
+            editar.DataNascimento = responsavel.Pessoa.DataNascimento;
+            editar.Cpf = responsavel.Pessoa.Cpf;
+            editar.Email = responsavel.Email;
+            editar.Contato = responsavel.Celular;
+            editar.Sexo = responsavel.Pessoa.Sexo;
+            return View(editar);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarPerfil(EditarPerfil edt)
+        {
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            if (ModelState.IsValid)
+            {
+                Responsavel res = db.Responsavel.Where(x => x.Id == resId).ToList().FirstOrDefault();
+                if (res != null)
+                {
+                    TempData["MSG"] = "success|Senha redefinida com sucesso!";
+                }
+                TempData["MSG"] = "error|Responsavel não encontrado "+resId+"";
+                return View(edt);
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View(edt);
         }
     }
 }

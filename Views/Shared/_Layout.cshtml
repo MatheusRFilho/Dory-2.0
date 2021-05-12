@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="menuContainer">
-                            <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@Request.Cookies.Get("loginData").Value</a></div>
+                            <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@User.Identity.Name</a></div>
                             <div class="menulink"><p class="link">Dory Gold</p></div>
                             <div class="menulink"><a href="~/Responsavels/Sair" class="link">Sair</a></div>
                         </div>
@@ -44,11 +44,11 @@
                     {
                         <div class="menuContainer">
                             <div class="btnEntrar">
-                                   <a href="~/Responsavels/Acesso" class="btnEntrar">Entrar</a>
-                             </div>
+                                <a href="~/Responsavels/Acesso" class="btnEntrar">Entrar</a>
+                            </div>
                             <div class="menulink"><a href="~/Responsavels/Cadastro" class="link2">Cadastrar</a></div>
-                                    <script src="https://use.fontawesome.com/62e43a72a9.js"></script>
-                            
+                            <script src="https://use.fontawesome.com/62e43a72a9.js"></script>
+
                         </div>
                     }
                 </div>
@@ -62,6 +62,32 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if (TempData["MSG"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+            var titulo = "";
+            switch ("@TempData["MSG"].ToString().Split('|')[0]") {
+            case "success":
+                titulo = "Sucesso";
+                break;
+            case "warning":
+                titulo = "Atenção";
+                break;
+            case "error":
+                titulo = "Erro";
+                break;
+            case "info":
+                titulo = "Informação";
+                break;
+                }
+                swal(titulo, "@Html.Raw(TempData["MSG"].ToString().Split('|')[1])", "@TempData["MSG"].ToString().Split('|')[0]");
+      });
+        </script>
+    }
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -79,4 +79,33 @@ namespace Dory2.Models
         public string Foto { get; set; }
         public int PessoaId { get; set; }
     }
+
+    public class EditarPerfil
+    {
+        [Required]
+        public string Nome { get; set; }
+
+        [Required]
+        public DateTime DataNascimento { get; set; }
+
+        [Required]
+        public string Cpf { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string Contato { get; set; }
+
+        [Required]
+        [EnumDataType(typeof(Sexos))]
+        public string Sexo { get; set; }
+
+        public enum Sexos
+        {
+            Masculino = 0,
+            Feminino = 1,
+        }
+    }
 }

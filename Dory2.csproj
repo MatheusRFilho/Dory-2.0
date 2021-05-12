@@ -227,6 +227,7 @@
     <Content Include="Views\Responsavels\Perfil.cshtml" />
     <Content Include="Views\Desaparecido\InitialRegisterDesaparecido.cshtml" />
     <Content Include="Views\Responsavels\UploadFotoPerfil.cshtml" />
+    <Content Include="Views\Responsavels\EditarPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,7 +7,8 @@
 
 
 @using (Html.BeginForm("UploadFotoPerfil", "Responsavels", FormMethod.Post,
-new { enctype = "multipart/form-data" }))
+new { enctype = "multipart/form-data" })
+)
 {
     @Html.AntiForgeryToken()
     <div class="img-banner-container">
