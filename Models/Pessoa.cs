@@ -16,7 +16,7 @@ namespace Dory2.Models
         public string Rg { get; set; }
 
         [Required]
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string Nome { get; set; }
 
         [Required]
