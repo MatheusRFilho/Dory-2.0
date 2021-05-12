@@ -73,4 +73,10 @@ namespace Dory2.Models
         [Display(Name = "Confirma Senha")]
         public string ConfirmaSenha { get; set; }
     }
+
+    public class UploadFotoPerfil
+    {
+        public string Foto { get; set; }
+        public int PessoaId { get; set; }
+    }
 }

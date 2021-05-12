@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -337,6 +338,58 @@ namespace Dory2.Controllers
             ViewBag.Idade = idade;
 
             return View(responsavel);
+        }
+
+        public ActionResult UploadFotoPerfil()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadFotoPerfil([Bind(Include = "Foto, PessoaId")] UploadFotoPerfil upl, HttpPostedFileBase arq)
+        {
+            int pesId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            string valor = "";
+            if (ModelState.IsValid)
+            {
+                var resFoto = db.Galeria.Where(x => x.PessoaId == pesId);
+                if (resFoto == null)
+                {
+                    TempData["MSG"] = "warning|"+ pesId +"";
+                    if (arq != null)
+                    {
+                        Upload.CriarDiretorio();
+                        string nomearq = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(arq.FileName);
+                        valor = Upload.UploadArquivo(arq, nomearq);
+                        if (valor == "sucesso")
+                        {
+                            Galeria gal = new Galeria();
+                            gal.Foto = nomearq;
+                            gal.PessoaId = pesId;
+                            db.Galeria.Add(gal);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", valor);
+                            TempData["MSG"] = "warning|Ops! Algo deu errado";
+                        }
+                    }
+                    else
+                    {
+                        TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                    }
+                }
+                else
+                {
+                    // Atualizar foto existente
+                    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                }
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View();
         }
     }
 }

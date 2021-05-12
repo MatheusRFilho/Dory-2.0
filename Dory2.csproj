@@ -143,10 +143,12 @@
     <Compile Include="Models\Desaparecido.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Funcoes.cs" />
+    <Compile Include="Models\Galeria.cs" />
     <Compile Include="Models\Mais_infos.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Responsavel.cs" />
     <Compile Include="Models\Tutorias.cs" />
+    <Compile Include="Models\Upload.cs" />
     <Compile Include="Models\VMDesaparecido.cs" />
     <Compile Include="Models\VMResponsavel.cs" />
     <Compile Include="Models\Vulneravel.cs" />
@@ -224,9 +226,11 @@
     <Content Include="Views\Responsavels\Redefinir.cshtml" />
     <Content Include="Views\Responsavels\Perfil.cshtml" />
     <Content Include="Views\Desaparecido\InitialRegisterDesaparecido.cshtml" />
+    <Content Include="Views\Responsavels\UploadFotoPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

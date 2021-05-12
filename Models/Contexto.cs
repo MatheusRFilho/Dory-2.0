@@ -19,6 +19,7 @@ namespace Dory2.Models
         public DbSet<Mais_infos> Mais_Infos { get; set; }
         public DbSet<Tutorias> Tutorias { get; set; }
         public DbSet<Contato> Contato { get; set; }
+        public DbSet<Galeria> Galeria { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder mb)
         {
@@ -108,6 +109,12 @@ namespace Dory2.Models
             con.Property(x => x.Tipo).HasColumnName("con_tipo");
             con.Property(x => x.Numero).HasColumnName("con_numero");
             con.Property(x => x.ResponsavelId).HasColumnName("res_codigo");
+
+            var gal = mb.Entity<Galeria>();
+            gal.ToTable("gal_galeria");
+            gal.Property(x => x.Id).HasColumnName("gal_codigo");
+            gal.Property(x => x.Foto).HasColumnName("gal_foto");
+            gal.Property(x => x.PessoaId).HasColumnName("pes_codigo");
         }
     }
 }
