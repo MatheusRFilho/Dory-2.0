@@ -26,7 +26,7 @@
 
         <div class="form-container">
             <div class="form-group form-Box">
-                @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control", @placeholder = "Data de Nascimento" } })
+                @Html.TextBoxFor(model => model.DataNascimento, "{0:MM/dd/yyyy}", htmlAttributes: new { @class = "form-control", @type = "date" })
                 @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger mensagem-erro" })
             </div>
 
@@ -78,7 +78,7 @@
 
     <script>
         $(function () {
-            $("#DataNascimento").mask("99/99/9999");
+            //$("#DataNascimento").mask("99/99/9999");
             $("#Celular").mask("(99)99999-9999");
 
         });

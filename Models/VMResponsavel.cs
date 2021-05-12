@@ -16,6 +16,7 @@ namespace Dory2.Models
 
         [Required]
         [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataNascimento { get; set; }
 
         [Required]
@@ -74,7 +75,7 @@ namespace Dory2.Models
         public string ConfirmaSenha { get; set; }
     }
 
-    public class UploadFotoPerfil
+    public class UploadFoto
     {
         public string Foto { get; set; }
         public int PessoaId { get; set; }

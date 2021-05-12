@@ -347,15 +347,16 @@ namespace Dory2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadFotoPerfil([Bind(Include = "Foto, PessoaId")] UploadFotoPerfil upl, HttpPostedFileBase arq)
+        public ActionResult UploadFotoPerfil(UploadFoto upl, HttpPostedFileBase arq)
         {
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             string valor = "";
+            upl.PessoaId = resId;
             if (ModelState.IsValid)
             {
-                var resFoto = db.Galeria.Where(x => x.Id == resId);
-                if (resFoto == null)
-                {
+                var resFoto = db.Galeria.Where(x => x.Id == resId).ToList().FirstOrDefault();
+                //if (resFoto == null)
+                //{
                     TempData["MSG"] = "warning|"+ resId +"";
                     if (arq != null)
                     {
@@ -368,6 +369,11 @@ namespace Dory2.Controllers
                             gal.Foto = nomearq;
                             gal.PessoaId = resId;
                             db.Galeria.Add(gal);
+                            if(resFoto != null)
+                            {
+                                Upload.ExcluirArquivo(Request.PhysicalApplicationPath + "Uploads\\" + resFoto.Foto);
+                                db.Galeria.Remove(resFoto);
+                            }
                             db.SaveChanges();
                             return RedirectToAction("Index");
                         }
@@ -375,20 +381,23 @@ namespace Dory2.Controllers
                         {
                             ModelState.AddModelError("", valor);
                             TempData["MSG"] = "warning|Ops! Algo deu errado";
+                            return View();
                         }
                     }
                     else
                     {
                         TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                        return View();
                     }
-                }
-                else
-                {
-                    // Atualizar foto existente
-                    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
-                }
+                //}
+                //else
+                //{
+                //    // Atualizar foto existente
+                //    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                //    return View();
+                //}
             }
-            TempData["MSG"] = "warning|Preencha todos os campos";
+            TempData["MSG"] = "warning|Preencha todos os campos" + resId;
             return View();
         }
 
@@ -424,6 +433,7 @@ namespace Dory2.Controllers
                 if (res != null)
                 {
                     TempData["MSG"] = "success|Senha redefinida com sucesso!";
+                    return View(edt);
                 }
                 TempData["MSG"] = "error|Responsavel não encontrado "+resId+"";
                 return View(edt);
