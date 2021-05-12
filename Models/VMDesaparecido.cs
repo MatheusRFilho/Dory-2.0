@@ -33,4 +33,24 @@ namespace Dory2.Models
         public string Descricao { get; set; }
 
     }
+
+    public class FinalRegisterDesaparecido
+    {
+        public string deficienciaMentalRadio { get; set; }
+
+        public string deficienciaMentalText { get; set; }
+
+        public string deficienciaFisicaRadio { get; set; }
+
+        public string deficienciaFisicaText { get; set; }
+
+        public string restricaoAlimentarRadio { get; set; }
+
+        public string restricaoAlimentarText { get; set; }
+
+        public string doencaRadio { get; set; }
+
+        public string doencaText { get; set; }
+
+    }
 }

@@ -26,8 +26,20 @@ namespace Dory2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult InitialRegisterDesaparecido(InitialRegisterDesaparecido cad)
         {
-            ViewBag.test = "Teste";
             return View();
-        }  
+        }
+
+
+        public ActionResult FinalRegisterDesaparecido()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FinalRegisterDesaparecido(FinalRegisterDesaparecido cad)
+        {
+            return View();
+        }
     }
 }
