@@ -59,5 +59,11 @@ namespace Dory2.Controllers
             return View();
         }
 
+
+        public ActionResult ListOneDesaparecido()
+        {
+            return View();
+        }
+
     }
 }

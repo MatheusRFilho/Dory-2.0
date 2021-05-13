@@ -1,0 +1,92 @@
+﻿.card {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px auto 50px;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex: 1;
+    width: 50%;
+}
+
+.card-header img {
+    width: 250px;
+    height: 250px;
+}
+
+.card-header div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 45%;
+}
+
+.card-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom:0px;
+}
+
+.card-age {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.bodycontent{
+    margin-left:45px;
+    margin-right: 45px;
+    margin-top: 30px;
+}
+
+.bodycontent .body-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.card-denuncia {
+    font-size: 16px;
+    color: #788896;
+    border-bottom: 1px solid rgba(120,136,150,0.5);
+    padding-bottom: 4px;
+    text-align: center;
+    margin-left: 64px;
+}
+
+.card-denuncia:hover {
+    text-decoration: none;
+}
+
+.card-footer div {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.card-footer div a {
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.card-footer div .card-back {
+    background-color: rgb(120,136,150); 
+    margin-right: 10px;
+}
+
+.card-footer div .card-achei {
+    background-color: #2c88d9;
+    margin-left: 10px;
+}
