@@ -105,8 +105,34 @@
 .select {
     width:250px;
 } 
-.title {
-    margin-top:-20px;
+.subtitle {
     margin-bottom:40px;
     text-align: center;
+}
+
+.title {
+    margin-top: -20px;
+    text-align: center;
+}
+
+.form-Box3 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.form-Box4 input {
+    width: 250px;
+}
+
+.form-container2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.newform-control {
+    min-width: 400px;
+    display: flex;
+    flex: 1;
 }
