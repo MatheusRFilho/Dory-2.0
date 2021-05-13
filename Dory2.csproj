@@ -161,6 +161,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\Home.css" />
+    <Content Include="Content\Listagem.css" />
     <Content Include="Content\Perfil.css" />
     <Content Include="Images\banner 2.jpg" />
     <Content Include="Images\banner 3.jpg" />
@@ -230,6 +231,7 @@
     <Content Include="Views\Responsavels\EditarPerfil.cshtml" />
     <Content Include="Views\Desaparecido\FinalRegisterDesaparecido.cshtml" />
     <Content Include="Views\Desaparecido\ConfirmationRegisterDesaparecido.cshtml" />
+    <Content Include="Views\Desaparecido\ListDesaparecido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
