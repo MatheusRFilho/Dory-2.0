@@ -26,7 +26,7 @@ namespace Dory2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult InitialRegisterDesaparecido(InitialRegisterDesaparecido cad)
         {
-            return View();
+            return RedirectToAction("FinalRegisterDesaparecido");
         }
 
 

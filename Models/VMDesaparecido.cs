@@ -24,6 +24,7 @@ namespace Dory2.Models
         public string TipoSanguineo { get; set; }
 
         [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataNascimento { get; set; }
 
         public string Altura { get; set; }
