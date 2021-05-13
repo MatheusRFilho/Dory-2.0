@@ -54,4 +54,22 @@ namespace Dory2.Models
         public string doencaText { get; set; }
 
     }
+
+    public class ConfirmationRegisterDesaparecido
+    {
+        public string SeuCPF { get; set; }
+
+        public string CpfDesaparecido { get; set; }
+
+        public string SeuRG { get; set; }
+
+        public string RgDesaparecido { get; set; }
+
+        public string NumeroDoBO { get; set; }
+
+        [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DataBO { get; set; }
+
+    }
 }

@@ -1,0 +1,76 @@
+﻿@model Dory2.Models.ConfirmationRegisterDesaparecido
+
+@{
+    ViewBag.Title = "ConfirmationRegisterDesaparecido";
+    Layout = "~/Views/Shared/_Register.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h1 class="title">Estamos quase acabando...</h1>
+    <p class="subtitle">Informe o boletim de ocorrência feito em uma delegacia mais próxima para evitar situações indesejadas.</p>
+    <div class="form-horizontal">
+
+        <div class="form-group form-Box2">
+            @Html.EditorFor(model => model.SeuCPF, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu CPF" } })
+            @Html.ValidationMessageFor(model => model.SeuCPF, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box2">
+            @Html.EditorFor(model => model.CpfDesaparecido, new { htmlAttributes = new { @class = "form-control", @placeholder = "CPF do(a) desaparecido(a)" } })
+            @Html.ValidationMessageFor(model => model.CpfDesaparecido, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box2">
+            @Html.EditorFor(model => model.SeuRG, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu RG" } })
+            @Html.ValidationMessageFor(model => model.SeuRG, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box2">
+            @Html.EditorFor(model => model.RgDesaparecido, new { htmlAttributes = new { @class = "form-control", @placeholder = "RG do(a) desaparecido(a)" } })
+            @Html.ValidationMessageFor(model => model.RgDesaparecido, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+
+        <div class="form-container">
+            <div class="form-group form-Box">
+                @Html.EditorFor(model => model.RgDesaparecido, new { htmlAttributes = new { @class = "form-control", @placeholder = "Número do Boletim de ocorrência" } })
+                @Html.ValidationMessageFor(model => model.RgDesaparecido, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+            <div class="form-group form-Box">
+                @Html.TextBoxFor(model => model.DataBO,  htmlAttributes: new { @class = "form-control", @type = "date", @placeholder = "Data do boletim" })
+                @Html.ValidationMessageFor(model => model.DataBO, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-container">
+            <div class="button-Container">
+                @*@Html.ActionLink("Voltar", "Index")*@
+                <input type="button" value="Voltar" onClick="history.go(-1)">
+            </div>
+
+            <div class="button-Container">
+                <input type="submit" value="Finalizar cadastro" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#SeuCPF").mask("999.999.999-99");
+            $("#CpfDesaparecido").mask("999.999.999-99");
+            $('#SeuRG').mask('99.999.999-9');
+            $('#RgDesaparecido').mask('99.999.999-9');
+        });
+    </script>
+
+
+}

@@ -41,5 +41,18 @@ namespace Dory2.Controllers
         {
             return View();
         }
+
+        public ActionResult ConfirmationRegisterDesaparecido()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmationRegisterDesaparecido(ConfirmationRegisterDesaparecido cad)
+        {
+            return View();
+        }
+
     }
 }
