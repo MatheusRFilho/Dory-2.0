@@ -26,6 +26,9 @@
                     @ViewBag.Idade
                     anos
                 </span>
+                <span>
+                    @Html.ActionLink("Editar perfil", "EditarPerfil", new { id = Model.Id })
+                </span>
             </div>
         </div>
         <div class="profile-body">
@@ -49,16 +52,17 @@
                 <span class="profile-title text-bold">Sexo</span>
                 @if (Html.DisplayFor(model => model.Pessoa.Sexo).ToString().Equals(""))
                 {
-                    <span>Cadastro não completo</span>
+                    <span>Edite seu perfil para selecionar</span>
                 }
                 else
                 {
                     <span>@Html.DisplayFor(model => model.Pessoa.Sexo)</span>
                 }
             </div>
+            @if (Html.DisplayFor(model => model.Pessoa.Cpf).ToString().Equals(""))
+            {
+                <span>Deseja <a href="~/Responsavels/TerminarRegistro">completar o seu cadastro</a>?</span>        
+            }
         </div>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "EditarPerfil", new { id = Model.Id })
-</p>

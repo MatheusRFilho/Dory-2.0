@@ -89,9 +89,11 @@ namespace Dory2.Models
         public string Nome { get; set; }
 
         [Required]
+        [Display(Name = "Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
 
         [Required]
+        [Display(Name = "CPF")]
         public string Cpf { get; set; }
 
         [Required]
@@ -99,11 +101,10 @@ namespace Dory2.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Celular")]
         public string Contato { get; set; }
 
-        [Required]
-        [EnumDataType(typeof(Sexos))]
-        public string Sexo { get; set; }
+        public Sexos Sexo { get; set; }
 
         public enum Sexos
         {

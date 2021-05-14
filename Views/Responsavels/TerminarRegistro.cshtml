@@ -9,8 +9,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <h1 class="title">Confirme seu cadastro!</h1>
-    <p class="subtitle">Termine o seu cadastro para poder cadastrar um desaparecido!</p>
+    <h1 class="title">Termine seu cadastro!</h1>
+    <p class="subtitle">Para ter acesso a maioria dos recursos do nosso sistema</p>
 
 
     <div class="form-horizontal">
@@ -64,7 +64,6 @@
 
         <div class="form-container">
             <div class="button-Container">
-                @*@Html.ActionLink("Voltar", "Index")*@
                 <input type="button" value="Voltar" onClick="history.go(-1)">
             </div>
 
@@ -85,7 +84,6 @@
             $('#Rg').mask('99.999.999-9');
 
         });
-
     </script>
 
 

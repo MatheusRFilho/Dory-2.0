@@ -205,11 +205,13 @@ namespace Dory2.Controllers
                 {
                     ModelState.AddModelError("Email", "Email já cadastrado");
                     return View();
-                } else if (db.Responsavel.Where(x => x.Celular == cad.Celular).ToList().Count > 0)
+                } 
+                else if (db.Responsavel.Where(x => x.Celular == cad.Celular).ToList().Count > 0)
                 {
                     ModelState.AddModelError("Celular", "Celular já cadastrado");
                     return View();
-                } else
+                } 
+                else
                 {
                     string NomeCompleto = cad.Nome + " " + cad.Sobrenome;
 
@@ -417,7 +419,6 @@ namespace Dory2.Controllers
             editar.Cpf = responsavel.Pessoa.Cpf;
             editar.Email = responsavel.Email;
             editar.Contato = responsavel.Celular;
-            editar.Sexo = responsavel.Pessoa.Sexo;
             return View(editar);
         }
 
@@ -432,10 +433,58 @@ namespace Dory2.Controllers
                 Responsavel res = db.Responsavel.Where(x => x.Id == resId).ToList().FirstOrDefault();
                 if (res != null)
                 {
-                    TempData["MSG"] = "success|Senha redefinida com sucesso!";
+                    Pessoa pes = db.Pessoa.Find(res.PessoaId);
+
+                    string auxEmail = res.Email;
+                    string auxCelular = res.Celular;
+                    string auxCpf = pes.Cpf;
+                    res.Email = "";
+                    res.Celular = "";
+                    pes.Cpf = "";
+
+                    db.SaveChanges();
+
+                    if (db.Responsavel.Where(x => x.Email == edt.Email).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Email", "Email já cadastrado");
+                        res.Email = auxEmail;
+                        res.Celular = auxCelular;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+                    if (db.Responsavel.Where(x => x.Celular == edt.Contato).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Contato", "Celular já cadastrado");
+                        res.Email = auxEmail;
+                        res.Celular = auxCelular;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+                    if (db.Responsavel.Where(x => x.Pessoa.Cpf == edt.Cpf).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Cpf", "CPF já cadastrado");
+                        res.Email = auxEmail;
+                        res.Celular = auxCelular;
+                        pes.Cpf = auxCpf;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+
+                    pes.Nome = edt.Nome;
+                    pes.DataNascimento = edt.DataNascimento;
+                    pes.Cpf = edt.Cpf;
+                    pes.Sexo = Convert.ToString(edt.Sexo);
+                    db.SaveChanges();
+
+                    res.Email = edt.Email;
+                    res.Celular = edt.Contato;
+                    db.SaveChanges();
+
+                    TempData["MSG"] = "success|Dados alterados com sucesso!";
                     return View(edt);
+
                 }
-                TempData["MSG"] = "error|Responsavel não encontrado "+resId+"";
+                TempData["MSG"] = "error|Responsavel não encontrado";
                 return View(edt);
             }
             TempData["MSG"] = "warning|Preencha todos os campos";
