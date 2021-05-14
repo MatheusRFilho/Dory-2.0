@@ -1,0 +1,119 @@
+﻿@model Dory2.Models.FinishedRegister
+
+@{
+    ViewBag.Title = "TerminarRegistro";
+    Layout = "~/Views/Shared/_Register.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h1 class="title">Confirme seu cadastro!</h1>
+    <p class="subtitle">Termine o seu cadastro para poder cadastrar um desaparecido!</p>
+
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-container">
+            <div class="form-group form-Box">
+                @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control", @placeholder = "CPF" } })
+                @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+
+            <div class="form-group form-Box">
+                @Html.EditorFor(model => model.Rg, new { htmlAttributes = new { @class = "form-control", @placeholder = "RG" } })
+                @Html.ValidationMessageFor(model => model.Rg, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="form-group form-Box7">
+                @Html.TextBoxFor(model => model.Logradouro, htmlAttributes: new { @class = "form-control", @placeholder = "Endereço" })
+                @Html.ValidationMessageFor(model => model.Logradouro, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+
+            <div class="form-group form-Box6">
+                @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero" } })
+                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger mensagem-erro2" })
+            </div>
+        </div>
+
+
+        <div class="form-container">
+            <div class="form-group form-Box5">
+                @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bairro" } })
+                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+
+            <div class="form-group form-Box5">
+                @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cidade" } })
+                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+
+            <div class="form-group form-Box">
+                <select asp-for="Sexo" class="form-control select2">
+                    <option value="" hidden selected disabled>UF</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="button-Container">
+                @*@Html.ActionLink("Voltar", "Index")*@
+                <input type="button" value="Voltar" onClick="history.go(-1)">
+            </div>
+
+            <div class="button-Container">
+                <input type="submit" value="Cadastrar" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+    <script>
+        $(function () {
+            $("#Cpf").mask("999.999.999-99");
+            $('#Rg').mask('99.999.999-9');
+
+        });
+
+    </script>
+
+
+}
+

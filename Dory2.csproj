@@ -234,6 +234,7 @@
     <Content Include="Views\Desaparecido\ConfirmationRegisterDesaparecido.cshtml" />
     <Content Include="Views\Desaparecido\ListDesaparecido.cshtml" />
     <Content Include="Views\Desaparecido\ListOneDesaparecido.cshtml" />
+    <Content Include="Views\Responsavels\TerminarRegistro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -440,5 +440,24 @@ namespace Dory2.Controllers
             TempData["MSG"] = "warning|Preencha todos os campos";
             return View(edt);
         }
+
+        public ActionResult TerminarRegistro ()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult TerminarRegistro(FinishedRegister cad)
+        {
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View();
+        }
     }
 }

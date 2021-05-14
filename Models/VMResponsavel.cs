@@ -109,4 +109,29 @@ namespace Dory2.Models
             Feminino = 1,
         }
     }
+
+    public class FinishedRegister
+    {
+        [Required]
+        public string Cpf { get; set; }
+
+        [Required]
+        public string Rg { get; set; }
+
+        [Required]
+        public string Logradouro { get; set; }
+
+        [Required(ErrorMessage = "Obrigarotio", AllowEmptyStrings = true)]
+        public string Numero { get; set; }
+
+        [Required]
+        public string Bairro { get; set; }
+
+        [Required]
+        public string Cidade { get; set; }
+
+        [Required]
+
+        public string UF { get; set; }
+    }
 }

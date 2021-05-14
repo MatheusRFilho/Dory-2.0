@@ -102,6 +102,16 @@
     margin-top: 12px;
 }
 
+.mensagem-erro2 {
+    display: block;
+    max-width: 100px;
+    font-size: 11px;
+}
+
+    .mensagem-erro2 span {
+        margin-top: 12px;
+    }
+
 .select {
     width:250px;
 } 
@@ -135,4 +145,23 @@
     min-width: 400px;
     display: flex;
     flex: 1;
+}
+
+.select2 {
+    width: 80px;
+}
+
+.form-Box5 input {
+    max-width: 400px;
+    min-width: 200px;
+}
+
+.form-Box6 input {
+    max-width: 400px;
+    min-width: 80px;
+    width: 50px !important;
+}
+
+.form-Box7 input {
+    min-width: 420px;
 }
