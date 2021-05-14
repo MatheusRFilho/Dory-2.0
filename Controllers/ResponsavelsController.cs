@@ -426,6 +426,7 @@ namespace Dory2.Controllers
         public ActionResult EditarPerfil(EditarPerfil edt)
         {
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+
             if (ModelState.IsValid)
             {
                 Responsavel res = db.Responsavel.Where(x => x.Id == resId).ToList().FirstOrDefault();
@@ -441,22 +442,39 @@ namespace Dory2.Controllers
             return View(edt);
         }
 
-        public ActionResult TerminarRegistro ()
+        public ActionResult TerminarRegistro()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public ActionResult TerminarRegistro(FinishedRegister cad)
         {
-            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             if (ModelState.IsValid)
             {
-                return View();
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Responsavel res = db.Responsavel.Find(resId);
+
+                Pessoa pes = db.Pessoa.Find(res.PessoaId);
+                pes.Cpf = cad.Cpf;
+                pes.Rg = cad.Rg;
+                db.SaveChanges();
+
+                Endereco end = new Endereco();
+                end.Bairro = cad.Bairro;
+                end.Cidade = cad.Cidade;
+                end.Estado = Convert.ToString(cad.UF);
+                end.Logradouro = cad.Logradouro;
+                end.Numero = cad.Numero;
+                end.Pessoa = pes;
+
+                db.Endereco.Add(end);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
             }
-            TempData["MSG"] = "warning|Preencha todos os campos";
+           
             return View();
         }
     }
