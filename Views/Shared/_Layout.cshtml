@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="menuContainer">
-                            <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@User.Identity.Name</a></div>
+                            <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@Request.Cookies.Get("loginData").Value</a></div>
                             <div class="menulink"><p class="link">Dory Gold</p></div>
                             <div class="menulink"><a href="~/Responsavels/Sair" class="link">Sair</a></div>
                         </div>

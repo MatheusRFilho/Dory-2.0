@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Perfil";
+
+    if (ViewBag.FotoPerfil == null) {
+        ViewBag.FotoPerfil = "avatar.jpg";
+    }
 }
 
 <link href="~/Content/Perfil.css" rel="stylesheet" />
@@ -14,7 +18,7 @@
     <div class="profile-container">
         <div class="profile-header">
             <a href="~/Responsavels/UploadFotoPerfil">
-                <img src="~/Images/perfil2.jpg" alt="Foto de perfil" class="profile-image" />
+                <img src="~/Uploads/@ViewBag.FotoPerfil" alt="Foto de perfil" class="profile-image" style="border-radius: 50%" />
             </a>
             <div class="profile-name-container">
                 <span class="profile-name text-bold">@Html.DisplayFor(model => model.Pessoa.Nome)</span>
@@ -34,7 +38,7 @@
             </div>
             <div class="profile-data">
                 <span class="profile-title text-bold">CPF</span>
-                @if (Html.DisplayFor(model => model.Pessoa.Cpf) == null)
+                @if (Html.DisplayFor(model => model.Pessoa.Cpf).Equals(""))
                 {
                     <span>Cadastro não completo</span>
                 }

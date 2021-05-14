@@ -21,6 +21,7 @@
 .profile-image {
     width: 200px;
     margin-right: 22px;
+    border-radius: 50%;
 }
 
 .profile-name-container {

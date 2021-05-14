@@ -337,6 +337,12 @@ namespace Dory2.Controllers
             int idade = ano - anoInicial;
             ViewBag.Idade = idade;
 
+            Galeria galeria = db.Galeria.Where(x => x.PessoaId == responsavel.PessoaId).ToList().FirstOrDefault();
+            if(galeria != null)
+            {
+                ViewBag.FotoPerfil = galeria.Foto;
+            }
+
             return View(responsavel);
         }
 
@@ -355,49 +361,42 @@ namespace Dory2.Controllers
             if (ModelState.IsValid)
             {
                 var resFoto = db.Galeria.Where(x => x.Id == resId).ToList().FirstOrDefault();
-                //if (resFoto == null)
-                //{
-                    TempData["MSG"] = "warning|"+ resId +"";
-                    if (arq != null)
+                if (arq != null)
+                {
+                    Upload.CriarDiretorio();
+                    string nomearq = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(arq.FileName);
+                    valor = Upload.UploadArquivo(arq, nomearq);
+                    if (valor == "sucesso")
                     {
-                        Upload.CriarDiretorio();
-                        string nomearq = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(arq.FileName);
-                        valor = Upload.UploadArquivo(arq, nomearq);
-                        if (valor == "sucesso")
+                        Responsavel res = db.Responsavel.Find(resId);
+
+                        Galeria gal = new Galeria();
+                        gal.Foto = nomearq;
+                        gal.PessoaId = res.PessoaId;
+                        db.Galeria.Add(gal);
+                        if (resFoto != null)
                         {
-                            Galeria gal = new Galeria();
-                            gal.Foto = nomearq;
-                            gal.PessoaId = resId;
-                            db.Galeria.Add(gal);
-                            if(resFoto != null)
-                            {
-                                Upload.ExcluirArquivo(Request.PhysicalApplicationPath + "Uploads\\" + resFoto.Foto);
-                                db.Galeria.Remove(resFoto);
-                            }
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
+                            Upload.ExcluirArquivo(Request.PhysicalApplicationPath + "Uploads\\" + resFoto.Foto);
+                            db.Galeria.Remove(resFoto);
                         }
-                        else
-                        {
-                            ModelState.AddModelError("", valor);
-                            TempData["MSG"] = "warning|Ops! Algo deu errado";
-                            return View();
-                        }
+                        db.SaveChanges();
+                        return RedirectToAction("Perfil/" + resId, "Responsavels");
                     }
                     else
                     {
-                        TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                        ModelState.AddModelError("", valor);
+                        TempData["MSG"] = "warning|Ops! Algo deu errado";
                         return View();
                     }
-                //}
-                //else
-                //{
-                //    // Atualizar foto existente
-                //    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
-                //    return View();
-                //}
+                }
+                else
+                {
+                    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                    return View();
+                }
+
             }
-            TempData["MSG"] = "warning|Preencha todos os campos" + resId;
+            TempData["MSG"] = "warning|Preencha todos os campos";
             return View();
         }
 
