@@ -19,7 +19,16 @@ namespace Dory2.Controllers
 
         public ActionResult InitialRegisterDesaparecido()
         {
-            return View();
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            Responsavel res = db.Responsavel.Where(x => x.Id == resId).ToList().FirstOrDefault();
+            if(res.Pessoa.Cpf == null)
+            {
+                return RedirectToAction("TerminarRegistro", "Responsavels");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
