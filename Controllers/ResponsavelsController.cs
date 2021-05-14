@@ -481,7 +481,7 @@ namespace Dory2.Controllers
                     db.SaveChanges();
 
                     TempData["MSG"] = "success|Dados alterados com sucesso!";
-                    return View(edt);
+                    return RedirectToAction("Perfil/" + resId, "Responsavels");
 
                 }
                 TempData["MSG"] = "error|Responsavel não encontrado";
