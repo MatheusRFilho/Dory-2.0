@@ -38,7 +38,7 @@
             </div>
             <div class="profile-data">
                 <span class="profile-title text-bold">CPF</span>
-                @if (Html.DisplayFor(model => model.Pessoa.Cpf).Equals(""))
+                @if (Html.DisplayFor(model => model.Pessoa.Cpf).ToString().Equals(""))
                 {
                     <span>Cadastro não completo</span>
                 }
@@ -47,7 +47,14 @@
                     <span>@Html.DisplayFor(model => model.Pessoa.Cpf)</span>
                 }
                 <span class="profile-title text-bold">Sexo</span>
-                <span>Conteudo</span>
+                @if (Html.DisplayFor(model => model.Pessoa.Sexo).ToString().Equals(""))
+                {
+                    <span>Cadastro não completo</span>
+                }
+                else
+                {
+                    <span>@Html.DisplayFor(model => model.Pessoa.Sexo)</span>
+                }
             </div>
         </div>
     </div>
