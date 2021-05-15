@@ -66,7 +66,6 @@ namespace Dory2.Models
             des.Property(x => x.Id).HasColumnName("des_codigo");
             des.Property(x => x.Encontrado).HasColumnName("des_encontrado");
             des.Property(x => x.PessoaId).HasColumnName("pes_codigo");
-            des.Property(x => x.VulneravelId).HasColumnName("vul_codigo");
 
             var cas = mb.Entity<Casos>();
             cas.ToTable("cas_casos");
