@@ -16,10 +16,8 @@ namespace Dory2.Models
         [Required]
         public int PessoaId { get; set; }
 
-        public int VulneravelId { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
-        public virtual Vulneravel Vulneravel { get; set; }
 
     }
 }

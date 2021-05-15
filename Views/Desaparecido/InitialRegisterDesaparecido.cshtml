@@ -25,23 +25,19 @@
         </div>
         <div class="form-container">
             <div class="form-group form-Box">
-                <select asp-for="Sexo" class="form-control select">
-                    <option value="" hidden selected disabled>Sexo</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Feminino</option>
-                    <option value="O">Outro</option>
-                </select>
+                @Html.EnumDropDownListFor(
+                   x => x.Sexo,
+                   "Sexo",
+                   new { @class = "form-control select" })
+                @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group form-Box">
-                <select asp-for="Etinia" class="form-control select">
-                    <option value="" hidden selected disabled>Etnia</option>
-                    <option value="1">Amarelo</option>
-                    <option value="2">Branco</option>
-                    <option value="3">Indígena</option>
-                    <option value="4">Negra</option>
-                    <option value="5">Parda</option>
-                </select>
+                @Html.EnumDropDownListFor(
+                   x => x.Cutis,
+                   "Etinia",
+                   new { @class = "form-control select" })
+                @Html.ValidationMessageFor(model => model.Cutis, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-container">

@@ -35,7 +35,42 @@ namespace Dory2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult InitialRegisterDesaparecido(InitialRegisterDesaparecido cad)
         {
-            return RedirectToAction("FinalRegisterDesaparecido");
+            if (ModelState.IsValid)
+            {
+                string name = cad.Nome + " " + cad.Sobrenome;
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias tut = new Tutorias();
+                tut.Responsavel = db.Responsavel.Find(resId);
+                tut.Pessoa = new Pessoa();
+
+                tut.Pessoa.Nome = name;
+                tut.Pessoa.DataNascimento = cad.DataNascimento;
+                tut.Pessoa.Sexo = Convert.ToString(cad.Sexo);
+                tut.Pessoa.Cutis = Convert.ToString(cad.Cutis);
+
+                db.Tutorias.Add(tut);
+                db.SaveChanges();
+
+                Desaparecido des = new Desaparecido();
+                des.Pessoa = tut.Pessoa;
+                //des.VulneravelId = 0; 
+
+                db.Desaparecido.Add(des);
+                db.SaveChanges();
+
+                Mais_infos infos = new Mais_infos();
+                infos.Olhos = cad.CorOlhos;
+                infos.Cabelo = cad.CorCabelo;
+                infos.Altura = Convert.ToDecimal(cad.Altura);
+                infos.Peso = Convert.ToDecimal(cad.Peso);
+                infos.Desaparecido = des;
+
+                db.Mais_Infos.Add(infos);
+                db.SaveChanges();
+
+                return RedirectToAction("FinalRegisterDesaparecido", "Desaparecido");
+            }
+            return View();
         }
 
 

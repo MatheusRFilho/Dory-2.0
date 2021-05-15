@@ -13,9 +13,23 @@ namespace Dory2.Models
 
         public string Sobrenome { get; set; }
 
-        public string Sexo { get; set; }
+        public Sexos Sexo { get; set; }
+        public enum Sexos
+        {
+            Masculino = 1,
+            Feminino = 2,
+            Outro = 3,
+        }
 
-        public string Etinia { get; set; }
+        public Etinias Cutis { get; set; }
+        public enum Etinias
+        {
+            Amarela = 1,
+            Branca = 2,
+            Indígena = 3,
+            Negra = 4,
+            Parda = 5,
+        }
 
         public string CorOlhos { get; set; }
 
