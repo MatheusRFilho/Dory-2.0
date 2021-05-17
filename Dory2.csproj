@@ -228,9 +228,10 @@
     <Content Include="Views\Responsavels\EditarPerfil.cshtml" />
     <Content Include="Views\Desaparecido\FinalRegisterDesaparecido.cshtml" />
     <Content Include="Views\Desaparecido\ConfirmationRegisterDesaparecido.cshtml" />
-    <Content Include="Views\Desaparecido\ListDesaparecido.cshtml" />
     <Content Include="Views\Desaparecido\ListOneDesaparecido.cshtml" />
     <Content Include="Views\Responsavels\TerminarRegistro.cshtml" />
+    <Content Include="Views\Desaparecido\ListDesaparecidoTest.cshtml" />
+    <Content Include="Views\Desaparecido\ListDesaparecidoTest2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

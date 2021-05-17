@@ -40,6 +40,8 @@ namespace Dory2.Controllers
                 string name = cad.Nome + " " + cad.Sobrenome;
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = new Tutorias();
+                tut.Ativo = true;
+                tut.Cadastro = DateTime.Now;
                 tut.Responsavel = db.Responsavel.Find(resId);
                 tut.Pessoa = new Pessoa();
 
@@ -215,7 +217,8 @@ namespace Dory2.Controllers
 
         public ActionResult ListDesaparecido()
         {
-            return View();
+            List<Desaparecido> des = db.Desaparecido.ToList();
+            return View(des);
         }
 
 
@@ -224,5 +227,16 @@ namespace Dory2.Controllers
             return View();
         }
 
+        public ActionResult ListDesaparecidoTest()
+        {
+            List<Tutorias> infos = db.Tutorias.ToList();
+            return View(infos);
+        }
+
+        public ActionResult ListDesaparecidoTest2()
+        {
+            List<Mais_infos> des = db.Mais_Infos.ToList();
+            return View(des);
+        }
     }
 }

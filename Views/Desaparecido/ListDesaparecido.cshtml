@@ -14,83 +14,19 @@
 
 
 <div class="peoples-desaparecidas">
-    <div class="card-desaparecido">
-        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-        <p class="list-name">Nome Sobrenome</p>
-        <p class="list-age">00 anos</p>
+    @foreach (var item in Model)
+    {
+        <div class="card-desaparecido">
+            <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+            @*<p class="list-name">@Html.DisplayNameFor(model => model.)</p>*@
+            <p class="list-age">00 anos</p>
 
-        <p class="list-subtitle">Desaparecido desde:</p>
-        <p class="list-date">25/06/2012</p>
+            <p class="list-subtitle">Desaparecido desde:</p>
+            <p class="list-date">25/06/2012</p>
 
-        <p class="list-subtitle">Cidade:</p>
-        <p class="list-city">Guaratinguetá/SP</p>
+            <a href="#" class="list-button">Mais Informações</a>
+        </div>
+    }
 
-        <a href="#" class="list-button">Mais Informações</a>
-    </div>
-    <div class="card-desaparecido">
-        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-        <p class="list-name">Nome Sobrenome</p>
-        <p class="list-age">00 anos</p>
-
-        <p class="list-subtitle">Desaparecido desde:</p>
-        <p class="list-date">25/06/2012</p>
-
-        <p class="list-subtitle">Cidade:</p>
-        <p class="list-city">Guaratinguetá/SP</p>
-
-        <a href="#" class="list-button">Mais Informações</a>
-    </div>
-    <div class="card-desaparecido">
-        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-        <p class="list-name">Nome Sobrenome</p>
-        <p class="list-age">00 anos</p>
-
-        <p class="list-subtitle">Desaparecido desde:</p>
-        <p class="list-date">25/06/2012</p>
-
-        <p class="list-subtitle">Cidade:</p>
-        <p class="list-city">Guaratinguetá/SP</p>
-
-        <a href="#" class="list-button">Mais Informações</a>
-    </div>
-    <div class="card-desaparecido">
-        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-        <p class="list-name">Nome Sobrenome</p>
-        <p class="list-age">00 anos</p>
-
-        <p class="list-subtitle">Desaparecido desde:</p>
-        <p class="list-date">25/06/2012</p>
-
-        <p class="list-subtitle">Cidade:</p>
-        <p class="list-city">Guaratinguetá/SP</p>
-
-        <a href="#" class="list-button">Mais Informações</a>
-    </div>
-    <div class="card-desaparecido">
-        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-        <p class="list-name">Nome Sobrenome</p>
-        <p class="list-age">00 anos</p>
-
-        <p class="list-subtitle">Desaparecido desde:</p>
-        <p class="list-date">25/06/2012</p>
-
-        <p class="list-subtitle">Cidade:</p>
-        <p class="list-city">Guaratinguetá/SP</p>
-
-        <a href="#" class="list-button">Mais Informações</a>
-    </div>
-    <div class="card-desaparecido">
-        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-        <p class="list-name">Nome Sobrenome</p>
-        <p class="list-age">00 anos</p>
-
-        <p class="list-subtitle">Desaparecido desde:</p>
-        <p class="list-date">25/06/2012</p>
-
-        <p class="list-subtitle">Cidade:</p>
-        <p class="list-city">Guaratinguetá/SP</p>
-
-        <a href="#" class="list-button">Mais Informações</a>
-    </div>
 </div>
 
