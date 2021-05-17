@@ -215,13 +215,6 @@ namespace Dory2.Controllers
             return View();
         }
 
-        public ActionResult ListDesaparecido()
-        {
-            List<Desaparecido> des = db.Desaparecido.ToList();
-            return View(des);
-        }
-
-
         public ActionResult ListOneDesaparecido(int id)
         {
             Tutorias tut = db.Tutorias.Find(id);
@@ -262,10 +255,11 @@ namespace Dory2.Controllers
             return View(infos);
         }
 
-        public ActionResult ListDesaparecidoTest2()
+        public ActionResult ListMeusDesaparecidos()
         {
-            List<Mais_infos> des = db.Mais_Infos.ToList();
-            return View(des);
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId).ToList();
+            return View(infos);
         }
     }
 }

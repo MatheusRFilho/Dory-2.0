@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Dory2.Models.Tutorias>
+
+@{
+    ViewBag.Title = "ListDesaparecidoTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Listagem.css" rel="stylesheet" />
+
+<div class="img-banner-container">
+    <img src="~/Images/BANNER SITE.jpg" alt="banner" class="img-banner" />
+</div>
+
+<h1 class="title"> Pessoas Desaparecidas </h1>
+
+<div class="peoples-desaparecidas">
+    @foreach (var item in Model)
+    {
+        if (item.Ativo)
+        {
+            <div class="card-desaparecido">
+                <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                <p class="list-name">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
+                <p class="list-age">
+                    @{
+                        DateTime dataInicial = item.Pessoa.DataNascimento;
+                        DateTime dataFinal = DateTime.Now;
+                        int ano = dataFinal.Year;
+                        int anoInicial = dataInicial.Year;
+                        int idade = ano - anoInicial;
+                        string show = idade + " Anos";
+
+                        @Html.DisplayFor(model => show)
+
+                    }
+                </p>
+
+                <p class="list-subtitle">Desaparecido desde:</p>
+                <p class="list-date">@Html.DisplayFor(model => item.Cadastro)</p>
+
+                <a href="https://localhost:44390/Desaparecido/ListOneDesaparecido/@item.Id" class="list-button">Mais Informações</a>
+            </div>
+        }
+
+    }
+</div>
+
