@@ -7,13 +7,13 @@ namespace Dory2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AdicaoHash : IMigrationMetadata
+    public sealed partial class CriacaoBanco : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AdicaoHash));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CriacaoBanco));
         
         string IMigrationMetadata.Id
         {
-            get { return "202103310004006_AdicaoHash"; }
+            get { return "202105171718455_CriacaoBanco"; }
         }
         
         string IMigrationMetadata.Source

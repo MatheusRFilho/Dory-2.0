@@ -127,13 +127,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202103250024147_CriacaoBanco.cs" />
-    <Compile Include="Migrations\202103250024147_CriacaoBanco.Designer.cs">
-      <DependentUpon>202103250024147_CriacaoBanco.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103310004006_AdicaoHash.cs" />
-    <Compile Include="Migrations\202103310004006_AdicaoHash.Designer.cs">
-      <DependentUpon>202103310004006_AdicaoHash.cs</DependentUpon>
+    <Compile Include="Migrations\202105171718455_CriacaoBanco.cs" />
+    <Compile Include="Migrations\202105171718455_CriacaoBanco.Designer.cs">
+      <DependentUpon>202105171718455_CriacaoBanco.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Casos.cs" />
@@ -246,11 +242,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103250024147_CriacaoBanco.resx">
-      <DependentUpon>202103250024147_CriacaoBanco.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103310004006_AdicaoHash.resx">
-      <DependentUpon>202103310004006_AdicaoHash.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105171718455_CriacaoBanco.resx">
+      <DependentUpon>202105171718455_CriacaoBanco.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

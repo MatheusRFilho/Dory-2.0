@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -35,7 +36,42 @@ namespace Dory2.Models
 
         public string CorCabelo { get; set; }
 
-        public string TipoSanguineo { get; set; }
+        public TipoSanguineos TipoSanguineo { get; set; }
+        public enum TipoSanguineos
+        {
+            [
+                Description("A+")
+            ]
+            APositivo,
+            [
+                Description("A-")
+            ]
+            ANegativo,
+            [
+                Description("B+")
+            ]
+            BPositivo,
+            [
+                Description("B-")
+            ]
+            BNegativo,
+            [
+                Description("O+")
+            ]
+            OPositivo,
+            [
+                Description("O-")
+            ]
+            ONegativo,
+            [
+                Description("AB+")
+            ]
+            ABPositivo,
+            [
+                Description("AB-")
+            ]
+            ABNegativo,
+        }
 
         [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
@@ -51,6 +87,8 @@ namespace Dory2.Models
 
     public class FinalRegisterDesaparecido
     {
+        public int codigo { get; set; }
+
         public string deficienciaMentalRadio { get; set; }
 
         public string deficienciaMentalText { get; set; }
@@ -63,6 +101,10 @@ namespace Dory2.Models
 
         public string restricaoAlimentarText { get; set; }
 
+        public string restricaoMedicamentosRadio { get; set; }
+
+        public string restricaoMedicamentosText { get; set; }
+
         public string doencaRadio { get; set; }
 
         public string doencaText { get; set; }
@@ -71,6 +113,8 @@ namespace Dory2.Models
 
     public class ConfirmationRegisterDesaparecido
     {
+        public int codigo { get; set; }
+
         public string SeuCPF { get; set; }
 
         public string CpfDesaparecido { get; set; }

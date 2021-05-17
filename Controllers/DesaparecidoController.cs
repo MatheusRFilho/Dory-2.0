@@ -63,38 +63,153 @@ namespace Dory2.Controllers
                 infos.Cabelo = cad.CorCabelo;
                 infos.Altura = Convert.ToDecimal(cad.Altura);
                 infos.Peso = Convert.ToDecimal(cad.Peso);
+                infos.TipoSanguineo = Convert.ToString(cad.TipoSanguineo);
+                infos.Descricao = cad.Descricao;
                 infos.Desaparecido = des;
+                infos.VulneravelId = null;
 
                 db.Mais_Infos.Add(infos);
                 db.SaveChanges();
 
-                return RedirectToAction("FinalRegisterDesaparecido", "Desaparecido");
+                return RedirectToAction("FinalRegisterDesaparecido", "Desaparecido", new {id= infos.Id });
             }
             return View();
         }
 
 
-        public ActionResult FinalRegisterDesaparecido()
+        public ActionResult FinalRegisterDesaparecido(int id)
         {
-            return View();
+            FinalRegisterDesaparecido register = new FinalRegisterDesaparecido();
+            register.codigo = id;
+            return View(register);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult FinalRegisterDesaparecido(FinalRegisterDesaparecido cad)
         {
+            if (ModelState.IsValid)
+            {
+                Mais_infos inf = db.Mais_Infos.Find(cad.codigo);
+                if (cad.deficienciaFisicaRadio == "yes")
+                {
+                    if (cad.deficienciaFisicaText != null)
+                    {
+                        inf.DeficienciaFisica = cad.deficienciaFisicaText;
+                    }
+                    else
+                    {
+                        inf.DeficienciaFisica = "Tem porem não foi informado";
+                    }
+                } else
+                {
+                    inf.DeficienciaFisica = "Não tem ou não foi informado";
+                }
+
+
+                if (cad.deficienciaMentalRadio == "yes")
+                {
+                    if (cad.deficienciaMentalText != null)
+                    {
+                        inf.DeficienciaMental = cad.deficienciaMentalText;
+                    }
+                    else
+                    {
+                        inf.DeficienciaMental = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.DeficienciaMental = "Não tem ou não foi informado";
+                }
+
+                if (cad.doencaRadio == "yes")
+                {
+                    if (cad.doencaText != null)
+                    {
+                        inf.Doencas = cad.doencaText;
+                    }
+                    else
+                    {
+                        inf.Doencas = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.Doencas = "Não tem ou não foi informado";
+                }
+
+                if (cad.restricaoAlimentarRadio == "yes")
+                {
+                    if (cad.restricaoAlimentarText != null)
+                    {
+                        inf.RestricaoAlimentar = cad.restricaoAlimentarText;
+                    }
+                    else
+                    {
+                        inf.RestricaoAlimentar = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.RestricaoAlimentar = "Não tem ou não foi informado";
+                }
+
+                if (cad.restricaoMedicamentosRadio == "yes")
+                {
+                    if (cad.restricaoMedicamentosText != null)
+                    {
+                        inf.RestricaoMedicamentos = cad.restricaoMedicamentosText;
+                    }
+                    else
+                    {
+                        inf.RestricaoMedicamentos = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.RestricaoMedicamentos = "Não tem ou não foi informado";
+                }
+
+                db.SaveChanges();
+
+                return RedirectToAction("ConfirmationRegisterDesaparecido", "Desaparecido", new { id = inf.Id });
+
+            }
             return View();
         }
 
-        public ActionResult ConfirmationRegisterDesaparecido()
+        public ActionResult ConfirmationRegisterDesaparecido(int id)
         {
-            return View();
+            ConfirmationRegisterDesaparecido register = new ConfirmationRegisterDesaparecido();
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            Responsavel res = db.Responsavel.Find(resId);
+            Pessoa pes = db.Pessoa.Find(res.Id);
+
+            register.SeuCPF = pes.Cpf;
+            register.SeuRG = pes.Rg;
+            register.codigo = id;
+            return View(register);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmationRegisterDesaparecido(ConfirmationRegisterDesaparecido cad)
         {
+
+            if (ModelState.IsValid)
+            {
+                Mais_infos infos = db.Mais_Infos.Find(cad.codigo);
+                Desaparecido des = db.Desaparecido.Find(infos.DesaparecidoId);
+                Pessoa pes = db.Pessoa.Find(des.PessoaId);
+
+                pes.Cpf = cad.CpfDesaparecido;
+                pes.Rg = cad.RgDesaparecido;
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 

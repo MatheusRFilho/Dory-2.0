@@ -21,8 +21,9 @@ namespace Dory2.Models
         public string RestricaoAlimentar { get; set; }
         public string RestricaoMedicamentos { get; set; }
         public string Doencas { get; set; }
-        public int DesaparecidoId { get; set; }
-        public int VulneravelId { get; set; }
+
+        public int? DesaparecidoId { get; set; }
+        public int? VulneravelId { get; set; }
 
         public virtual Desaparecido Desaparecido { get; set; }
         public virtual Vulneravel Vulneravel { get; set; }
