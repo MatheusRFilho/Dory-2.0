@@ -222,9 +222,38 @@ namespace Dory2.Controllers
         }
 
 
-        public ActionResult ListOneDesaparecido()
+        public ActionResult ListOneDesaparecido(int id)
         {
-            return View();
+            Tutorias tut = db.Tutorias.Find(id);
+            if (tut.Ativo)
+            {
+                // calculo da idade do responsavel
+                DateTime dataInicial = tut.Pessoa.DataNascimento;
+                DateTime dataFinal = DateTime.Now;
+                int ano = dataFinal.Year;
+                int anoInicial = dataInicial.Year;
+                int idade = ano - anoInicial;
+                ViewBag.Idade = idade;
+
+                Galeria galeria = db.Galeria.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (galeria != null)
+                {
+                    ViewBag.FotoPerfil = galeria.Foto;
+                }
+
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Mais_infos infos = db.Mais_Infos.Find(des.Id);
+
+                ViewBag.Mental = infos.DeficienciaMental;
+                ViewBag.Fisico = infos.DeficienciaFisica;
+                ViewBag.Doencas = infos.Doencas;
+                ViewBag.Comidas = infos.RestricaoAlimentar;
+                ViewBag.Medicamentos = infos.RestricaoMedicamentos;
+
+
+                return View(tut);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ListDesaparecidoTest()
