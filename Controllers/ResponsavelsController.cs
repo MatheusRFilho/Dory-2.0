@@ -449,6 +449,7 @@ namespace Dory2.Controllers
                         ModelState.AddModelError("Email", "Email já cadastrado");
                         res.Email = auxEmail;
                         res.Celular = auxCelular;
+                        pes.Cpf = auxCpf;
                         db.SaveChanges();
                         return View(edt);
                     }
@@ -457,10 +458,11 @@ namespace Dory2.Controllers
                         ModelState.AddModelError("Contato", "Celular já cadastrado");
                         res.Email = auxEmail;
                         res.Celular = auxCelular;
+                        pes.Cpf = auxCpf;
                         db.SaveChanges();
                         return View(edt);
                     }
-                    if (db.Responsavel.Where(x => x.Pessoa.Cpf == edt.Cpf).ToList().Count > 0)
+                    if (db.Pessoa.Where(x => x.Cpf == edt.Cpf).ToList().Count > 0)
                     {
                         ModelState.AddModelError("Cpf", "CPF já cadastrado");
                         res.Email = auxEmail;

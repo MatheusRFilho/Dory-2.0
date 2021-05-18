@@ -130,4 +130,9 @@ namespace Dory2.Models
         public DateTime DataBO { get; set; }
 
     }
+
+    public class EditarInformacoesPessoais
+    {
+
+    }
 }
