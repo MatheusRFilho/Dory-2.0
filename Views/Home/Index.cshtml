@@ -16,25 +16,27 @@
             if (item.Ativo)
             {
                 <div class="item">
-                    <div class="img-perfil">
-                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-                    </div>
-                    <div>
-                        <p class="textname">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
-                        <p class="textage">
-                            @{
-                                DateTime dataInicial = item.Pessoa.DataNascimento;
-                                DateTime dataFinal = DateTime.Now;
-                                int ano = dataFinal.Year;
-                                int anoInicial = dataInicial.Year;
-                                int idade = ano - anoInicial;
-                                string show = idade + " Anos";
+                    <a href="~/Desaparecido/ListOneDesaparecido/@item.Id" style="text-decoration: none; color: black">
+                        <div class="img-perfil">
+                            <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                        </div>
+                        <div>
+                            <p class="textname">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
+                            <p class="textage">
+                                @{
+                                    DateTime dataInicial = item.Pessoa.DataNascimento;
+                                    DateTime dataFinal = DateTime.Now;
+                                    int ano = dataFinal.Year;
+                                    int anoInicial = dataInicial.Year;
+                                    int idade = ano - anoInicial;
+                                    string show = idade + " Anos";
 
-                                @Html.DisplayFor(model => show)
+                                    @Html.DisplayFor(model => show)
 
-                            }
-                        </p>
-                    </div>
+                                }
+                            </p>
+                        </div>
+                    </a>
                 </div>
             }
 
