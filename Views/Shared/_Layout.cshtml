@@ -27,13 +27,14 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <div class="menuContainer">
-                            <div class="menulink"><p class="link">Pessoas Encontradas</p></div>
-                            <div class="menulink"><a href="~/Desaparecido/ListMeusDesaparecidos" class="link">Meus Desaparecidos</a></div>
-                            <div class="menulink"><a href="~/Desaparecido/InitialRegisterDesaparecido" class="link">Cadastrar Desaparecidos</a></div>
-                            <div class="menulink"><p class="link">Meus Vulneráveis</p></div>
-                            <div class="menulink"><p class="link">Estatísticas</p></div>
-                        </div>
+                <div class="menuContainer">
+                    <div class="menulink"><p class="link">Pessoas Encontradas</p></div>
+                    <div class="menulink"><a href="~/Desaparecido/ListMeusDesaparecidos" class="link">Meus Desaparecidos</a></div>
+                    <div class="menulink"><a href="~/Desaparecido/InitialRegisterDesaparecido" class="link">Cadastrar Desaparecidos</a></div>
+                    <div class="menulink"><p class="link">Meus Vulneráveis</p></div>
+                    <div class="menulink"><a href="~/Vulneravels/InitialRegisterVulneravel" class="link">Cadastrar Vulneravel</a></div>
+                    <div class="menulink"><p class="link">Estatísticas</p></div>
+                </div>
 
                         <div class="menuContainer">
                             <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@Request.Cookies.Get("loginData").Value</a></div>

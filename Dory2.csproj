@@ -125,6 +125,7 @@
     <Compile Include="Controllers\DesaparecidoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResponsavelsController.cs" />
+    <Compile Include="Controllers\VulneravelsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,6 +149,7 @@
     <Compile Include="Models\Upload.cs" />
     <Compile Include="Models\VMDesaparecido.cs" />
     <Compile Include="Models\VMResponsavel.cs" />
+    <Compile Include="Models\VMVulneravel.cs" />
     <Compile Include="Models\Vulneravel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,10 +242,18 @@
     <Content Include="Views\Denuncias\Edit.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
     <Content Include="Views\Desaparecido\EditarDadosPessoais.cshtml" />
+    <Content Include="Views\Vulneravels\Create.cshtml" />
+    <Content Include="Views\Vulneravels\Delete.cshtml" />
+    <Content Include="Views\Vulneravels\Details.cshtml" />
+    <Content Include="Views\Vulneravels\Edit.cshtml" />
+    <Content Include="Views\Vulneravels\Index.cshtml" />
+    <Content Include="Views\Vulneravels\InitialRegisterVulneravel.cshtml" />
+    <Content Include="Views\Vulneravels\FinalRegisterVulneravel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Vulneravel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
