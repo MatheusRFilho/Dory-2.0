@@ -17,7 +17,8 @@ namespace Dory2.Controllers
         // GET: Denuncias
         public ActionResult Index()
         {
-            return View(db.Denuncias.ToList());
+            var denuncias = db.Denuncias.Include(d => d.Desaparecido);
+            return View(denuncias.ToList());
         }
 
         // GET: Denuncias/Details/5
@@ -42,7 +43,9 @@ namespace Dory2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View();
+            Denuncias den = new Denuncias();
+            den.DesaparecidoId = Convert.ToInt32(id);
+            return View(den);
         }
 
         // POST: Denuncias/Create
@@ -50,15 +53,18 @@ namespace Dory2.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Descricao,DataDenuncia,TipoDenuncia,Status,RepostaAdm")] Denuncias denuncias)
+        public ActionResult Create([Bind(Include = "Id,Email,Descricao,DataDenuncia,DesaparecidoId")] Denuncias denuncias)
         {
+            denuncias.DataDenuncia = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Denuncias.Add(denuncias);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["MSG"] = "success|Em breve um administrador estará revisando sua denúncia e tomará as decisões cabíveis";
+                return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = denuncias.DesaparecidoId });
             }
 
+            ViewBag.DesaparecidoId = new SelectList(db.Desaparecido, "Id", "Id", denuncias.DesaparecidoId);
             return View(denuncias);
         }
 
@@ -74,6 +80,7 @@ namespace Dory2.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DesaparecidoId = new SelectList(db.Desaparecido, "Id", "Id", denuncias.DesaparecidoId);
             return View(denuncias);
         }
 
@@ -82,7 +89,7 @@ namespace Dory2.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Descricao,DataDenuncia,TipoDenuncia,Status,RepostaAdm")] Denuncias denuncias)
+        public ActionResult Edit([Bind(Include = "Id,Email,Descricao,DataDenuncia,DesaparecidoId")] Denuncias denuncias)
         {
             if (ModelState.IsValid)
             {
@@ -90,6 +97,7 @@ namespace Dory2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.DesaparecidoId = new SelectList(db.Desaparecido, "Id", "Id", denuncias.DesaparecidoId);
             return View(denuncias);
         }
 
