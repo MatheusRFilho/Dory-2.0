@@ -5,46 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Denuncias</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+    <link href="~/Content/Denuncias.css" rel="stylesheet" />
+
+    <div class="img-banner-container">
+        <img src="~/Images/BANNER SITE.jpg" alt="banner" class="img-banner" />
+    </div>
+    <div class="denuncia-container">
+        <h3><strong>Denunciar Perfil</strong></h3>
+        <div class="denuncia-header">
+            <div class="denuncia-texto">
+                <h4><strong>Por que devo fazer uma denúncia?</strong></h4>
+                <p>
+                    Caso você tenha encontrado alguma informação errada no perfil
+                    ou tenha identificado que este perfil é falso ou foi feito de maneira
+                    errada, é importante que nos avise para que tiremos ele do sistema.
+                </p>
+            </div>
+            <div class="denuncia-texto">
+                <h4><strong>Como fazer uma denúncia?</strong></h4>
+                <p>
+                    1. Coloque seu e-mail ou celular para que possamos te responder;
+                </p>
+                <p>
+                    2. Escreva, com detalhes, o que você identificou de errado no perfil;
+                </p>
+            </div>
+        </div>
+        <div class="denuncia-form">
+            <div class="denuncia-campos">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "margin: auto", @placeholder = "Email ou celular" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="denuncia-campos">
+                @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @rows = 6, @style = "margin: auto;", @placeholder = "O que está de errado nesse perfil?" })
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DesaparecidoId, new { htmlAttributes = new { @class = "form-control", @style = "display: none;" } })
             </div>
         </div>
-
-        @Html.EditorFor(model => model.DesaparecidoId, new { htmlAttributes = new { @class = "form-control", @style = "display: none;" } })
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <div class="denuncia-botoes">
+            <input type="button" onclick="history.go(-1)" value="Cancelar" class="btn btn-default btn-lg denuncia-botao" />
+            <input type="submit" value="Enviar denúncia" class="btn btn-primary btn-lg denuncia-botao" />
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

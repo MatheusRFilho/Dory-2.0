@@ -1,0 +1,55 @@
+﻿.denuncia-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.denuncia-container > h3 {
+    margin-top: 86px;
+}
+
+.denuncia-header {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 62px;
+}
+
+.denuncia-texto {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 540px;
+    margin-bottom: 24px
+}
+
+.denuncia-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 35%;
+}
+
+.denuncia-campos {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.denuncia-botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 18%;
+}
+
+.denuncia-botao {
+    font-weight: bold;
+}
