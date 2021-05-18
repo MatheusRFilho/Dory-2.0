@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Dory2.Models.Tutorias>
 
 @{
-    ViewBag.Title = "Meus Desaparecidos";
+    ViewBag.Title = "Meus Vulneraveis";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Listagem.css" rel="stylesheet" />
@@ -10,13 +10,11 @@
     <img src="~/Images/BANNER SITE.jpg" alt="banner" class="img-banner" />
 </div>
 
-<h1 class="title"> Meus Desaparecidos </h1>
+<h1 class="title"> Meus Vulneraveis </h1>
 
 <div class="peoples-desaparecidas">
     @foreach (var item in Model)
     {
-        if (item.Ativo)
-        {
             <div class="card-desaparecido">
                 <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
                 <p class="list-name">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
@@ -34,12 +32,12 @@
                     }
                 </p>
 
-                <p class="list-subtitle">Desaparecido desde:</p>
+                <p class="list-subtitle">Cadastrado no dia</p>
                 <p class="list-date">@Html.DisplayFor(model => item.Cadastro.ToString().Split(' ')[0])</p>
 
-                <a href="https://localhost:44390/Desaparecido/ListOneDesaparecido/@item.Id" class="list-button">Mais Informações</a>
+                <a href="https://localhost:44390/Vulneravels/ListOneVulneravel/@item.Id" class="list-button">Mais Informações</a>
             </div>
-        }
+        
 
     }
 </div>

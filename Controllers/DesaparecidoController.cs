@@ -275,7 +275,7 @@ namespace Dory2.Controllers
         public ActionResult ListMeusDesaparecidos()
         {
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
-            List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId).ToList();
+            List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.Ativo == true).ToList();
             return View(infos);
         }
 

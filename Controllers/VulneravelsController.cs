@@ -297,5 +297,61 @@ namespace Dory2.Controllers
             }
             return View();
         }
+
+        public ActionResult ListMeusVulneraveis()
+        {
+            int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+            List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.Ativo == false).ToList();
+            return View(infos);
+        }
+
+        public ActionResult ListOneVulneravel(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tutorias tut = db.Tutorias.Find(id);
+            
+                // calculo da idade do responsavel
+                DateTime dataInicial = tut.Pessoa.DataNascimento;
+                DateTime dataFinal = DateTime.Now;
+                int ano = dataFinal.Year;
+                int anoInicial = dataInicial.Year;
+                int idade = ano - anoInicial;
+                ViewBag.Idade = idade;
+
+                Galeria galeria = db.Galeria.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (galeria != null)
+                {
+                    ViewBag.FotoPerfil = galeria.Foto;
+                }
+
+                Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Mais_infos infos = db.Mais_Infos.Find(vul.Id);
+
+                ViewBag.IsResponsavel = false;
+
+                if (Request.Cookies.Get("userId") != null)
+                {
+                    int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                    if (tut.ResponsavelId == resId)
+                    {
+                        ViewBag.IsResponsavel = true;
+                    }
+                }
+
+                ViewBag.Mental = infos.DeficienciaMental;
+                ViewBag.Fisico = infos.DeficienciaFisica;
+                ViewBag.Doencas = infos.Doencas;
+                ViewBag.Comidas = infos.RestricaoAlimentar;
+                ViewBag.Medicamentos = infos.RestricaoMedicamentos;
+                ViewBag.VulneravelId = vul.Id;
+
+
+                return View(tut);
+            
+            
+        }
     }
 }
