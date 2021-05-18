@@ -10,28 +10,16 @@ namespace Dory2.Models
     {
         [Key]
         public int Id { get; set; }
-
         [Required]
+        public string Email { get; set; }
+        [Required]
+        [Display(Name = "Digite uma breve descrição da denúncia")]
+        [StringLength(255, MinimumLength = 10)]
         public string Descricao { get; set; }
-
         [Required]
         public DateTime DataDenuncia { get; set; }
-
         [Required]
-        public string TipoDenuncia { get; set; } // perguntar dps pro allbert
-
-        [Required]
-        [EnumDataType(typeof (StatusDenuncia))]
-        public string Status { get; set; }
-
-        public string RepostaAdm { get; set; }
-
-        // falta chaves estrangeiras
-
-        public enum StatusDenuncia
-        {
-            Aberto = 0,
-            Resolvido = 1
-        }
+        public int DesaparecidoId { get; set; }
+        public Desaparecido Desaparecido { get; set; }
     }
 }

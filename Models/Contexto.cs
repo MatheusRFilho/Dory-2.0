@@ -114,6 +114,16 @@ namespace Dory2.Models
             gal.Property(x => x.Id).HasColumnName("gal_codigo");
             gal.Property(x => x.Foto).HasColumnName("gal_foto");
             gal.Property(x => x.PessoaId).HasColumnName("pes_codigo");
+
+            var den = mb.Entity<Denuncias>();
+            den.ToTable("den_denuncias");
+            den.Property(x => x.Id).HasColumnName("den_codigo");
+            den.Property(x => x.DataDenuncia).HasColumnName("den_data_denuncia");
+            den.Property(x => x.Descricao).HasColumnName("den_descricao");
+            den.Property(x => x.Email).HasColumnName("den_email");
+            den.Property(x => x.DesaparecidoId).HasColumnName("des_codigo");
         }
+
+        public System.Data.Entity.DbSet<Dory2.Models.Denuncias> Denuncias { get; set; }
     }
 }

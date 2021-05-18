@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "ListOneDesaparecido";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (ViewBag.FotoPerfil == null)
+    {
+        ViewBag.FotoPerfil = "avatar.jpg";
+    }
 }
 
 <link href="~/Content/Exibicao.css" rel="stylesheet" />
@@ -13,7 +18,7 @@
 
 <div class="card">
     <div class="card-header">
-        <img src="~/Images/@ViewBag.FotoPerfil" alt="temp" />
+        <img src="~/Uploads/@ViewBag.FotoPerfil" alt="temp" style="border-radius: 50%" />
         <div>
             <p class="card-name">@Html.DisplayFor(x => x.Pessoa.Nome)</p>
             <p class="card-age">

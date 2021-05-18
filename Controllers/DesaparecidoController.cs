@@ -73,7 +73,7 @@ namespace Dory2.Controllers
                 db.Mais_Infos.Add(infos);
                 db.SaveChanges();
 
-                return RedirectToAction("FinalRegisterDesaparecido", "Desaparecido", new {id= infos.Id });
+                return RedirectToAction("FinalRegisterDesaparecido", "Desaparecido", new { id = infos.Id });
             }
             return View();
         }

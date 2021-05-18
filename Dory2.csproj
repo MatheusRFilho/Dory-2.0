@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DenunciasController.cs" />
     <Compile Include="Controllers\DesaparecidoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ResponsavelsController.cs" />
@@ -232,10 +233,16 @@
     <Content Include="Views\Responsavels\TerminarRegistro.cshtml" />
     <Content Include="Views\Desaparecido\ListDesaparecidoTest.cshtml" />
     <Content Include="Views\Desaparecido\ListMeusDesaparecidos.cshtml" />
+    <Content Include="Views\Denuncias\Create.cshtml" />
+    <Content Include="Views\Denuncias\Delete.cshtml" />
+    <Content Include="Views\Denuncias\Details.cshtml" />
+    <Content Include="Views\Denuncias\Edit.cshtml" />
+    <Content Include="Views\Denuncias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Denuncia\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,65 @@
+﻿@model Dory2.Models.Denuncias
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Denuncias</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDenuncia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDenuncia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDenuncia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDenuncia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RepostaAdm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RepostaAdm)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
