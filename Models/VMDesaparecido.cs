@@ -133,6 +133,82 @@ namespace Dory2.Models
 
     public class EditarInformacoesPessoais
     {
+        [Required]
+        public string Nome { get; set; }
 
+        [Required]
+        public string Cpf { get; set; }
+
+        [Required]
+        public string Rg { get; set; }
+
+        //public Sexos Sexo { get; set; }
+        //public enum Sexos
+        //{
+        //    Masculino = 1,
+        //    Feminino = 2,
+        //    Outro = 3,
+        //}
+
+        //public Etinias Cutis { get; set; }
+        //public enum Etinias
+        //{
+        //    Amarela = 1,
+        //    Branca = 2,
+        //    Indígena = 3,
+        //    Negra = 4,
+        //    Parda = 5,
+        //}
+
+        public string CorOlhos { get; set; }
+
+        public string CorCabelo { get; set; }
+
+        //public TipoSanguineos TipoSanguineo { get; set; }
+        //public enum TipoSanguineos
+        //{
+        //    [
+        //        Description("A+")
+        //    ]
+        //    APositivo,
+        //    [
+        //        Description("A-")
+        //    ]
+        //    ANegativo,
+        //    [
+        //        Description("B+")
+        //    ]
+        //    BPositivo,
+        //    [
+        //        Description("B-")
+        //    ]
+        //    BNegativo,
+        //    [
+        //        Description("O+")
+        //    ]
+        //    OPositivo,
+        //    [
+        //        Description("O-")
+        //    ]
+        //    ONegativo,
+        //    [
+        //        Description("AB+")
+        //    ]
+        //    ABPositivo,
+        //    [
+        //        Description("AB-")
+        //    ]
+        //    ABNegativo,
+        //}
+
+        [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DataNascimento { get; set; }
+
+        public decimal Altura { get; set; }
+
+        public decimal Peso { get; set; }
+
+        public string Descricao { get; set; }
     }
 }

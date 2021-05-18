@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -215,8 +216,12 @@ namespace Dory2.Controllers
             return View();
         }
 
-        public ActionResult ListOneDesaparecido(int id)
+        public ActionResult ListOneDesaparecido(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Tutorias tut = db.Tutorias.Find(id);
             if (tut.Ativo)
             {
@@ -236,6 +241,17 @@ namespace Dory2.Controllers
 
                 Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
                 Mais_infos infos = db.Mais_Infos.Find(des.Id);
+
+                ViewBag.IsResponsavel = false;
+
+                if(Request.Cookies.Get("userId") != null)
+                {
+                    int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                    if (tut.ResponsavelId == resId)
+                    {
+                        ViewBag.IsResponsavel = true;
+                    }
+                }
 
                 ViewBag.Mental = infos.DeficienciaMental;
                 ViewBag.Fisico = infos.DeficienciaFisica;
@@ -261,6 +277,33 @@ namespace Dory2.Controllers
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId).ToList();
             return View(infos);
+        }
+
+        public ActionResult EditarDadosPessoais(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            EditarInformacoesPessoais edt = new EditarInformacoesPessoais();
+            Desaparecido des = db.Desaparecido.Find(id);
+            Pessoa pes = db.Pessoa.Find(des.PessoaId);
+            Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
+
+            edt.Altura = min.Altura;
+            edt.CorCabelo = min.Cabelo;
+            edt.CorOlhos = min.Olhos;
+            edt.Cpf = pes.Cpf;
+            //edt.Cutis = new SelectList(EditarInformacoesPessoais.Etinias);
+            //edt.TipoSanguineo = new SelectList(EditarInformacoesPessoais.TipoSanguineos);
+            //edt.Sexo 
+            edt.DataNascimento = pes.DataNascimento;
+            edt.Descricao = min.Descricao;
+            edt.Nome = pes.Nome;
+            edt.Peso = min.Peso;
+            edt.Rg = pes.Rg;
+            return View(edt);
         }
     }
 }

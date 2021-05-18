@@ -239,6 +239,7 @@
     <Content Include="Views\Denuncias\Details.cshtml" />
     <Content Include="Views\Denuncias\Edit.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
+    <Content Include="Views\Desaparecido\EditarDadosPessoais.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

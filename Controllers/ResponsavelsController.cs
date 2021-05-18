@@ -362,7 +362,8 @@ namespace Dory2.Controllers
             upl.PessoaId = resId;
             if (ModelState.IsValid)
             {
-                var resFoto = db.Galeria.Where(x => x.Id == resId).ToList().FirstOrDefault();
+                Responsavel res = db.Responsavel.Find(resId);
+                var resFoto = db.Galeria.Where(x => x.PessoaId == res.PessoaId).ToList().FirstOrDefault();
                 if (arq != null)
                 {
                     Upload.CriarDiretorio();
@@ -370,7 +371,6 @@ namespace Dory2.Controllers
                     valor = Upload.UploadArquivo(arq, nomearq);
                     if (valor == "sucesso")
                     {
-                        Responsavel res = db.Responsavel.Find(resId);
 
                         Galeria gal = new Galeria();
                         gal.Foto = nomearq;

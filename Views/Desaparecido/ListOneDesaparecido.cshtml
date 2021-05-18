@@ -29,8 +29,16 @@
     </div>
     <div class="card-body">
         <div class="bodycontent">
+            @{
+                if (ViewBag.IsResponsavel)
+                {
+                    <p>
+                        @Html.ActionLink("Editar dados pessoais", "EditarDadosPessoais", new { id = Model.Id })
+                    </p>
+                }
+            }
             <p class="body-title">Desaparecido desde</p>
-            <p>@Html.DisplayFor(x => x.Cadastro)</p>
+            <p>@Html.DisplayFor(x => x.Cadastro.ToString().Split(' ')[0])</p>
 
             <p class="body-title">Contato</p>
             <p>@Html.DisplayFor(x => x.Responsavel.Celular)</p>
@@ -39,6 +47,14 @@
             <p>@Html.DisplayFor(x => x.Pessoa.Sexo)</p>
         </div>
         <div class="bodycontent">
+            @{
+                if (ViewBag.IsResponsavel)
+                {
+                    <p>
+                        @Html.ActionLink("Editar informações do desaparecido", "EditarPerfil", new { id = Model.Id })
+                    </p>
+                }
+            }
             <p class="body-title">Deficiência mental</p>
             <p>@ViewBag.Mental</p>
 

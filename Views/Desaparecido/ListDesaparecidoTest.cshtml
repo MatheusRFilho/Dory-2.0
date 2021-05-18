@@ -34,8 +34,8 @@
                     }
                 </p>
 
-                <p class="list-subtitle">Desaparecido desde:</p>
-                <p class="list-date">@Html.DisplayFor(model => item.Cadastro)</p>
+                <p class="list-subtitle">Desaparecido desde</p>
+                <p class="list-date">@Html.DisplayFor(model => item.Cadastro.ToString().Split(' ')[0])</p>
 
                 <a href="https://localhost:44390/Desaparecido/ListOneDesaparecido/@item.Id" class="list-button">Mais Informações</a>
             </div>
