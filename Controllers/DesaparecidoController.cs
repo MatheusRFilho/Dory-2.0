@@ -291,7 +291,7 @@ namespace Dory2.Controllers
             Pessoa pes = db.Pessoa.Find(des.PessoaId);
             Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
-            edt.Altura = min.Altura;
+            edt.Altura = Convert.ToString(min.Altura);
             edt.CorCabelo = min.Cabelo;
             edt.CorOlhos = min.Olhos;
             edt.Cpf = pes.Cpf;
@@ -301,9 +301,68 @@ namespace Dory2.Controllers
             edt.DataNascimento = pes.DataNascimento;
             edt.Descricao = min.Descricao;
             edt.Nome = pes.Nome;
-            edt.Peso = min.Peso;
+            edt.Peso = Convert.ToString(min.Peso);
             edt.Rg = pes.Rg;
+            edt.Codigo = des.Id;
+            return View(edt);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarDadosPessoais(EditarInformacoesPessoais edt)
+        {
+            if (ModelState.IsValid)
+            {
+                Desaparecido des = db.Desaparecido.Find(edt.Codigo);
+                if(des != null)
+                {
+                    Pessoa pes = db.Pessoa.Find(des.PessoaId);
+
+                    string auxRg = pes.Rg;
+                    string auxCpf = pes.Cpf;
+                    pes.Rg = "";
+                    pes.Cpf = "";
+
+                    db.SaveChanges();
+
+                    if (db.Pessoa.Where(x => x.Cpf == edt.Cpf).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Cpf", "CPF já cadastrado");
+                        pes.Rg = auxRg;
+                        pes.Cpf = auxCpf;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+
+                    if (db.Pessoa.Where(x => x.Rg == edt.Rg).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Rg", "RG já cadastrado");
+                        pes.Rg = auxRg;
+                        pes.Cpf = auxCpf;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+
+                    pes.Nome = edt.Nome;
+                    pes.Rg = edt.Rg;
+                    pes.Cpf = edt.Cpf;
+                    pes.DataNascimento = edt.DataNascimento;
+                    db.SaveChanges();
+
+                    Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
+                    min.Altura = Convert.ToDecimal(edt.Altura);
+                    min.Cabelo = edt.CorCabelo;
+                    min.Descricao = edt.Descricao;
+                    min.Olhos = edt.CorOlhos;
+                    min.Peso = Convert.ToDecimal(edt.Peso);
+                    db.SaveChanges();
+
+                    return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = des.Id });
+                }
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
             return View(edt);
         }
     }
+
 }

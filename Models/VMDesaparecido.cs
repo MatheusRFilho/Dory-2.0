@@ -133,6 +133,8 @@ namespace Dory2.Models
 
     public class EditarInformacoesPessoais
     {
+        public int Codigo { get; set; }
+
         [Required]
         public string Nome { get; set; }
 
@@ -205,9 +207,9 @@ namespace Dory2.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataNascimento { get; set; }
 
-        public decimal Altura { get; set; }
+        public string Altura { get; set; }
 
-        public decimal Peso { get; set; }
+        public string Peso { get; set; }
 
         public string Descricao { get; set; }
     }
