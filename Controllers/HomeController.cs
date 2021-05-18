@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dory2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace Dory2.Controllers
 {
     public class HomeController : Controller
     {
+        private Contexto db = new Contexto();
+
         public ActionResult Index()
         {
-            return View();
+            List<Tutorias> infos = db.Tutorias.ToList();
+            return View(infos);
         }
 
         public ActionResult About()
