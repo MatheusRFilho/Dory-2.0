@@ -240,7 +240,7 @@ namespace Dory2.Controllers
                 }
 
                 Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
-                Mais_infos infos = db.Mais_Infos.Find(des.Id);
+                Mais_infos infos = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
                 ViewBag.IsResponsavel = false;
 
@@ -287,8 +287,9 @@ namespace Dory2.Controllers
             }
 
             EditarInformacoesPessoais edt = new EditarInformacoesPessoais();
-            Desaparecido des = db.Desaparecido.Find(id);
-            Pessoa pes = db.Pessoa.Find(des.PessoaId);
+            Tutorias tut = db.Tutorias.Find(id);
+            Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
             Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
             edt.Altura = Convert.ToString(min.Altura);

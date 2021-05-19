@@ -328,7 +328,7 @@ namespace Dory2.Controllers
                 }
 
                 Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
-                Mais_infos infos = db.Mais_Infos.Find(vul.Id);
+                Mais_infos infos = db.Mais_Infos.Where(x => x.VulneravelId == vul.Id).ToList().FirstOrDefault();
 
                 ViewBag.IsResponsavel = false;
 
