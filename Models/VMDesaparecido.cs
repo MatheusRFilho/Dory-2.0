@@ -144,23 +144,23 @@ namespace Dory2.Models
         [Required]
         public string Rg { get; set; }
 
-        //public Sexos Sexo { get; set; }
-        //public enum Sexos
-        //{
-        //    Masculino = 1,
-        //    Feminino = 2,
-        //    Outro = 3,
-        //}
+        public Sexos Sexo { get; set; }
+        public enum Sexos
+        {
+            Masculino = 1,
+            Feminino = 2,
+            Outro = 3,
+        }
 
-        //public Etinias Cutis { get; set; }
-        //public enum Etinias
-        //{
-        //    Amarela = 1,
-        //    Branca = 2,
-        //    Indígena = 3,
-        //    Negra = 4,
-        //    Parda = 5,
-        //}
+        public Etinias Cutis { get; set; }
+        public enum Etinias
+        {
+            Amarela = 1,
+            Branca = 2,
+            Indígena = 3,
+            Negra = 4,
+            Parda = 5,
+        }
 
         public string CorOlhos { get; set; }
 

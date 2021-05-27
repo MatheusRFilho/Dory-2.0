@@ -292,11 +292,16 @@ namespace Dory2.Controllers
             Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
             Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
+            //ViewBag.Cutis = new SelectList(EditarInformacoesPessoais.Etinias);
+
             edt.Altura = Convert.ToString(min.Altura);
             edt.CorCabelo = min.Cabelo;
             edt.CorOlhos = min.Olhos;
             edt.Cpf = pes.Cpf;
-            //edt.Cutis = new SelectList(EditarInformacoesPessoais.Etinias);
+            if(pes.Cutis == "Amarela")
+            {
+                edt.Cutis = EditarInformacoesPessoais.Etinias.Amarela;
+            }
             //edt.TipoSanguineo = new SelectList(EditarInformacoesPessoais.TipoSanguineos);
             //edt.Sexo 
             edt.DataNascimento = pes.DataNascimento;

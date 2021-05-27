@@ -27,14 +27,14 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                <div class="menuContainer">
-                    <div class="menulink"><p class="link">Pessoas Encontradas</p></div>
-                    <div class="menulink"><a href="~/Desaparecido/ListMeusDesaparecidos" class="link">Meus Desaparecidos</a></div>
-                    <div class="menulink"><a href="~/Desaparecido/InitialRegisterDesaparecido" class="link">Cadastrar Desaparecidos</a></div>
-                    <div class="menulink"><a href="~/Vulneravels/ListMeusVulneraveis" class="link">Meus Vulneráveis</a></div>
-                    <div class="menulink"><a href="~/Vulneravels/InitialRegisterVulneravel" class="link">Cadastrar Vulneravel</a></div>
-                    <div class="menulink"><p class="link">Estatísticas</p></div>
-                </div>
+                        <div class="menuContainer">
+                            <div class="menulink"><p class="link">Pessoas Encontradas</p></div>
+                            <div class="menulink"><a href="~/Desaparecido/ListMeusDesaparecidos" class="link">Meus Desaparecidos</a></div>
+                            <div class="menulink"><a href="~/Desaparecido/InitialRegisterDesaparecido" class="link">Cadastrar Desaparecidos</a></div>
+                            <div class="menulink"><a href="~/Vulneravels/ListMeusVulneraveis" class="link">Meus Vulneráveis</a></div>
+                            <div class="menulink"><a href="~/Vulneravels/InitialRegisterVulneravel" class="link">Cadastrar Vulneravel</a></div>
+                            <div class="menulink"><p class="link">Estatísticas</p></div>
+                        </div>
 
                         <div class="menuContainer">
                             <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@Request.Cookies.Get("loginData").Value</a></div>
@@ -65,7 +65,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @*<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({ selector: 'textarea' });</script>*@
+        <script>tinymce.init({ selector: 'textarea' });</script>*@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @if (TempData["MSG"] != null)
     {
