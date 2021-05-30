@@ -1,0 +1,234 @@
+﻿@model Dory2.Models.FinalRegisterDesaparecido
+
+@{
+    ViewBag.Title = "EditarMaisInfos";
+    Layout = "~/Views/Shared/_Register.cshtml";
+}
+
+@Html.HiddenFor(x => x.codigo)
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <div class="form-container2">
+        <p>Tem algum tipo de deficiência mental ? Caso sim descreva:</p>
+        <div class="form-container">
+            <div class="form-group form-Box3">
+
+                <input id="deficienciaMentalRadio"
+                       name="deficienciaMentalRadio"
+                       type="radio"
+                       value="yes"
+                       onclick="showDescriptionMental()" />
+                <p>Sim</p>
+                <input checked="checked"
+                       id="deficienciaMentalRadio"
+                       name="deficienciaMentalRadio"
+                       type="radio"
+                       value="no"
+                       onclick="hideDescriptionMental()" />
+                <p>Não</p>
+
+            </div>
+            <div class="form-group form-Box4">
+                @Html.EditorFor(model => model.deficienciaMentalText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @Html.ValidationMessageFor(model => model.deficienciaMentalText, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-container2">
+        <p>Tem algum tipo de deficiência física ? Caso sim descreva:</p>
+        <div class="form-container">
+            <div class="form-group form-Box3">
+
+                <input id="deficienciaFisicaRadio"
+                       name="deficienciaFisicaRadio"
+                       type="radio"
+                       value="yes"
+                       onclick="showDescriptionFisic()" />
+                <p>Sim</p>
+                <input checked="checked"
+                       id="deficienciaFisicaRadio"
+                       name="deficienciaFisicaRadio"
+                       type="radio"
+                       value="no"
+                       onclick="hideDescriptionFisic()" />
+                <p>Não</p>
+
+            </div>
+            <div class="form-group form-Box4">
+                @Html.EditorFor(model => model.deficienciaFisicaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @Html.ValidationMessageFor(model => model.deficienciaFisicaText, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-container2">
+        <p>Tem algum tipo de restriçao Alimentar? Caso sim descreva:</p>
+        <div class="form-container">
+            <div class="form-group form-Box3">
+
+                <input id="restricaoAlimentarRadio"
+                       name="restricaoAlimentarRadio"
+                       type="radio"
+                       value="yes"
+                       onclick="showDescriptionAlimentar()" />
+                <p>Sim</p>
+                <input checked="checked"
+                       id="restricaoAlimentarRadio"
+                       name="restricaoAlimentarRadio"
+                       type="radio"
+                       value="no"
+                       onclick="hideDescriptionAlimentar()" />
+                <p>Não</p>
+
+            </div>
+            <div class="form-group form-Box4">
+                @Html.EditorFor(model => model.restricaoAlimentarText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @Html.ValidationMessageFor(model => model.restricaoAlimentarText, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-container2">
+        <p>Tem algum tipo de restriçao a Medicamentos? Caso sim descreva:</p>
+        <div class="form-container">
+            <div class="form-group form-Box3">
+
+                <input id="restricaoMedicamentosRadio"
+                       name="restricaoMedicamentosRadio"
+                       type="radio"
+                       value="yes"
+                       onclick="showDescriptionMedicamentos()" />
+                <p>Sim</p>
+                <input checked="checked"
+                       id="restricaoMedicamentosRadio"
+                       name="restricaoMedicamentosRadio"
+                       type="radio"
+                       value="no"
+                       onclick="hideDescriptionMedicamentos()" />
+                <p>Não</p>
+
+            </div>
+            <div class="form-group form-Box4">
+                @Html.EditorFor(model => model.restricaoMedicamentosText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @Html.ValidationMessageFor(model => model.restricaoMedicamentosText, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-container2">
+        <p>Tem alguma condição especial que não se encaixe nos itens acima ? Caso sim descreva:</p>
+        <div class="form-container">
+            <div class="form-group form-Box3">
+
+                <input id="doencaRadio"
+                       name="doencaRadio"
+                       type="radio"
+                       value="yes"
+                       onclick="showDescriptionDoenca()" />
+                <p>Sim</p>
+                <input checked="checked"
+                       id="doencaRadio"
+                       name="doencaRadio"
+                       type="radio"
+                       value="no"
+                       onclick="hideDescriptionDoenca()" />
+                <p>Não</p>
+
+            </div>
+            <div class="form-group form-Box4">
+                @Html.EditorFor(model => model.doencaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @Html.ValidationMessageFor(model => model.doencaText, "", new { @class = "text-danger mensagem-erro" })
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-container">
+        <div class="button-Container">
+            @*@Html.ActionLink("Voltar", "Index")*@
+            <input type="button" value="Voltar" onClick="history.go(-1)">
+        </div>
+
+        <div class="button-Container">
+            <input type="submit" value="Salvar alterações" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+    <script>
+
+        function showDescriptionMental() {
+            if (document.getElementById('deficienciaMentalText').disabled == true)
+            {
+                document.getElementById('deficienciaMentalText').disabled = false
+            }
+        }
+
+        function hideDescriptionMental() {
+            if (document.getElementById('deficienciaMentalText').disabled == false)
+            {
+                document.getElementById('deficienciaMentalText').disabled = true
+            }
+        }
+
+        function showDescriptionFisic() {
+            if (document.getElementById('deficienciaFisicaText').disabled == true) {
+                document.getElementById('deficienciaFisicaText').disabled = false
+            }
+        }
+
+        function hideDescriptionFisic() {
+            if (document.getElementById('deficienciaFisicaText').disabled == false) {
+                document.getElementById('deficienciaFisicaText').disabled = true
+            }
+        }
+
+        function showDescriptionAlimentar() {
+            if (document.getElementById('restricaoAlimentarText').disabled == true) {
+                document.getElementById('restricaoAlimentarText').disabled = false
+            }
+        }
+
+        function hideDescriptionAlimentar() {
+            if (document.getElementById('restricaoAlimentarText').disabled == false) {
+                document.getElementById('restricaoAlimentarText').disabled = true
+            }
+        }
+
+        function showDescriptionDoenca() {
+            if (document.getElementById('doencaText').disabled == true) {
+                document.getElementById('doencaText').disabled = false
+            }
+        }
+
+        function hideDescriptionDoenca() {
+            if (document.getElementById('doencaText').disabled == false) {
+                document.getElementById('doencaText').disabled = true
+            }
+        }
+
+        function showDescriptionMedicamentos() {
+            if (document.getElementById('restricaoMedicamentosText').disabled == true) {
+                document.getElementById('restricaoMedicamentosText').disabled = false
+            }
+        }
+
+        function hideDescriptionMedicamentos() {
+            if (document.getElementById('restricaoMedicamentosText').disabled == false) {
+                document.getElementById('restricaoMedicamentosText').disabled = true
+            }
+        }
+
+    </script>
+}

@@ -292,8 +292,6 @@ namespace Dory2.Controllers
             Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
             Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
-            //ViewBag.Cutis = new SelectList(EditarInformacoesPessoais.Etinias);
-
             edt.Altura = Convert.ToString(min.Altura);
             edt.CorCabelo = min.Cabelo;
             edt.CorOlhos = min.Olhos;
@@ -448,6 +446,150 @@ namespace Dory2.Controllers
             }
             TempData["MSG"] = "warning|Preencha todos os campos";
             return View(edt);
+        }
+
+        public ActionResult EditarMaisInfos(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            FinalRegisterDesaparecido edt = new FinalRegisterDesaparecido();
+            Tutorias tut = db.Tutorias.Find(id);
+            Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
+
+            edt.codigo = des.Id;
+            edt.deficienciaFisicaText = min.DeficienciaFisica;
+            edt.deficienciaMentalText = min.DeficienciaMental;
+            edt.doencaText = min.Doencas;
+            edt.restricaoAlimentarText = min.RestricaoAlimentar;
+            edt.restricaoMedicamentosText = min.RestricaoMedicamentos;
+            
+            if(min.DeficienciaFisica != "Não tem ou não foi informado")
+            {
+                edt.deficienciaFisicaRadio = "yes";
+            }
+
+            if (min.DeficienciaMental != "Não tem ou não foi informado")
+            {
+                edt.deficienciaMentalRadio = "yes";
+            }
+
+            if (min.Doencas != "Não tem ou não foi informado")
+            {
+                edt.doencaRadio = "yes";
+            }
+
+            if (min.RestricaoAlimentar != "Não tem ou não foi informado")
+            {
+                edt.restricaoAlimentarRadio = "yes";
+            }
+
+            if (min.RestricaoMedicamentos != "Não tem ou não foi informado")
+            {
+                edt.restricaoMedicamentosRadio = "yes";
+            }
+
+            return View(edt);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarMaisInfos(FinalRegisterDesaparecido edt)
+        {
+            if (ModelState.IsValid)
+            {
+                Mais_infos inf = db.Mais_Infos.Where(x => x.DesaparecidoId == edt.codigo).ToList().FirstOrDefault();
+                if (edt.deficienciaFisicaRadio == "yes")
+                {
+                    if (edt.deficienciaFisicaText != null)
+                    {
+                        inf.DeficienciaFisica = edt.deficienciaFisicaText;
+                    }
+                    else
+                    {
+                        inf.DeficienciaFisica = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.DeficienciaFisica = "Não tem ou não foi informado";
+                }
+
+
+                if (edt.deficienciaMentalRadio == "yes")
+                {
+                    if (edt.deficienciaMentalText != null)
+                    {
+                        inf.DeficienciaMental = edt.deficienciaMentalText;
+                    }
+                    else
+                    {
+                        inf.DeficienciaMental = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.DeficienciaMental = "Não tem ou não foi informado";
+                }
+
+                if (edt.doencaRadio == "yes")
+                {
+                    if (edt.doencaText != null)
+                    {
+                        inf.Doencas = edt.doencaText;
+                    }
+                    else
+                    {
+                        inf.Doencas = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.Doencas = "Não tem ou não foi informado";
+                }
+
+                if (edt.restricaoAlimentarRadio == "yes")
+                {
+                    if (edt.restricaoAlimentarText != null)
+                    {
+                        inf.RestricaoAlimentar = edt.restricaoAlimentarText;
+                    }
+                    else
+                    {
+                        inf.RestricaoAlimentar = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.RestricaoAlimentar = "Não tem ou não foi informado";
+                }
+
+                if (edt.restricaoMedicamentosRadio == "yes")
+                {
+                    if (edt.restricaoMedicamentosText != null)
+                    {
+                        inf.RestricaoMedicamentos = edt.restricaoMedicamentosText;
+                    }
+                    else
+                    {
+                        inf.RestricaoMedicamentos = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.RestricaoMedicamentos = "Não tem ou não foi informado";
+                }
+
+                db.SaveChanges();
+
+                return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = edt.codigo });
+
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 

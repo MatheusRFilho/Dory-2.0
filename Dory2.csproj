@@ -251,6 +251,7 @@
     <Content Include="Views\Vulneravels\FinalRegisterVulneravel.cshtml" />
     <Content Include="Views\Vulneravels\ListMeusVulneraveis.cshtml" />
     <Content Include="Views\Vulneravels\ListOneVulneravel.cshtml" />
+    <Content Include="Views\Desaparecido\EditarMaisInfos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
