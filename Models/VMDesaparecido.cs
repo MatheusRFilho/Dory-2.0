@@ -166,42 +166,42 @@ namespace Dory2.Models
 
         public string CorCabelo { get; set; }
 
-        //public TipoSanguineos TipoSanguineo { get; set; }
-        //public enum TipoSanguineos
-        //{
-        //    [
-        //        Description("A+")
-        //    ]
-        //    APositivo,
-        //    [
-        //        Description("A-")
-        //    ]
-        //    ANegativo,
-        //    [
-        //        Description("B+")
-        //    ]
-        //    BPositivo,
-        //    [
-        //        Description("B-")
-        //    ]
-        //    BNegativo,
-        //    [
-        //        Description("O+")
-        //    ]
-        //    OPositivo,
-        //    [
-        //        Description("O-")
-        //    ]
-        //    ONegativo,
-        //    [
-        //        Description("AB+")
-        //    ]
-        //    ABPositivo,
-        //    [
-        //        Description("AB-")
-        //    ]
-        //    ABNegativo,
-        //}
+        public TipoSanguineos TipoSanguineo { get; set; }
+        public enum TipoSanguineos
+        {
+            [
+                Description("A+")
+            ]
+            APositivo,
+            [
+                Description("A-")
+            ]
+            ANegativo,
+            [
+                Description("B+")
+            ]
+            BPositivo,
+            [
+                Description("B-")
+            ]
+            BNegativo,
+            [
+                Description("O+")
+            ]
+            OPositivo,
+            [
+                Description("O-")
+            ]
+            ONegativo,
+            [
+                Description("AB+")
+            ]
+            ABPositivo,
+            [
+                Description("AB-")
+            ]
+            ABNegativo,
+        }
 
         [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

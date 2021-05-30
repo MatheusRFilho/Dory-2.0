@@ -298,12 +298,89 @@ namespace Dory2.Controllers
             edt.CorCabelo = min.Cabelo;
             edt.CorOlhos = min.Olhos;
             edt.Cpf = pes.Cpf;
-            if(pes.Cutis == "Amarela")
+
+            switch(pes.Cutis)
             {
-                edt.Cutis = EditarInformacoesPessoais.Etinias.Amarela;
+                case "Amarela":
+                    edt.Cutis = EditarInformacoesPessoais.Etinias.Amarela;
+                    break;
+
+                case "Branca":
+                    edt.Cutis = EditarInformacoesPessoais.Etinias.Branca;
+                    break;
+
+                case "Indigena":
+                    edt.Cutis = EditarInformacoesPessoais.Etinias.Indígena;
+                    break;
+
+                case "Negra":
+                    edt.Cutis = EditarInformacoesPessoais.Etinias.Negra;
+                    break;
+
+                case "Parda":
+                    edt.Cutis = EditarInformacoesPessoais.Etinias.Parda;
+                    break;
+
+                default:
+                    break;
             }
-            //edt.TipoSanguineo = new SelectList(EditarInformacoesPessoais.TipoSanguineos);
-            //edt.Sexo 
+
+            switch (min.TipoSanguineo)
+            {
+                case "APositivo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.APositivo;
+                    break;
+
+                case "ANegativo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ANegativo;
+                    break;
+
+                case "ABPositivo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABPositivo;
+                    break;
+
+                case "ABNegativo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABNegativo;
+                    break;
+
+                case "OPositivo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.OPositivo;
+                    break;
+
+                case "ONegativo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ONegativo;
+                    break;
+
+                case "BPositivo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BPositivo;
+                    break;
+
+                case "BNegativo":
+                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BNegativo;
+                    break;
+
+                default:
+                    break;
+            }
+
+            switch (pes.Sexo)
+            {
+                case "Masculino":
+                    edt.Sexo = EditarInformacoesPessoais.Sexos.Masculino;
+                    break;
+
+                case "Feminino":
+                    edt.Sexo = EditarInformacoesPessoais.Sexos.Feminino;
+                    break;
+
+                case "Outro":
+                    edt.Sexo = EditarInformacoesPessoais.Sexos.Outro;
+                    break;
+
+                default:
+                    break;
+            }
+
             edt.DataNascimento = pes.DataNascimento;
             edt.Descricao = min.Descricao;
             edt.Nome = pes.Nome;
@@ -353,6 +430,8 @@ namespace Dory2.Controllers
                     pes.Rg = edt.Rg;
                     pes.Cpf = edt.Cpf;
                     pes.DataNascimento = edt.DataNascimento;
+                    pes.Sexo = Convert.ToString(edt.Sexo);
+                    pes.Cutis = Convert.ToString(edt.Cutis);
                     db.SaveChanges();
 
                     Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
@@ -361,6 +440,7 @@ namespace Dory2.Controllers
                     min.Descricao = edt.Descricao;
                     min.Olhos = edt.CorOlhos;
                     min.Peso = Convert.ToDecimal(edt.Peso);
+                    min.TipoSanguineo = Convert.ToString(edt.TipoSanguineo);
                     db.SaveChanges();
 
                     return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = des.Id });
