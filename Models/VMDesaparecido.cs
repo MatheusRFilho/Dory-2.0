@@ -220,6 +220,8 @@ namespace Dory2.Models
         [EmailAddress]
         public string Email { get; set; }
         [Required]
+        public string Contato { get; set; }
+        [Required]
         public string Nome { get; set; }
         public string CidadeVisto { get; set; }
         public string LocalVisto { get; set; }

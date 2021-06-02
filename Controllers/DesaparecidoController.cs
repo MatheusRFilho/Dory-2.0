@@ -610,14 +610,15 @@ namespace Dory2.Controllers
                 Responsavel res = db.Responsavel.Find(resId);
                 Pessoa pesR = db.Pessoa.Find(res.PessoaId);
                 vi.DesaparecidoId = des.Id;
+                vi.DataVisto = DateTime.Now;
 
                 if(res != null)
                 {
                     vi.Email = res.Email;
                     vi.Nome = pesR.Nome;
+                    vi.Contato = res.Celular;
                 }
             }
-
 
             return View(vi);
         }

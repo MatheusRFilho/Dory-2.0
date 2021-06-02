@@ -23,18 +23,22 @@
             <h4 class="vi-labels">sobre você</h4>
             <div class="form-container">
                 <div class="form-group form-Box2">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu email" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-container">
-                <div class="form-group form-Box2">
                     @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu nome" } })
                     @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <div class="form-container">
+                <div class="form-group form-Box2">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="form-group form-Box2">
+                    @Html.EditorFor(model => model.Contato, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu telefone" } })
+                    @Html.ValidationMessageFor(model => model.Contato, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <div class="divisor">
                 <hr />
             </div>
@@ -83,4 +87,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+    <script>
+        $(function () {
+            $("#Contato").mask("(99)99999-9999");
+
+        });
+    </script>
 }

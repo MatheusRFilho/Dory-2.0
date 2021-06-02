@@ -18,6 +18,7 @@ namespace Dory2.Models
         public DateTime Cadastro  { get; set; }
         [Required]
         public bool Ativo  { get; set; }
+        public bool IsVulneravel { get; set; }
         public virtual Responsavel Responsavel { get; set; }
         public virtual Pessoa Pessoa { get; set; }
 

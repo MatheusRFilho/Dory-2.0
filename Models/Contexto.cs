@@ -74,6 +74,9 @@ namespace Dory2.Models
             cas.Property(x => x.UltimaRoupa).HasColumnName("cas_ultima_roupa");
             cas.Property(x => x.UltimoHorarioVisto).HasColumnName("cas_ultimo_horario");
             cas.Property(x => x.UltimoLugarVisto).HasColumnName("cas_ultimo_lugar");
+            cas.Property(x => x.NomeQuemViu).HasColumnName("cas_nome_quem_viu");
+            cas.Property(x => x.EmailQuemViu).HasColumnName("cas_email_quem_viu");
+            cas.Property(x => x.ContatoQuemViu).HasColumnName("cas_contato_quem_viu");
             cas.Property(x => x.DesaparecidoId).HasColumnName("des_codigo");
 
             var min = mb.Entity<Mais_infos>();
@@ -98,6 +101,7 @@ namespace Dory2.Models
             tut.Property(x => x.Id).HasColumnName("tut_codigo");
             tut.Property(x => x.Ativo).HasColumnName("tut_ativo");
             tut.Property(x => x.Cadastro).HasColumnName("tut_data_cadastro");
+            tut.Property(x => x.IsVulneravel).HasColumnName("tut_is_vulneravel");
             tut.Property(x => x.PessoaId).HasColumnName("pes_codigo");
             tut.Property(x => x.ResponsavelId).HasColumnName("res_codigo");
 
