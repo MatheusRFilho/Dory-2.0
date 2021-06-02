@@ -604,13 +604,14 @@ namespace Dory2.Controllers
             Pessoa pes = db.Pessoa.Find(tut.PessoaId);
             Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
 
+            vi.DesaparecidoId = des.Id;
+            vi.DataVisto = DateTime.Now;
+
             if (Request.Cookies.Get("userId") != null)
             {
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Responsavel res = db.Responsavel.Find(resId);
                 Pessoa pesR = db.Pessoa.Find(res.PessoaId);
-                vi.DesaparecidoId = des.Id;
-                vi.DataVisto = DateTime.Now;
 
                 if(res != null)
                 {
@@ -620,6 +621,55 @@ namespace Dory2.Controllers
                 }
             }
 
+            return View(vi);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ViEstaPessoa(ViEssaPessoa vi)
+        {
+            if (ModelState.IsValid)
+            {
+                Casos cas = new Casos();
+
+                cas.EmailQuemViu = vi.Email;
+                cas.ContatoQuemViu = vi.Contato;
+                cas.NomeQuemViu = vi.Nome;
+                cas.UltimoHorarioVisto = vi.DataVisto;
+                cas.DesaparecidoId = vi.DesaparecidoId;
+
+                if(vi.CidadeVisto != null)
+                {
+                    cas.UltimaLocalizacao = vi.CidadeVisto;
+                } else
+                {
+                    cas.UltimaLocalizacao = "Não informado";
+                }
+
+                if (vi.RoupaVisto != null)
+                {
+                    cas.UltimaRoupa = vi.RoupaVisto;
+                }
+                else
+                {
+                    cas.UltimaRoupa = "Não informado";
+                }
+
+                if (vi.LocalVisto != null)
+                {
+                    cas.UltimoLugarVisto = vi.LocalVisto;
+                }
+                else
+                {
+                    cas.UltimoLugarVisto = "Não informado";
+                }
+
+                Desaparecido des = db.Desaparecido.Find(vi.DesaparecidoId);
+                Tutorias tut = db.Tutorias.Where(x => x.PessoaId == des.PessoaId).ToList().FirstOrDefault();
+
+                db.SaveChanges();
+                return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = tut.Id });
+            }
             return View(vi);
         }
     }

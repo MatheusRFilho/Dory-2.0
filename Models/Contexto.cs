@@ -74,6 +74,7 @@ namespace Dory2.Models
             cas.Property(x => x.UltimaRoupa).HasColumnName("cas_ultima_roupa");
             cas.Property(x => x.UltimoHorarioVisto).HasColumnName("cas_ultimo_horario");
             cas.Property(x => x.UltimoLugarVisto).HasColumnName("cas_ultimo_lugar");
+            cas.Property(x => x.MaisInformacoes).HasColumnName("cas_mais_infos");
             cas.Property(x => x.NomeQuemViu).HasColumnName("cas_nome_quem_viu");
             cas.Property(x => x.EmailQuemViu).HasColumnName("cas_email_quem_viu");
             cas.Property(x => x.ContatoQuemViu).HasColumnName("cas_contato_quem_viu");
