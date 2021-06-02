@@ -742,6 +742,7 @@ namespace Dory2.Controllers
                 Desaparecido des = db.Desaparecido.Find(vi.DesaparecidoId);
                 Tutorias tut = db.Tutorias.Where(x => x.PessoaId == des.PessoaId).ToList().FirstOrDefault();
 
+                db.Casos.Add(cas);
                 db.SaveChanges();
                 return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = tut.Id });
             }

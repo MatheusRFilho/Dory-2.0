@@ -170,35 +170,35 @@ namespace Dory2.Models
         public enum TipoSanguineos
         {
             [
-                Description("A+")
+                Display(Name = "A+")
             ]
             APositivo,
             [
-                Description("A-")
+                Display(Name = "A-")
             ]
             ANegativo,
             [
-                Description("B+")
+                Display(Name = "B+")
             ]
             BPositivo,
             [
-                Description("B-")
+                Display(Name = "B-")
             ]
             BNegativo,
             [
-                Description("O+")
+                Display(Name = "O+")
             ]
             OPositivo,
             [
-                Description("O-")
+                Display(Name = "O-")
             ]
             ONegativo,
             [
-                Description("AB+")
+                Display(Name = "AB+")
             ]
             ABPositivo,
             [
-                Description("AB-")
+                Display(Name = "AB-")
             ]
             ABNegativo,
         }
