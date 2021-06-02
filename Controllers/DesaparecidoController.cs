@@ -664,6 +664,15 @@ namespace Dory2.Controllers
                     cas.UltimoLugarVisto = "Não informado";
                 }
 
+                if (vi.DescricaoVisto != null)
+                {
+                    cas.MaisInformacoes = vi.DescricaoVisto;
+                }
+                else
+                {
+                    cas.MaisInformacoes = "Não informado";
+                }
+
                 Desaparecido des = db.Desaparecido.Find(vi.DesaparecidoId);
                 Tutorias tut = db.Tutorias.Where(x => x.PessoaId == des.PessoaId).ToList().FirstOrDefault();
 
