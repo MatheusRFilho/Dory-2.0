@@ -1,0 +1,86 @@
+﻿@model Dory2.Models.ViEssaPessoa
+
+@{
+    ViewBag.Title = "ViEstaPessoa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.DesaparecidoId)
+    <link rel="stylesheet" href="~/Content/register-forms.css" />
+    <link rel="stylesheet" href="~/Content/viestapessoa.css" />
+
+    <div class="img-banner-container">
+        <img src="~/Images/BANNER SITE.jpg" alt="banner" class="img-banner" />
+    </div>
+    <div class="vi-container">
+        <h3 class="vi-titulo">Você viu esta pessoa?</h3>
+
+        <div class="form-horizontal">
+            <h4 class="vi-labels">sobre você</h4>
+            <div class="form-container">
+                <div class="form-group form-Box2">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="form-group form-Box2">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Seu nome" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="divisor">
+                <hr />
+            </div>
+
+            <div class="vi-texto">
+                <p>Descreva aqui algumas informações sobre a pessoa que você viu para que possamos avisar ao responsável por ele.</p>
+            </div>
+
+            <h4 class="vi-labels">sobre o desaparecido</h4>
+            <div class="form-container">
+                <div class="form-group form-Box">
+                    @Html.EditorFor(model => model.CidadeVisto, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cidade onde foi visto" } })
+                    @Html.ValidationMessageFor(model => model.CidadeVisto, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group form-Box">
+                    @Html.EditorFor(model => model.LocalVisto, new { htmlAttributes = new { @class = "form-control", @placeholder = "Local onde foi visto" } })
+                    @Html.ValidationMessageFor(model => model.LocalVisto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="form-group form-Box">
+                    @Html.TextBoxFor(model => model.DataVisto, "{0:yyyy-MM-dd}", htmlAttributes: new { @class = "form-control", @type = "date" })
+                    @Html.ValidationMessageFor(model => model.DataVisto, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group form-Box">
+                    @Html.EditorFor(model => model.RoupaVisto, new { htmlAttributes = new { @class = "form-control", @placeholder = "Roupa que foi visto" } })
+                    @Html.ValidationMessageFor(model => model.RoupaVisto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="form-group form-Box2">
+                    @Html.TextAreaFor(model => model.DescricaoVisto, htmlAttributes: new { @class = "form-control", @style = "min-width: 500px;", @rows = 6, @placeholder = "Deseja adicionar alguma informação?" })
+                    @Html.ValidationMessageFor(model => model.DescricaoVisto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="form-buttons">
+                    <input type="button" value="Cancelar" onClick="history.go(-1)" class="btn btn-lg btn-default btn-gray" />
+                    <input type="submit" value="Finalizar" class="btn btn-lg btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

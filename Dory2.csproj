@@ -164,6 +164,8 @@
     <Content Include="Content\Home.css" />
     <Content Include="Content\Listagem.css" />
     <Content Include="Content\Perfil.css" />
+    <Content Include="Content\register-forms.css" />
+    <Content Include="Content\viestapessoa.css" />
     <Content Include="Images\banner 2.jpg" />
     <Content Include="Images\banner 3.jpg" />
     <Content Include="Images\perfil.jpg" />
@@ -252,6 +254,7 @@
     <Content Include="Views\Vulneravels\ListMeusVulneraveis.cshtml" />
     <Content Include="Views\Vulneravels\ListOneVulneravel.cshtml" />
     <Content Include="Views\Desaparecido\EditarMaisInfos.cshtml" />
+    <Content Include="Views\Desaparecido\ViEstaPessoa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

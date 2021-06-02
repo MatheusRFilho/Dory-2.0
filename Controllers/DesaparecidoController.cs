@@ -591,6 +591,36 @@ namespace Dory2.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult ViEstaPessoa(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViEssaPessoa vi = new ViEssaPessoa();
+            Tutorias tut = db.Tutorias.Find(id);
+            Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+
+            if (Request.Cookies.Get("userId") != null)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Responsavel res = db.Responsavel.Find(resId);
+                Pessoa pesR = db.Pessoa.Find(res.PessoaId);
+                vi.DesaparecidoId = des.Id;
+
+                if(res != null)
+                {
+                    vi.Email = res.Email;
+                    vi.Nome = pesR.Nome;
+                }
+            }
+
+
+            return View(vi);
+        }
     }
 
 }

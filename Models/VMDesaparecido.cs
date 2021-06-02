@@ -213,4 +213,22 @@ namespace Dory2.Models
 
         public string Descricao { get; set; }
     }
+
+    public class ViEssaPessoa
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public string Nome { get; set; }
+        public string CidadeVisto { get; set; }
+        public string LocalVisto { get; set; }
+        [Required(ErrorMessage = "Por favor insira a data que você viu essa pessoa")]
+        [DataType(DataType.DateTime, ErrorMessage = "Data em formato inválido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DataVisto { get; set; }
+        public string RoupaVisto { get; set; }
+        public string DescricaoVisto { get; set; }
+        public int DesaparecidoId { get; set; }
+    }
 }

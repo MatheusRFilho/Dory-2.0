@@ -1,0 +1,37 @@
+﻿.vi-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vi-titulo{
+    font-weight: bold;
+    margin: 6rem 0;
+}
+
+.vi-labels {
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.divisor {
+    padding: 4rem;
+}
+
+.divisor > hr {
+    margin: 0;
+    border: 0;
+    border-top: 2px solid #7777774a;
+}
+
+.vi-texto {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+.vi-texto p {
+    max-width: 44rem;
+    line-height: 24px;
+}
