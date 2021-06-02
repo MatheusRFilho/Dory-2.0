@@ -1,6 +1,7 @@
 ﻿using Dory2.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -277,6 +278,71 @@ namespace Dory2.Controllers
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.Ativo == true).ToList();
             return View(infos);
+        }
+
+        public ActionResult UploadFotoPerfil(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadFotoPerfil(UploadFoto upl, HttpPostedFileBase arq, int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Tutorias tut = db.Tutorias.Find(id);
+            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            string valor = "";
+            upl.PessoaId = des.PessoaId;
+
+            if (ModelState.IsValid)
+            {
+                var resFoto = db.Galeria.Where(x => x.PessoaId == des.PessoaId).ToList().FirstOrDefault();
+                if (arq != null)
+                {
+                    Upload.CriarDiretorio();
+                    string nomearq = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(arq.FileName);
+                    valor = Upload.UploadArquivo(arq, nomearq);
+                    if (valor == "sucesso")
+                    {
+
+                        Galeria gal = new Galeria();
+                        gal.Foto = nomearq;
+                        gal.PessoaId = des.PessoaId;
+                        db.Galeria.Add(gal);
+                        if (resFoto != null)
+                        {
+                            Upload.ExcluirArquivo(Request.PhysicalApplicationPath + "Uploads\\" + resFoto.Foto);
+                            db.Galeria.Remove(resFoto);
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("ListOneDesaparecido/" + tut.Id, "Desaparecido");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", valor);
+                        TempData["MSG"] = "warning|Ops! Algo deu errado";
+                        return View();
+                    }
+                }
+                else
+                {
+                    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                    return View();
+                }
+
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View();
         }
 
         public ActionResult EditarDadosPessoais(int? id)

@@ -255,6 +255,7 @@
     <Content Include="Views\Vulneravels\ListOneVulneravel.cshtml" />
     <Content Include="Views\Desaparecido\EditarMaisInfos.cshtml" />
     <Content Include="Views\Desaparecido\ViEstaPessoa.cshtml" />
+    <Content Include="Views\Desaparecido\UploadFotoPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

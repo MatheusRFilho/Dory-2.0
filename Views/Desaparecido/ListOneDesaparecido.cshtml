@@ -18,7 +18,18 @@
 
 <div class="card">
     <div class="card-header">
-        <img src="~/Uploads/@ViewBag.FotoPerfil" alt="temp" style="border-radius: 50%" />
+        @{
+            if (ViewBag.IsResponsavel)
+            {
+                <a href="~/Desaparecido/UploadFotoPerfil/@Model.Id">
+                    <img src="~/Uploads/@ViewBag.FotoPerfil" alt="Foto de perfil" class="profile-image" style="border-radius: 50%" />
+                </a>
+            }
+            else
+            {
+                <img src="~/Uploads/@ViewBag.FotoPerfil" alt="temp" style="border-radius: 50%" />
+            }
+        }
         <div>
             <p class="card-name">@Html.DisplayFor(x => x.Pessoa.Nome)</p>
             <p class="card-age">
