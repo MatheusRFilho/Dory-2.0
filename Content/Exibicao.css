@@ -42,18 +42,26 @@
 
 .card-body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .bodycontent{
-    margin-left:45px;
-    margin-right: 45px;
     margin-top: 30px;
+    width: 700px;
+}
+
+.two-line-exibition-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #2c88d9;
+    margin-bottom:40px;
 }
 
 .bodycontent .body-title {
     font-weight: bold;
     font-size: 16px;
+    
 }
 
 .card-denuncia {
@@ -89,4 +97,37 @@
 .card-footer div .card-achei {
     background-color: #2c88d9;
     margin-left: 10px;
+}
+
+.one-line-exibition {
+    width: 100%;
+}
+
+.two-line-exibition {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list-item {
+    width: 250px;
+}
+
+.list-item-header-title {
+    width: 400px;
+}
+
+.list-item-header-edit {
+    /*width: 50px;*/
+    margin-top: -15px;
+}
+
+.list-item-header-edit2 {
+    /*width: 50px;*/
+}
+
+.body-title-header {
+    font-weight: bold;
+    font-size: 20px;
+    color: #2c88d9;
 }

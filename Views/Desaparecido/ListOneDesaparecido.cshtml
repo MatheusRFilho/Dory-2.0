@@ -40,46 +40,132 @@
     </div>
     <div class="card-body">
         <div class="bodycontent">
-            @{
-                if (ViewBag.IsResponsavel)
-                {
-                    <p>
-                        @Html.ActionLink("Editar dados pessoais", "EditarDadosPessoais", new { id = Model.Id })
-                    </p>
-                }
-            }
-            <p class="body-title">Desaparecido desde</p>
-            <p>@Html.DisplayFor(x => x.Cadastro.ToString().Split(' ')[0])</p>
+            <div class="two-line-exibition-header">
+                <div class="list-item-header-title">
+                    <p class="body-title-header">Informações Pessoais</p>
+                </div>
+                <div class="list-item-header-edit">
 
-            <p class="body-title">Contato</p>
-            <p>@Html.DisplayFor(x => x.Responsavel.Celular)</p>
+                    @{
+                        if (ViewBag.IsResponsavel)
+                        {
+                            <p class="link">
+                                    @Html.ActionLink("Editar dados pessoais", "EditarDadosPessoais", new { id = Model.Id })
+                            </p>
+                            @*<a href="~/Desaparecido/EditarDadosPessoais/@{Model.Id} ">
+                                <img src="~/Images/edit.svg" />
+                            </a>*@
+                        }
+                    }
+                </div>
+            </div>
 
-            <p class="body-title">Sexo</p>
-            <p>@Html.DisplayFor(x => x.Pessoa.Sexo)</p>
+            <div class="one-line-exibition">
+                <p class="body-title">Sobre esta pessoa</p>
+                <p>@ViewBag.Descricao</p>
+            </div>
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Desaparecido desde</p>
+                    <p>@Html.DisplayFor(x => x.Cadastro.ToString().Split(' ')[0])</p>
+                </div>
+                <div class="list-item">
+                    <p class="body-title">Sexo</p>
+                    <p>@Html.DisplayFor(x => x.Pessoa.Sexo)</p>
+                </div>
+            </div>
+
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Etnia</p>
+                    <p>@Html.DisplayFor(x => x.Pessoa.Cutis)</p>
+                </div>
+                <div class="list-item">
+                    <p class="body-title">Tipo sanguíneo</p>
+                    <p>@ViewBag.Sangue</p>
+                </div>
+            </div>
+
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Altura</p>
+                    <p>@ViewBag.Altura</p>
+                </div>
+                <div class="list-item">
+                    <p class="body-title">Peso</p>
+                    <p>@ViewBag.Peso</p>
+                </div>
+            </div>
+
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Cor dos olhos</p>
+                    <p>@ViewBag.CorOlhos</p>
+                </div>
+                <div class="list-item">
+                    <p class="body-title">Cor dos cabelos</p>
+                    <p>@ViewBag.CorCabelo</p>
+                </div>
+            </div>
+
+            @*<p class="body-title">Contato</p>
+                <p>@Html.DisplayFor(x => x.Responsavel.Celular)</p>*@
+
+
         </div>
         <div class="bodycontent">
-            @{
-                if (ViewBag.IsResponsavel)
-                {
-                    <p>
-                        @Html.ActionLink("Editar informações do desaparecido", "EditarMaisInfos", new { id = Model.Id })
-                    </p>
-                }
-            }
-            <p class="body-title">Deficiência mental</p>
-            <p>@ViewBag.Mental</p>
 
-            <p class="body-title">Deficiência Física</p>
-            <p>@ViewBag.Fisico</p>
+            <div class="two-line-exibition-header">
+                <div class="list-item-header-title">
+                    <p class="body-title-header">Informações sobre a saúde da pessoa </p>
+                </div>
+                <div class="list-item-header-edit2">
 
-            <p class="body-title">Medicamentos alergenicos</p>
-            <p>@ViewBag.Medicamentos</p>
+                    @{
+                        if (ViewBag.IsResponsavel)
+                        {
+                            <p>
+                                @Html.ActionLink("Editar informações do desaparecido", "EditarMaisInfos", new { id = Model.Id })
+                            </p>
+                            @*<a href="~/Desaparecido/EditarDadosPessoais/@{Model.Id} ">
+                            <img src="~/Images/edit.svg" />
+                        </a>*@
+                        }
+                    }
+                </div>
+            </div>
 
-            <p class="body-title">Comidas alergenicas</p>
-            <p>@ViewBag.Comidas</p>
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Deficiência mental</p>
+                    <p>@ViewBag.Mental</p>
+                </div>
+                <div class="list-item">
+                    <p class="body-title">Deficiência Física</p>
+                    <p>@ViewBag.Fisico</p>
+                </div>
+            </div>
 
-            <p class="body-title">Outras condições</p>
-            <p>@ViewBag.Doencas</p>
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Medicamentos alergenicos</p>
+                    <p>@ViewBag.Medicamentos</p>
+                </div>
+                <div class="list-item">
+                    <p class="body-title">Comidas alergenicas</p>
+                    <p>@ViewBag.Comidas</p>
+                </div>
+            </div>
+
+
+            <div class="two-line-exibition">
+                <div class="list-item">
+                    <p class="body-title">Outras condições</p>
+                    <p>@ViewBag.Doencas</p>
+                </div>
+                <div class="list-item">
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-footer">

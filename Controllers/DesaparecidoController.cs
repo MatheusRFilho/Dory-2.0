@@ -260,6 +260,12 @@ namespace Dory2.Controllers
                 ViewBag.Comidas = infos.RestricaoAlimentar;
                 ViewBag.Medicamentos = infos.RestricaoMedicamentos;
                 ViewBag.DesaparecidoId = des.Id;
+                ViewBag.Sangue = infos.TipoSanguineo;
+                ViewBag.CorCabelo = infos.Cabelo;
+                ViewBag.CorOlhos = infos.Olhos;
+                ViewBag.Altura = infos.Altura;
+                ViewBag.Peso = infos.Peso;
+                ViewBag.Descricao = infos.Descricao;
 
 
                 return View(tut);

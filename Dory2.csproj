@@ -168,6 +168,7 @@
     <Content Include="Content\viestapessoa.css" />
     <Content Include="Images\banner 2.jpg" />
     <Content Include="Images\banner 3.jpg" />
+    <Content Include="Images\edit.svg" />
     <Content Include="Images\perfil.jpg" />
     <Content Include="Images\perfil2.jpg" />
     <Content Include="Images\perfil3.jpg" />
