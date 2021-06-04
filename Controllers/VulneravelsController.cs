@@ -312,7 +312,18 @@ namespace Dory2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Tutorias tut = db.Tutorias.Find(id);
-            
+
+            if (User.Identity.IsAuthenticated)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == id).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse Vulneravel";
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
                 // calculo da idade do responsavel
                 DateTime dataInicial = tut.Pessoa.DataNascimento;
                 DateTime dataFinal = DateTime.Now;
