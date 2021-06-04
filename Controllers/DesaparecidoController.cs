@@ -347,111 +347,124 @@ namespace Dory2.Controllers
 
         public ActionResult EditarDadosPessoais(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias validation = db.Tutorias.Where(x=> x.ResponsavelId == resId && x.PessoaId == id).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }    
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                EditarInformacoesPessoais edt = new EditarInformacoesPessoais();
+                Tutorias tut = db.Tutorias.Find(id);
+                Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
+
+                edt.Altura = Convert.ToString(min.Altura);
+                edt.CorCabelo = min.Cabelo;
+                edt.CorOlhos = min.Olhos;
+                edt.Cpf = pes.Cpf;
+
+                switch (pes.Cutis)
+                {
+                    case "Amarela":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Amarela;
+                        break;
+
+                    case "Branca":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Branca;
+                        break;
+
+                    case "Indigena":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Indígena;
+                        break;
+
+                    case "Negra":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Negra;
+                        break;
+
+                    case "Parda":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Parda;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                switch (min.TipoSanguineo)
+                {
+                    case "APositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.APositivo;
+                        break;
+
+                    case "ANegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ANegativo;
+                        break;
+
+                    case "ABPositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABPositivo;
+                        break;
+
+                    case "ABNegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABNegativo;
+                        break;
+
+                    case "OPositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.OPositivo;
+                        break;
+
+                    case "ONegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ONegativo;
+                        break;
+
+                    case "BPositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BPositivo;
+                        break;
+
+                    case "BNegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BNegativo;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                switch (pes.Sexo)
+                {
+                    case "Masculino":
+                        edt.Sexo = EditarInformacoesPessoais.Sexos.Masculino;
+                        break;
+
+                    case "Feminino":
+                        edt.Sexo = EditarInformacoesPessoais.Sexos.Feminino;
+                        break;
+
+                    case "Outro":
+                        edt.Sexo = EditarInformacoesPessoais.Sexos.Outro;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                edt.DataNascimento = pes.DataNascimento;
+                edt.Descricao = min.Descricao;
+                edt.Nome = pes.Nome;
+                edt.Peso = Convert.ToString(min.Peso);
+                edt.Rg = pes.Rg;
+                edt.Codigo = des.Id;
+                return View(edt);
             }
-
-            EditarInformacoesPessoais edt = new EditarInformacoesPessoais();
-            Tutorias tut = db.Tutorias.Find(id);
-            Pessoa pes = db.Pessoa.Find(tut.PessoaId);
-            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
-            Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
-
-            edt.Altura = Convert.ToString(min.Altura);
-            edt.CorCabelo = min.Cabelo;
-            edt.CorOlhos = min.Olhos;
-            edt.Cpf = pes.Cpf;
-
-            switch(pes.Cutis)
-            {
-                case "Amarela":
-                    edt.Cutis = EditarInformacoesPessoais.Etinias.Amarela;
-                    break;
-
-                case "Branca":
-                    edt.Cutis = EditarInformacoesPessoais.Etinias.Branca;
-                    break;
-
-                case "Indigena":
-                    edt.Cutis = EditarInformacoesPessoais.Etinias.Indígena;
-                    break;
-
-                case "Negra":
-                    edt.Cutis = EditarInformacoesPessoais.Etinias.Negra;
-                    break;
-
-                case "Parda":
-                    edt.Cutis = EditarInformacoesPessoais.Etinias.Parda;
-                    break;
-
-                default:
-                    break;
-            }
-
-            switch (min.TipoSanguineo)
-            {
-                case "APositivo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.APositivo;
-                    break;
-
-                case "ANegativo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ANegativo;
-                    break;
-
-                case "ABPositivo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABPositivo;
-                    break;
-
-                case "ABNegativo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABNegativo;
-                    break;
-
-                case "OPositivo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.OPositivo;
-                    break;
-
-                case "ONegativo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ONegativo;
-                    break;
-
-                case "BPositivo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BPositivo;
-                    break;
-
-                case "BNegativo":
-                    edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BNegativo;
-                    break;
-
-                default:
-                    break;
-            }
-
-            switch (pes.Sexo)
-            {
-                case "Masculino":
-                    edt.Sexo = EditarInformacoesPessoais.Sexos.Masculino;
-                    break;
-
-                case "Feminino":
-                    edt.Sexo = EditarInformacoesPessoais.Sexos.Feminino;
-                    break;
-
-                case "Outro":
-                    edt.Sexo = EditarInformacoesPessoais.Sexos.Outro;
-                    break;
-
-                default:
-                    break;
-            }
-
-            edt.DataNascimento = pes.DataNascimento;
-            edt.Descricao = min.Descricao;
-            edt.Nome = pes.Nome;
-            edt.Peso = Convert.ToString(min.Peso);
-            edt.Rg = pes.Rg;
-            edt.Codigo = des.Id;
-            return View(edt);
+            TempData["MSG"] = "warning|Logue antes de tentar editar esse desaparecido";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -516,50 +529,63 @@ namespace Dory2.Controllers
 
         public ActionResult EditarMaisInfos(int? id)
         {
-            if (id == null)
+
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == id).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                FinalRegisterDesaparecido edt = new FinalRegisterDesaparecido();
+                Tutorias tut = db.Tutorias.Find(id);
+                Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
+
+                edt.codigo = des.Id;
+                edt.deficienciaFisicaText = min.DeficienciaFisica;
+                edt.deficienciaMentalText = min.DeficienciaMental;
+                edt.doencaText = min.Doencas;
+                edt.restricaoAlimentarText = min.RestricaoAlimentar;
+                edt.restricaoMedicamentosText = min.RestricaoMedicamentos;
+
+                if (min.DeficienciaFisica != "Não tem ou não foi informado")
+                {
+                    edt.deficienciaFisicaRadio = "yes";
+                }
+
+                if (min.DeficienciaMental != "Não tem ou não foi informado")
+                {
+                    edt.deficienciaMentalRadio = "yes";
+                }
+
+                if (min.Doencas != "Não tem ou não foi informado")
+                {
+                    edt.doencaRadio = "yes";
+                }
+
+                if (min.RestricaoAlimentar != "Não tem ou não foi informado")
+                {
+                    edt.restricaoAlimentarRadio = "yes";
+                }
+
+                if (min.RestricaoMedicamentos != "Não tem ou não foi informado")
+                {
+                    edt.restricaoMedicamentosRadio = "yes";
+                }
+
+                return View(edt);
             }
-
-            FinalRegisterDesaparecido edt = new FinalRegisterDesaparecido();
-            Tutorias tut = db.Tutorias.Find(id);
-            Pessoa pes = db.Pessoa.Find(tut.PessoaId);
-            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
-            Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
-
-            edt.codigo = des.Id;
-            edt.deficienciaFisicaText = min.DeficienciaFisica;
-            edt.deficienciaMentalText = min.DeficienciaMental;
-            edt.doencaText = min.Doencas;
-            edt.restricaoAlimentarText = min.RestricaoAlimentar;
-            edt.restricaoMedicamentosText = min.RestricaoMedicamentos;
-            
-            if(min.DeficienciaFisica != "Não tem ou não foi informado")
-            {
-                edt.deficienciaFisicaRadio = "yes";
-            }
-
-            if (min.DeficienciaMental != "Não tem ou não foi informado")
-            {
-                edt.deficienciaMentalRadio = "yes";
-            }
-
-            if (min.Doencas != "Não tem ou não foi informado")
-            {
-                edt.doencaRadio = "yes";
-            }
-
-            if (min.RestricaoAlimentar != "Não tem ou não foi informado")
-            {
-                edt.restricaoAlimentarRadio = "yes";
-            }
-
-            if (min.RestricaoMedicamentos != "Não tem ou não foi informado")
-            {
-                edt.restricaoMedicamentosRadio = "yes";
-            }
-
-            return View(edt);
+            TempData["MSG"] = "warning|Logue antes de tentar editar esse desaparecido";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
