@@ -328,7 +328,7 @@ namespace Dory2.Controllers
             }
 
             Tutorias tut = db.Tutorias.Find(id);
-            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
             string valor = "";
             upl.PessoaId = des.PessoaId;
 
@@ -394,7 +394,7 @@ namespace Dory2.Controllers
                 EditarInformacoesPessoais edt = new EditarInformacoesPessoais();
                 Tutorias tut = db.Tutorias.Find(id);
                 Pessoa pes = db.Pessoa.Find(tut.PessoaId);
-                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
                 Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
                 edt.Altura = Convert.ToString(min.Altura);
@@ -577,7 +577,7 @@ namespace Dory2.Controllers
                 FinalRegisterDesaparecido edt = new FinalRegisterDesaparecido();
                 Tutorias tut = db.Tutorias.Find(id);
                 Pessoa pes = db.Pessoa.Find(tut.PessoaId);
-                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
                 Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
                 edt.codigo = des.Id;
@@ -724,7 +724,7 @@ namespace Dory2.Controllers
             ViEssaPessoa vi = new ViEssaPessoa();
             Tutorias tut = db.Tutorias.Find(id);
             Pessoa pes = db.Pessoa.Find(tut.PessoaId);
-            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
 
             vi.DesaparecidoId = des.Id;
             vi.DataVisto = DateTime.Now;
@@ -818,7 +818,7 @@ namespace Dory2.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
 
                 des.Encontrado = DateTime.Now;
                 tut.Ativo = false;

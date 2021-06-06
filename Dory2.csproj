@@ -258,6 +258,7 @@
     <Content Include="Views\Desaparecido\ViEstaPessoa.cshtml" />
     <Content Include="Views\Desaparecido\UploadFotoPerfil.cshtml" />
     <Content Include="Views\Vulneravels\UploadFotoPerfil.cshtml" />
+    <Content Include="Views\Vulneravels\CompletarCadastroVulneravel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

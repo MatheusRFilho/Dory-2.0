@@ -11,62 +11,121 @@
     <img src="~/Images/BANNER SITE.jpg" alt="banner" class="img-banner" />
 </div>
 
-<h1 class="title"> Meus Vulneraveis </h1>
-
+<h1 class="title">Meus Vulneráveis</h1>
 <div class="peoples-desaparecidas">
     @foreach (var item in Model)
     {
-        <div class="card-desaparecido">
-            @{
-                if (ViewBag.FotosPerfil == null)
-                {
-                    <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
-                }
-                else
-                {
-                    ViewBag.Foto = "";
-                    foreach (var img in ViewBag.FotosPerfil)
+        if (!item.Ativo)
+        {
+            <div class="card-desaparecido">
+                @{
+                    if (ViewBag.FotosPerfil == null)
                     {
-                        if (img.PessoaId == item.PessoaId)
+                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                    }
+                    else
+                    {
+                        ViewBag.Foto = "";
+                        foreach (var img in ViewBag.FotosPerfil)
                         {
-                            ViewBag.Foto = img.Foto;
+                            if (img.PessoaId == item.PessoaId)
+                            {
+                                ViewBag.Foto = img.Foto;
+                            }
                         }
                     }
                 }
-            }
-            @{
-                if (ViewBag.Foto != "")
-                {
-                    <img src="~/Uploads/@ViewBag.Foto" alt="temp" class="img-perfil" style="border-radius: 50%" />
-                }
-                else
-                {
-                    <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" style="border-radius: 50%" />
-
-                }
-            }
-            <p class="list-name">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
-            <p class="list-age">
                 @{
-                    DateTime dataInicial = item.Pessoa.DataNascimento;
-                    DateTime dataFinal = DateTime.Now;
-                    int ano = dataFinal.Year;
-                    int anoInicial = dataInicial.Year;
-                    int idade = ano - anoInicial;
-                    string show = idade + " Anos";
+                    if (ViewBag.Foto != "")
+                    {
+                        <img src="~/Uploads/@ViewBag.Foto" alt="temp" class="img-perfil" style="border-radius: 50%" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" style="border-radius: 50%" />
 
-                    @Html.DisplayFor(model => show)
-
+                    }
                 }
-            </p>
+                <p class="list-name">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
+                <p class="list-age">
+                    @{
+                        DateTime dataInicial = item.Pessoa.DataNascimento;
+                        DateTime dataFinal = DateTime.Now;
+                        int ano = dataFinal.Year;
+                        int anoInicial = dataInicial.Year;
+                        int idade = ano - anoInicial;
+                        string show = idade + " Anos";
 
-            <p class="list-subtitle">Cadastrado no dia</p>
-            <p class="list-date">@Html.DisplayFor(model => item.Cadastro.ToString().Split(' ')[0])</p>
+                        @Html.DisplayFor(model => show)
 
-            <a href="https://localhost:44390/Vulneravels/ListOneVulneravel/@item.Id" class="list-button">Mais Informações</a>
-        </div>
+                    }
+                </p>
 
+                <p class="list-subtitle">Cadastrado no dia</p>
+                <p class="list-date">@Html.DisplayFor(model => item.Cadastro.ToString().Split(' ')[0])</p>
 
+                <a href="https://localhost:44390/Vulneravels/ListOneVulneravel/@item.Id" class="list-button">Mais Informações</a>
+            </div>
+        }
+    }
+</div>
+
+<h1 class="title">Vulneráveis Desaparecidos</h1>
+<div class="peoples-desaparecidas">
+    @foreach (var item in Model)
+    {
+        if (item.Ativo)
+        {
+            <div class="card-desaparecido">
+                @{
+                    if (ViewBag.FotosPerfil == null)
+                    {
+                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                    }
+                    else
+                    {
+                        ViewBag.Foto = "";
+                        foreach (var img in ViewBag.FotosPerfil)
+                        {
+                            if (img.PessoaId == item.PessoaId)
+                            {
+                                ViewBag.Foto = img.Foto;
+                            }
+                        }
+                    }
+                }
+                @{
+                    if (ViewBag.Foto != "")
+                    {
+                        <img src="~/Uploads/@ViewBag.Foto" alt="temp" class="img-perfil" style="border-radius: 50%" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" style="border-radius: 50%" />
+
+                    }
+                }
+                <p class="list-name">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
+                <p class="list-age">
+                    @{
+                        DateTime dataInicial = item.Pessoa.DataNascimento;
+                        DateTime dataFinal = DateTime.Now;
+                        int ano = dataFinal.Year;
+                        int anoInicial = dataInicial.Year;
+                        int idade = ano - anoInicial;
+                        string show = idade + " Anos";
+
+                        @Html.DisplayFor(model => show)
+
+                    }
+                </p>
+
+                <p class="list-subtitle">Cadastrado no dia</p>
+                <p class="list-date">@Html.DisplayFor(model => item.Cadastro.ToString().Split(' ')[0])</p>
+
+                <a href="https://localhost:44390/Desaparecido/ListOneDesaparecido/@item.Id" class="list-button">Mais Informações</a>
+            </div>
+        }
     }
 </div>
 

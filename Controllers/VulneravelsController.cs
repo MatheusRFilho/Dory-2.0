@@ -458,7 +458,6 @@ namespace Dory2.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = db.Tutorias.Find(id);
                 Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
@@ -467,11 +466,16 @@ namespace Dory2.Controllers
                     TempData["MSG"] = "warning|Não foi você quem cadastrou esse vulnerável";
                     return RedirectToAction("Index", "Home");
                 }
-
-                tut.Ativo = true;
-
+ 
                 Desaparecido des = new Desaparecido();
                 des.Pessoa = tut.Pessoa;
+
+                if(des.Pessoa.Cpf == null || des.Pessoa.Rg == null)
+                {
+                    return RedirectToAction("CompletarCadastroVulneravel", "Vulneravels");
+                }
+
+                tut.Ativo = true;
                 db.Desaparecido.Add(des);
 
                 Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
@@ -518,6 +522,49 @@ namespace Dory2.Controllers
             }
             TempData["MSG"] = "warning|Logue antes de tentar alterar esse vulnerável";
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult CompletarCadastroVulneravel(int? id)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias tut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse vulnerável";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ConfirmaVulneravel cfm = new ConfirmaVulneravel();
+                Pessoa pes = db.Pessoa.Where(x => x.Id == tut.PessoaId).ToList().FirstOrDefault();
+                if (pes != null)
+                {
+                    cfm.CpfVulneravel = pes.Cpf;
+                    cfm.RgVulneravel = pes.Rg;
+                }
+                cfm.codigo = tut.Id;
+
+                return View(cfm);
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar alterar esse vulnerável";
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompletarCadastroVulneravel(ConfirmaVulneravel cfm)
+        {
+            Tutorias tut = db.Tutorias.Find(cfm.codigo);
+            Pessoa pes = db.Pessoa.Where(x => x.Id == tut.PessoaId).ToList().FirstOrDefault();
+
+            pes.Cpf = cfm.CpfVulneravel;
+            pes.Rg = cfm.RgVulneravel;
+
+            db.SaveChanges();
+
+            return RedirectToAction("DesaparecimentoVulneravel", "Vulneravels", new { id = tut.Id });
         }
     }
 }
