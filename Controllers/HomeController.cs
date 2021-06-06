@@ -16,6 +16,11 @@ namespace Dory2.Controllers
             List<Tutorias> infos = db.Tutorias.ToList();
             List<Galeria> gal = db.Galeria.ToList();
             ViewBag.FotosPerfil = gal.ToArray();
+
+            DateTime padrao = new DateTime();
+            int des = db.Desaparecido.Where(x => x.Encontrado > padrao).Count();
+            ViewBag.PessoasEncontradas = des;
+
             return View(infos);
         }
 
