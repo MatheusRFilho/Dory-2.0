@@ -241,7 +241,7 @@ namespace Dory2.Controllers
                     ViewBag.FotoPerfil = galeria.Foto;
                 }
 
-                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
                 Mais_infos infos = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
 
                 ViewBag.IsResponsavel = false;

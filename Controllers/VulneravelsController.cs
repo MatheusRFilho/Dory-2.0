@@ -501,7 +501,7 @@ namespace Dory2.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
 
                 des.Encontrado = DateTime.Now;
                 tut.Ativo = false;
