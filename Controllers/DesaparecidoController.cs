@@ -827,12 +827,26 @@ namespace Dory2.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 Tutorias tut = db.Tutorias.Find(id);
-                //Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
 
-                tut.Ativo = false;
+                tut.IsDeleted = true;
                 db.SaveChanges();
 
-                return RedirectToAction("ListDesaparecidoTest", "Desaparecido");
+                return RedirectToAction("ListMeusDesaparecidos", "Desaparecido");
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar alterar esse desaparecido";
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ReativarDesaparecido(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                Tutorias tut = db.Tutorias.Find(id);
+
+                tut.IsDeleted = false;
+                db.SaveChanges();
+
+                return RedirectToAction("ListMeusDesaparecidos", "Desaparecido");
             }
             TempData["MSG"] = "warning|Logue antes de tentar alterar esse desaparecido";
             return RedirectToAction("Index", "Home");

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Meus Desaparecidos";
     ViewBag.Foto = "";
+    ViewBag.SomeDeleted = false;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Listagem.css" rel="stylesheet" />
@@ -72,7 +73,9 @@
         }
     }
 </div>
+@{ 
 <h1 class="title">Desaparecidos Inativos</h1>
+}
 <div class="peoples-desaparecidas">
     @foreach (var item in Model)
     {
@@ -127,7 +130,7 @@
                     <p class="list-subtitle">Desaparecido desde:</p>
                     <p class="list-date">@Html.DisplayFor(model => item.Cadastro.ToString().Split(' ')[0])</p>
 
-                    <a href="https://localhost:44390/Desaparecido/ListOneDesaparecido/@item.Id" class="list-button">Mais Informações</a>
+                    <a href="https://localhost:44390/Desaparecido/ReativarDesaparecido/@item.Id" class="list-button">Reativar</a>
                 </div>
             }
         }
