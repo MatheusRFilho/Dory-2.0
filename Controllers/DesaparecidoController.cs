@@ -803,6 +803,23 @@ namespace Dory2.Controllers
             }
             return View(vi);
         }
+
+        public ActionResult DesaparecidoEncontrado(int? id)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                Tutorias tut = db.Tutorias.Find(id);
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+
+                des.Encontrado = DateTime.Now;
+                tut.Ativo = false;
+                db.SaveChanges();
+
+                return RedirectToAction("ListDesaparecidoTest", "Desaparecido");
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar alterar esse desaparecido";
+            return RedirectToAction("Index", "Home");
+        }
     }
 
 }

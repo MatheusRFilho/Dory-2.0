@@ -155,6 +155,8 @@ namespace Dory2.Controllers
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = new Tutorias();
                 tut.Ativo = false;
+                tut.IsVulneravel = true;
+
                 tut.Cadastro = DateTime.Now;
                 tut.Responsavel = db.Responsavel.Find(resId);
                 tut.Pessoa = new Pessoa();
@@ -171,7 +173,7 @@ namespace Dory2.Controllers
                 vul.Pessoa = tut.Pessoa;
                 vul.Status = false;
                 vul.Observacoes = "Nenhuma";
-                
+
                 //des.VulneravelId = 0; 
 
                 db.Vulneravel.Add(vul);
@@ -302,7 +304,7 @@ namespace Dory2.Controllers
         public ActionResult ListMeusVulneraveis()
         {
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
-            List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.Ativo == false).ToList();
+            List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.IsVulneravel == true).ToList();
             List<Galeria> gal = db.Galeria.ToList();
             ViewBag.FotosPerfil = gal.ToArray();
             return View(infos);
@@ -328,48 +330,48 @@ namespace Dory2.Controllers
                 }
             }
 
-                // calculo da idade do responsavel
-                DateTime dataInicial = tut.Pessoa.DataNascimento;
-                DateTime dataFinal = DateTime.Now;
-                int ano = dataFinal.Year;
-                int anoInicial = dataInicial.Year;
-                int idade = ano - anoInicial;
-                ViewBag.Idade = idade;
+            // calculo da idade do responsavel
+            DateTime dataInicial = tut.Pessoa.DataNascimento;
+            DateTime dataFinal = DateTime.Now;
+            int ano = dataFinal.Year;
+            int anoInicial = dataInicial.Year;
+            int idade = ano - anoInicial;
+            ViewBag.Idade = idade;
 
-                Galeria galeria = db.Galeria.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
-                if (galeria != null)
+            Galeria galeria = db.Galeria.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            if (galeria != null)
+            {
+                ViewBag.FotoPerfil = galeria.Foto;
+            }
+
+            Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            Mais_infos infos = db.Mais_Infos.Where(x => x.VulneravelId == vul.Id).ToList().FirstOrDefault();
+
+            ViewBag.IsResponsavel = false;
+
+            if (Request.Cookies.Get("userId") != null)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                if (tut.ResponsavelId == resId)
                 {
-                    ViewBag.FotoPerfil = galeria.Foto;
+                    ViewBag.IsResponsavel = true;
                 }
+            }
 
-                Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
-                Mais_infos infos = db.Mais_Infos.Where(x => x.VulneravelId == vul.Id).ToList().FirstOrDefault();
+            ViewBag.Mental = infos.DeficienciaMental;
+            ViewBag.Fisico = infos.DeficienciaFisica;
+            ViewBag.Doencas = infos.Doencas;
+            ViewBag.Comidas = infos.RestricaoAlimentar;
+            ViewBag.Medicamentos = infos.RestricaoMedicamentos;
+            ViewBag.VulneravelId = vul.Id;
+            ViewBag.Sangue = infos.TipoSanguineo;
+            ViewBag.CorCabelo = infos.Cabelo;
+            ViewBag.CorOlhos = infos.Olhos;
+            ViewBag.Altura = infos.Altura;
+            ViewBag.Peso = infos.Peso;
+            ViewBag.Descricao = infos.Descricao;
 
-                ViewBag.IsResponsavel = false;
-
-                if (Request.Cookies.Get("userId") != null)
-                {
-                    int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
-                    if (tut.ResponsavelId == resId)
-                    {
-                        ViewBag.IsResponsavel = true;
-                    }
-                }
-
-                ViewBag.Mental = infos.DeficienciaMental;
-                ViewBag.Fisico = infos.DeficienciaFisica;
-                ViewBag.Doencas = infos.Doencas;
-                ViewBag.Comidas = infos.RestricaoAlimentar;
-                ViewBag.Medicamentos = infos.RestricaoMedicamentos;
-                ViewBag.VulneravelId = vul.Id;
-                ViewBag.Sangue = infos.TipoSanguineo;
-                ViewBag.CorCabelo = infos.Cabelo;
-                ViewBag.CorOlhos = infos.Olhos;
-                ViewBag.Altura = infos.Altura;
-                ViewBag.Peso = infos.Peso;
-                ViewBag.Descricao = infos.Descricao;
-
-            return View(tut);         
+            return View(tut);
         }
 
         public ActionResult UploadFotoPerfil(int? id)
