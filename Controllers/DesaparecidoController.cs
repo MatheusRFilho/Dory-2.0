@@ -809,7 +809,15 @@ namespace Dory2.Controllers
         {
             if(User.Identity.IsAuthenticated)
             {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
+
                 Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
 
                 des.Encontrado = DateTime.Now;
@@ -826,7 +834,14 @@ namespace Dory2.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
 
                 tut.IsDeleted = true;
                 db.SaveChanges();
@@ -841,7 +856,14 @@ namespace Dory2.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
 
                 tut.IsDeleted = false;
                 db.SaveChanges();

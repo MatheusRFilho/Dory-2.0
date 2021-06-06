@@ -453,5 +453,71 @@ namespace Dory2.Controllers
             TempData["MSG"] = "warning|Preencha todos os campos";
             return View();
         }
+
+        public ActionResult DesaparecimentoVulneravel(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias tut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse vulnerável";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                tut.Ativo = true;
+
+                Desaparecido des = new Desaparecido();
+                des.Pessoa = tut.Pessoa;
+                db.Desaparecido.Add(des);
+
+                Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                vul.Status = true;
+
+                Mais_infos min = db.Mais_Infos.Where(x => x.VulneravelId == vul.Id).ToList().FirstOrDefault();
+                min.Desaparecido = des;
+
+                db.SaveChanges();
+
+                return RedirectToAction("ListMeusVulneraveis", "Vulneravels");
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar alterar esse Vulneravel";
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult VulneravelEncontrado(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias tut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse vulnerável";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+
+                des.Encontrado = DateTime.Now;
+                tut.Ativo = false;
+
+                Mais_infos min = db.Mais_Infos.Where(x => x.DesaparecidoId == des.Id).ToList().FirstOrDefault();
+                min.DesaparecidoId = null;
+
+                Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+                vul.Status = false;
+
+                db.SaveChanges();
+
+                return RedirectToAction("ListMeusVulneraveis", "Vulneravels");
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar alterar esse vulnerável";
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

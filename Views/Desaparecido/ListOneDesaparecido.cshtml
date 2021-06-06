@@ -278,7 +278,16 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-                <a href="~/Desaparecido/DesaparecidoEncontrado/@Model.Id" class="btn btn-primary">Sim</a>
+                @{
+                    if (Model.IsVulneravel)
+                    {
+                        <a href="~/Vulneravels/VulneravelEncontrado/@Model.Id" class="btn btn-primary">Sim</a>
+                    }
+                    else
+                    {
+                        <a href="~/Desaparecido/DesaparecidoEncontrado/@Model.Id" class="btn btn-primary">Sim</a>
+                    }
+                }
             </div>
         </div>
     </div>
