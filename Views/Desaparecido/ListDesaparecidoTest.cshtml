@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "ListDesaparecidoTest";
+    ViewBag.Foto = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Listagem.css" rel="stylesheet" />
@@ -11,14 +12,41 @@
 </div>
 
 <h1 class="title"> Pessoas Desaparecidas </h1>
- 
+
 <div class="peoples-desaparecidas">
     @foreach (var item in Model)
     {
         if (item.Ativo)
         {
             <div class="card-desaparecido">
-                <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                @{
+                    if (ViewBag.FotosPerfil == null)
+                    {
+                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                    }
+                    else
+                    {
+                        ViewBag.Foto = "";
+                        foreach (var img in ViewBag.FotosPerfil)
+                        {
+                            if (img.PessoaId == item.PessoaId)
+                            {
+                                ViewBag.Foto = img.Foto;
+                            }
+                        }
+                    }
+                }
+                @{
+                    if (ViewBag.Foto != "")
+                    {
+                        <img src="~/Uploads/@ViewBag.Foto" alt="temp" class="img-perfil" style="border-radius: 50%" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" style="border-radius: 50%" />
+
+                    }
+                }
                 <p class="list-name">@Html.DisplayFor(model => item.Pessoa.Nome)</p>
                 <p class="list-age">
                     @{

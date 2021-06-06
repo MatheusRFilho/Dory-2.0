@@ -257,11 +257,11 @@
     <Content Include="Views\Desaparecido\EditarMaisInfos.cshtml" />
     <Content Include="Views\Desaparecido\ViEstaPessoa.cshtml" />
     <Content Include="Views\Desaparecido\UploadFotoPerfil.cshtml" />
+    <Content Include="Views\Vulneravels\UploadFotoPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\Vulneravel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

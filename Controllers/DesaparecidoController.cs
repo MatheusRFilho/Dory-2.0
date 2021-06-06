@@ -267,6 +267,8 @@ namespace Dory2.Controllers
                 ViewBag.Peso = infos.Peso;
                 ViewBag.Descricao = infos.Descricao;
 
+                //List<Casos> cas = db.Casos.Where(x => x.DesaparecidoId == des.Id).ToList();
+                //ViewBag.Casos = cas[0].Id;
 
                 return View(tut);
             }
@@ -276,6 +278,8 @@ namespace Dory2.Controllers
         public ActionResult ListDesaparecidoTest()
         {
             List<Tutorias> infos = db.Tutorias.ToList();
+            List<Galeria> gal = db.Galeria.ToList();
+            ViewBag.FotosPerfil = gal.ToArray();
             return View(infos);
         }
 
@@ -283,17 +287,34 @@ namespace Dory2.Controllers
         {
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.Ativo == true).ToList();
+            List<Galeria> gal = db.Galeria.ToList();
+            ViewBag.FotosPerfil = gal.ToArray();
             return View(infos);
         }
 
         public ActionResult UploadFotoPerfil(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                return View();
             }
 
-            return View();
+            TempData["MSG"] = "warning|Logue antes de tentar editar esse desaparecido";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -356,7 +377,8 @@ namespace Dory2.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
-                Tutorias validation = db.Tutorias.Where(x=> x.ResponsavelId == resId && x.PessoaId == id).ToList().FirstOrDefault();
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x=> x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
                 if (validation == null)
                 {
                     TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
@@ -539,7 +561,8 @@ namespace Dory2.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
-                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == id).ToList().FirstOrDefault();
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
                 if (validation == null)
                 {
                     TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";

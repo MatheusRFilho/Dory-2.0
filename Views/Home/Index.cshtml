@@ -18,7 +18,34 @@
                 <div class="item">
                     <a href="~/Desaparecido/ListOneDesaparecido/@item.Id" style="text-decoration: none; color: black">
                         <div class="img-perfil">
-                            <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                            @{
+                                if (ViewBag.FotosPerfil == null)
+                                {
+                                    <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" />
+                                }
+                                else
+                                {
+                                    ViewBag.Foto = "";
+                                    foreach (var img in ViewBag.FotosPerfil)
+                                    {
+                                        if (img.PessoaId == item.PessoaId)
+                                        {
+                                            ViewBag.Foto = img.Foto;
+                                        }
+                                    }
+                                }
+                            }
+                            @{
+                                if (ViewBag.Foto != "")
+                                {
+                                    <img src="~/Uploads/@ViewBag.Foto" alt="temp" class="img-perfil" style="border-radius: 50%" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/perfil.jpg" alt="temp" class="img-perfil" style="border-radius: 50%" />
+
+                                }
+                            }
                         </div>
                         <div>
                             <p class="textname">@Html.DisplayFor(model => item.Pessoa.Nome)</p>

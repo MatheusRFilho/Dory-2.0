@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -302,6 +303,8 @@ namespace Dory2.Controllers
         {
             int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
             List<Tutorias> infos = db.Tutorias.Where(x => x.ResponsavelId == resId && x.Ativo == false).ToList();
+            List<Galeria> gal = db.Galeria.ToList();
+            ViewBag.FotosPerfil = gal.ToArray();
             return View(infos);
         }
 
@@ -316,7 +319,8 @@ namespace Dory2.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
-                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == id).ToList().FirstOrDefault();
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
                 if (validation == null)
                 {
                     TempData["MSG"] = "warning|Não foi você quem cadastrou esse Vulneravel";
@@ -365,10 +369,87 @@ namespace Dory2.Controllers
                 ViewBag.Peso = infos.Peso;
                 ViewBag.Descricao = infos.Descricao;
 
+            return View(tut);         
+        }
 
-            return View(tut);
-            
-            
+        public ActionResult UploadFotoPerfil(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse vulnerável";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                return View();
+            }
+
+            TempData["MSG"] = "warning|Logue antes de tentar editar esse vulnerável";
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadFotoPerfil(UploadFoto upl, HttpPostedFileBase arq, int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Tutorias tut = db.Tutorias.Find(id);
+            Vulneravel vul = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+            string valor = "";
+            upl.PessoaId = vul.PessoaId;
+
+            if (ModelState.IsValid)
+            {
+                var resFoto = db.Galeria.Where(x => x.PessoaId == vul.PessoaId).ToList().FirstOrDefault();
+                if (arq != null)
+                {
+                    Upload.CriarDiretorio();
+                    string nomearq = DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(arq.FileName);
+                    valor = Upload.UploadArquivo(arq, nomearq);
+                    if (valor == "sucesso")
+                    {
+
+                        Galeria gal = new Galeria();
+                        gal.Foto = nomearq;
+                        gal.PessoaId = vul.PessoaId;
+                        db.Galeria.Add(gal);
+                        if (resFoto != null)
+                        {
+                            Upload.ExcluirArquivo(Request.PhysicalApplicationPath + "Uploads\\" + resFoto.Foto);
+                            db.Galeria.Remove(resFoto);
+                        }
+                        db.SaveChanges();
+                        return RedirectToAction("ListOneVulneravel/" + tut.Id, "Vulneravels");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", valor);
+                        TempData["MSG"] = "warning|Ops! Algo deu errado";
+                        return View();
+                    }
+                }
+                else
+                {
+                    TempData["MSG"] = "warning|Selecione uma imagem para seu perfil";
+                    return View();
+                }
+
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View();
         }
     }
 }

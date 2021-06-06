@@ -44,17 +44,14 @@
                 <div class="list-item-header-title">
                     <p class="body-title-header">Informações Pessoais</p>
                 </div>
-                <div class="list-item-header-edit">
+                <div class="list-item-header-edit2">
 
                     @{
                         if (ViewBag.IsResponsavel)
                         {
-                            <p class="link">
-                                    @Html.ActionLink("Editar dados pessoais", "EditarDadosPessoais", new { id = Model.Id })
-                            </p>
-                            @*<a href="~/Desaparecido/EditarDadosPessoais/@{Model.Id} ">
+                            <a href="~/Desaparecido/EditarDadosPessoais/@Model.Id" title="Editar dados pessoais">
                                 <img src="~/Images/edit.svg" />
-                            </a>*@
+                            </a>
                         }
                     }
                 </div>
@@ -124,12 +121,9 @@
                     @{
                         if (ViewBag.IsResponsavel)
                         {
-                            <p>
-                                @Html.ActionLink("Editar informações do desaparecido", "EditarMaisInfos", new { id = Model.Id })
-                            </p>
-                            @*<a href="~/Desaparecido/EditarDadosPessoais/@{Model.Id} ">
-                            <img src="~/Images/edit.svg" />
-                        </a>*@
+                            <a href="~/Desaparecido/EditarMaisInfos/@Model.Id" title="Editar informações">
+                                <img src="~/Images/edit.svg" />
+                            </a>
                         }
                     }
                 </div>

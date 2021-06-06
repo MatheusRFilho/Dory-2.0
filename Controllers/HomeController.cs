@@ -14,6 +14,8 @@ namespace Dory2.Controllers
         public ActionResult Index()
         {
             List<Tutorias> infos = db.Tutorias.ToList();
+            List<Galeria> gal = db.Galeria.ToList();
+            ViewBag.FotosPerfil = gal.ToArray();
             return View(infos);
         }
 
