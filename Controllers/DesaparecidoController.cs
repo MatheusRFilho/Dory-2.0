@@ -267,8 +267,8 @@ namespace Dory2.Controllers
                 ViewBag.Peso = infos.Peso;
                 ViewBag.Descricao = infos.Descricao;
 
-                //List<Casos> cas = db.Casos.Where(x => x.DesaparecidoId == des.Id).ToList();
-                //ViewBag.Casos = cas[0].Id;
+                List<Casos> cas = db.Casos.Where(x => x.DesaparecidoId == des.Id).ToList();
+                ViewBag.Historico = cas;
 
                 return View(tut);
             }

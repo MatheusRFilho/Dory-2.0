@@ -45,7 +45,6 @@
                     <p class="body-title-header">Informações Pessoais</p>
                 </div>
                 <div class="list-item-header-edit2">
-
                     @{
                         if (ViewBag.IsResponsavel)
                         {
@@ -117,7 +116,6 @@
                     <p class="body-title-header">Informações sobre a saúde da pessoa </p>
                 </div>
                 <div class="list-item-header-edit2">
-
                     @{
                         if (ViewBag.IsResponsavel)
                         {
@@ -125,6 +123,7 @@
                                 <img src="~/Images/edit.svg" />
                             </a>
                         }
+
                     }
                 </div>
             </div>
@@ -151,7 +150,6 @@
                 </div>
             </div>
 
-
             <div class="two-line-exibition">
                 <div class="list-item">
                     <p class="body-title">Outras condições</p>
@@ -161,13 +159,87 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-footer">
-        <div>
-            <input type="button" value="Voltar" onClick="history.go(-1)" class="btn btn-lg btn-default" style="margin-right: 16px">
-            <a href="~/Desaparecido/ViEstaPessoa/@Model.Id" class="btn btn-lg btn-primary">Eu vi esta pessoa</a>
-        </div>
+        <div class="bodycontent">
 
-        <a href="~/Denuncias/Create/@ViewBag.DesaparecidoId" class="card-denuncia">Denunciar este perfil</a>
+            <div class="two-line-exibition-header">
+                <div class="list-item-header-title">
+                    <p class="body-title-header">Histórico de localização </p>
+                </div>
+            </div>
+
+            @{
+                foreach (var hist in ViewBag.Historico)
+                {
+                <div class="two-line-exibition">
+                    <div class="list-item">
+                        <p class="body-title">Local</p>
+                        <p>@hist.UltimoLugarVisto</p>
+                    </div>
+                    <div class="list-item">
+                        <p class="body-title">Cidade</p>
+                        <p>@hist.UltimaLocalizacao</p>
+                    </div>
+                </div>
+                <div class="two-line-exibition">
+                    <div class="list-item">
+                        <p class="body-title">Ultima Roupa</p>
+                        <p>@hist.UltimaRoupa</p>
+                    </div>
+                    <div class="list-item">
+                        <p class="body-title">Data</p>
+                        <p>@hist.UltimoHorarioVisto.ToString().Split(' ')[0]</p>
+                    </div>
+                </div>
+                <div class="two-line-exibition">
+                    <div class="list-item">
+                        <p class="body-title">Mais informações</p>
+                        <p>@hist.MaisInformacoes</p>
+                    </div>
+                </div>
+                    if (ViewBag.isResponsavel)
+                    {
+                <div class="two-line-exibition">
+                    <div class="list-item">
+                        <p class="body-title">Quem viu?</p>
+                        <p>@hist.NomeQuemViu</p>
+                    </div>
+                </div>
+                <div class="two-line-exibition">
+                    <div class="list-item">
+                        <p class="body-title">Contato</p>
+                        <p>@hist.ContatoQuemViu</p>
+                    </div>
+                    <div class="list-item">
+                        <p class="body-title">Email</p>
+                        <p>@hist.EmailQuemViu</p>
+                    </div>
+                </div>
+                    }
+                <hr />
+                }
+            }
+        </div>
+    </div>
+
+    <div class="card-footer">
+
+        @{
+            if (ViewBag.isResponsavel)
+            {
+                <div>
+                    <input type="button" value="Voltar" onClick="history.go(-1)" class="btn btn-lg btn-default" style="margin-right: 16px">
+                    <a href="~/Desaparecido/ViEstaPessoa/@Model.Id" class="btn btn-lg btn-primary">Pessoa Encontrada</a>
+                </div>
+                <a href="~/Denuncias/Create/@ViewBag.DesaparecidoId" class="card-denuncia">Apagar desaparecido</a>
+            }
+            else
+            {
+                <div>
+                    <input type="button" value="Voltar" onClick="history.go(-1)" class="btn btn-lg btn-default" style="margin-right: 16px">
+                    <a href="~/Desaparecido/ViEstaPessoa/@Model.Id" class="btn btn-lg btn-primary">Eu vi esta pessoa</a>
+                </div>
+                <a href="~/Denuncias/Create/@ViewBag.DesaparecidoId" class="card-denuncia">Denunciar este perfil</a>
+            }
+        }
     </div>
 </div>
