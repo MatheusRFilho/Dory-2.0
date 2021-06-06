@@ -44,6 +44,7 @@ namespace Dory2.Controllers
                 Tutorias tut = new Tutorias();
                 tut.Ativo = true;
                 tut.Cadastro = DateTime.Now;
+                tut.IsDeleted = false;
                 tut.Responsavel = db.Responsavel.Find(resId);
                 tut.Pessoa = new Pessoa();
 
@@ -812,6 +813,22 @@ namespace Dory2.Controllers
                 Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
 
                 des.Encontrado = DateTime.Now;
+                tut.Ativo = false;
+                db.SaveChanges();
+
+                return RedirectToAction("ListDesaparecidoTest", "Desaparecido");
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar alterar esse desaparecido";
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ExcluirDesaparecido(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                Tutorias tut = db.Tutorias.Find(id);
+                //Desaparecido des = db.Desaparecido.Where(x => x.PessoaId == tut.PessoaId).ToList().FirstOrDefault();
+
                 tut.Ativo = false;
                 db.SaveChanges();
 

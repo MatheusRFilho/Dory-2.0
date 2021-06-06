@@ -16,7 +16,7 @@
 <div class="peoples-desaparecidas">
     @foreach (var item in Model)
     {
-        if (item.Ativo)
+        if (item.Ativo && !item.IsDeleted)
         {
             <div class="card-desaparecido">
                 @{

@@ -103,6 +103,7 @@ namespace Dory2.Models
             tut.Property(x => x.Ativo).HasColumnName("tut_ativo");
             tut.Property(x => x.Cadastro).HasColumnName("tut_data_cadastro");
             tut.Property(x => x.IsVulneravel).HasColumnName("tut_is_vulneravel");
+            tut.Property(x => x.IsDeleted).HasColumnName("tut_is_deleted");
             tut.Property(x => x.PessoaId).HasColumnName("pes_codigo");
             tut.Property(x => x.ResponsavelId).HasColumnName("res_codigo");
 

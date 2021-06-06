@@ -19,6 +19,7 @@ namespace Dory2.Models
         [Required]
         public bool Ativo  { get; set; }
         public bool IsVulneravel { get; set; }
+        public bool IsDeleted { get; set; }
         public virtual Responsavel Responsavel { get; set; }
         public virtual Pessoa Pessoa { get; set; }
 
