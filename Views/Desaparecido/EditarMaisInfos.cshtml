@@ -13,14 +13,29 @@
         <p>Tem algum tipo de deficiência mental ? Caso sim descreva:</p>
         <div class="form-container">
             <div class="form-group form-Box3">
-
-                <input id="deficienciaMentalRadio"
+                @{
+                    var validationMental = "";
+                    var validationMentalNo = "";
+                    var validationDisabledMental = false;
+                    if (Model.deficienciaMentalRadio == "yes")
+                    {
+                        validationMental = "checked='checked'";
+                        validationDisabledMental = true;
+                    }
+                    else
+                    {
+                        validationMentalNo = "checked='checked'";
+                    }
+                }
+                <input @validationMental
+                       id="deficienciaMentalRadio"
                        name="deficienciaMentalRadio"
                        type="radio"
                        value="yes"
                        onclick="showDescriptionMental()" />
                 <p>Sim</p>
-                <input checked="checked"
+                <input 
+                       @validationMentalNo
                        id="deficienciaMentalRadio"
                        name="deficienciaMentalRadio"
                        type="radio"
@@ -30,7 +45,18 @@
 
             </div>
             <div class="form-group form-Box4">
-                @Html.EditorFor(model => model.deficienciaMentalText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+
+                @{
+                    if (validationDisabledMental == true)
+                    {
+                        @Html.EditorFor(model => model.deficienciaMentalText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.deficienciaMentalText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = "disabled" } })
+                    }
+                }
+
                 @Html.ValidationMessageFor(model => model.deficienciaMentalText, "", new { @class = "text-danger mensagem-erro" })
             </div>
         </div>
@@ -41,14 +67,28 @@
         <p>Tem algum tipo de deficiência física ? Caso sim descreva:</p>
         <div class="form-container">
             <div class="form-group form-Box3">
-
-                <input id="deficienciaFisicaRadio"
+                @{
+                    var validationFisico = "";
+                    var validationFisicoNo = "";
+                    var validationDisabledFisico = false;
+                    if (Model.deficienciaFisicaRadio == "yes")
+                    {
+                        validationFisico = "checked='checked'";
+                        validationDisabledFisico = true;
+                    }
+                    else
+                    {
+                        validationFisicoNo = "checked='checked'";
+                    }
+                }
+                <input @validationFisico
+                       id="deficienciaFisicaRadio"
                        name="deficienciaFisicaRadio"
                        type="radio"
                        value="yes"
                        onclick="showDescriptionFisic()" />
                 <p>Sim</p>
-                <input checked="checked"
+                <input @validationFisicoNo
                        id="deficienciaFisicaRadio"
                        name="deficienciaFisicaRadio"
                        type="radio"
@@ -58,7 +98,17 @@
 
             </div>
             <div class="form-group form-Box4">
-                @Html.EditorFor(model => model.deficienciaFisicaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+
+                @{
+                    if (validationDisabledFisico == true)
+                    {
+                        @Html.EditorFor(model => model.deficienciaFisicaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição"} })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.deficienciaFisicaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = "disabled" } })
+                    }
+                }
                 @Html.ValidationMessageFor(model => model.deficienciaFisicaText, "", new { @class = "text-danger mensagem-erro" })
             </div>
         </div>
@@ -69,14 +119,28 @@
         <p>Tem algum tipo de restriçao Alimentar? Caso sim descreva:</p>
         <div class="form-container">
             <div class="form-group form-Box3">
-
-                <input id="restricaoAlimentarRadio"
+                @{
+                    var validationAlimentar = "";
+                    var validationAlimentarNo = "";
+                    var validationDisabledAliementar = false;
+                    if (Model.restricaoAlimentarRadio == "yes")
+                    {
+                        validationAlimentar = "checked='checked'";
+                        validationDisabledAliementar = true;
+                    }
+                    else
+                    {
+                        validationAlimentarNo = "checked='checked'";
+                    }
+                }
+                <input @validationAlimentar ;
+                       id="restricaoAlimentarRadio"
                        name="restricaoAlimentarRadio"
                        type="radio"
                        value="yes"
                        onclick="showDescriptionAlimentar()" />
                 <p>Sim</p>
-                <input checked="checked"
+                <input @validationAlimentarNo
                        id="restricaoAlimentarRadio"
                        name="restricaoAlimentarRadio"
                        type="radio"
@@ -86,7 +150,16 @@
 
             </div>
             <div class="form-group form-Box4">
-                @Html.EditorFor(model => model.restricaoAlimentarText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @{
+                    if (validationDisabledAliementar == true)
+                    {
+                        @Html.EditorFor(model => model.restricaoAlimentarText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.restricaoAlimentarText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = "disabled" } })
+                    }
+                }
                 @Html.ValidationMessageFor(model => model.restricaoAlimentarText, "", new { @class = "text-danger mensagem-erro" })
             </div>
         </div>
@@ -97,14 +170,28 @@
         <p>Tem algum tipo de restriçao a Medicamentos? Caso sim descreva:</p>
         <div class="form-container">
             <div class="form-group form-Box3">
-
-                <input id="restricaoMedicamentosRadio"
+                @{
+                    var validationMedicamentos = "";
+                    var validationMedicamentosNo = "";
+                    var validationDisabledMedicamentos = false;
+                    if (Model.restricaoMedicamentosRadio == "yes")
+                    {
+                        validationMedicamentos = "checked='checked'";
+                        validationDisabledMedicamentos = true;
+                    }
+                    else
+                    {
+                        validationMedicamentosNo = "checked='checked'";
+                    }
+                }
+                <input @validationMedicamentos
+                       id="restricaoMedicamentosRadio"
                        name="restricaoMedicamentosRadio"
                        type="radio"
                        value="yes"
                        onclick="showDescriptionMedicamentos()" />
                 <p>Sim</p>
-                <input checked="checked"
+                <input @validationMedicamentosNo
                        id="restricaoMedicamentosRadio"
                        name="restricaoMedicamentosRadio"
                        type="radio"
@@ -114,7 +201,16 @@
 
             </div>
             <div class="form-group form-Box4">
-                @Html.EditorFor(model => model.restricaoMedicamentosText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @{
+                    if (validationDisabledMedicamentos == true)
+                    {
+                        @Html.EditorFor(model => model.restricaoMedicamentosText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.restricaoMedicamentosText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = "disabled" } })
+                    }
+                }
                 @Html.ValidationMessageFor(model => model.restricaoMedicamentosText, "", new { @class = "text-danger mensagem-erro" })
             </div>
         </div>
@@ -125,14 +221,29 @@
         <p>Tem alguma condição especial que não se encaixe nos itens acima ? Caso sim descreva:</p>
         <div class="form-container">
             <div class="form-group form-Box3">
-
-                <input id="doencaRadio"
+                @{
+                    var validationDoencas = "";
+                    var validationDoencasNo = "";
+                    var validationDisabledDoencas = false;
+                    if (Model.doencaRadio == "yes")
+                    {
+                        validationDoencas = "checked='checked'";
+                        validationDisabledDoencas = true;
+                    }
+                    else
+                    {
+                        validationDoencasNo = "checked='checked'";
+                    }
+                }
+                <input @validationDoencas
+                       id="doencaRadio"
                        name="doencaRadio"
                        type="radio"
                        value="yes"
                        onclick="showDescriptionDoenca()" />
                 <p>Sim</p>
-                <input checked="checked"
+                <input 
+                       @validationDoencasNo
                        id="doencaRadio"
                        name="doencaRadio"
                        type="radio"
@@ -142,7 +253,16 @@
 
             </div>
             <div class="form-group form-Box4">
-                @Html.EditorFor(model => model.doencaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = true } })
+                @{
+                    if (validationDisabledDoencas == true)
+                    {
+                        @Html.EditorFor(model => model.doencaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição" } })
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.doencaText, new { htmlAttributes = new { @class = "form-control newform-control", @placeholder = "Descrição", @Disabled = "disabled" } })
+                    }
+                }
                 @Html.ValidationMessageFor(model => model.doencaText, "", new { @class = "text-danger mensagem-erro" })
             </div>
         </div>

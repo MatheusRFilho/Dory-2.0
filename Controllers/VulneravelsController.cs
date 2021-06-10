@@ -358,13 +358,51 @@ namespace Dory2.Controllers
                 }
             }
 
+
+            switch (infos.TipoSanguineo)
+            {
+                case "APositivo":
+                    ViewBag.Sangue = "A+";
+                    break;
+
+                case "ANegativo":
+                    ViewBag.Sangue = "A-";
+                    break;
+
+                case "ABPositivo":
+                    ViewBag.Sangue = "AB+";
+                    break;
+
+                case "ABNegativo":
+                    ViewBag.Sangue = "AB-";
+                    break;
+
+                case "OPositivo":
+                    ViewBag.Sangue = "O+";
+                    break;
+
+                case "ONegativo":
+                    ViewBag.Sangue = "O-";
+                    break;
+
+                case "BPositivo":
+                    ViewBag.Sangue = "B+";
+                    break;
+
+                case "BNegativo":
+                    ViewBag.Sangue = "B-";
+                    break;
+
+                default:
+                    break;
+            }
+
             ViewBag.Mental = infos.DeficienciaMental;
             ViewBag.Fisico = infos.DeficienciaFisica;
             ViewBag.Doencas = infos.Doencas;
             ViewBag.Comidas = infos.RestricaoAlimentar;
             ViewBag.Medicamentos = infos.RestricaoMedicamentos;
             ViewBag.VulneravelId = vul.Id;
-            ViewBag.Sangue = infos.TipoSanguineo;
             ViewBag.CorCabelo = infos.Cabelo;
             ViewBag.CorOlhos = infos.Olhos;
             ViewBag.Altura = infos.Altura;
