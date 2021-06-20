@@ -2,6 +2,10 @@
     padding: 0px;
 }
 
+a, h1, h1, h3, h4, h5, h6 {
+    font-family: 'Inter', 'sans-serif';
+}
+
 .homeContent {
     display: flex;
     flex: 1;
@@ -21,7 +25,6 @@
     position: fixed;
     display: flex;
     justify-content: center;
-
     -webkit-box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.63);
     box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.15);
@@ -56,9 +59,13 @@
 
 .link {
     margin-top: 20px;
-
     font-weight: 600;
+    text-decoration: none;
 }
+
+    .link:hover {
+        text-decoration: none;
+    }
 
 
 .contentContainer {
@@ -91,11 +98,11 @@
     margin-bottom: 6px;
 }
 
-.btnEntrar:hover {
-    text-decoration: none;
-    color: white;
-    background-color: #1A5182;
-}
+    .btnEntrar:hover {
+        text-decoration: none;
+        color: white;
+        background-color: #1A5182;
+    }
 
 .link2 {
     margin-left: 25px;
