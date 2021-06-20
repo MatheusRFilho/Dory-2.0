@@ -544,6 +544,7 @@ namespace Dory2.Controllers
                 if(des != null)
                 {
                     Pessoa pes = db.Pessoa.Find(des.PessoaId);
+                    Tutorias tut = db.Tutorias.Where(x => x.PessoaId == pes.Id).ToList().FirstOrDefault();
 
                     string auxRg = pes.Rg;
                     string auxCpf = pes.Cpf;
@@ -587,7 +588,7 @@ namespace Dory2.Controllers
                     min.TipoSanguineo = Convert.ToString(edt.TipoSanguineo);
                     db.SaveChanges();
 
-                    return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = des.Id });
+                    return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = tut.Id });
                 }
             }
             TempData["MSG"] = "warning|Preencha todos os campos";
@@ -663,6 +664,9 @@ namespace Dory2.Controllers
             if (ModelState.IsValid)
             {
                 Mais_infos inf = db.Mais_Infos.Where(x => x.DesaparecidoId == edt.codigo).ToList().FirstOrDefault();
+                Desaparecido des = db.Desaparecido.Find(edt.codigo);
+                Tutorias tut = db.Tutorias.Where(x => x.PessoaId == des.PessoaId).ToList().FirstOrDefault();
+
                 if (edt.deficienciaFisicaRadio == "yes")
                 {
                     if (edt.deficienciaFisicaText != null)
@@ -746,7 +750,7 @@ namespace Dory2.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = edt.codigo });
+                return RedirectToAction("ListOneDesaparecido", "Desaparecido", new { id = tut.Id });
 
             }
             return RedirectToAction("Index", "Home");

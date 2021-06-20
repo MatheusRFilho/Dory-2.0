@@ -504,11 +504,11 @@ namespace Dory2.Controllers
                     TempData["MSG"] = "warning|Não foi você quem cadastrou esse vulnerável";
                     return RedirectToAction("Index", "Home");
                 }
- 
+
                 Desaparecido des = new Desaparecido();
                 des.Pessoa = tut.Pessoa;
 
-                if(des.Pessoa.Cpf == null || des.Pessoa.Rg == null)
+                if (des.Pessoa.Cpf == null || des.Pessoa.Rg == null)
                 {
                     return RedirectToAction("CompletarCadastroVulneravel", "Vulneravels");
                 }
@@ -564,7 +564,7 @@ namespace Dory2.Controllers
 
         public ActionResult CompletarCadastroVulneravel(int? id)
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
                 Tutorias tut = db.Tutorias.Find(id);
@@ -603,6 +603,350 @@ namespace Dory2.Controllers
             db.SaveChanges();
 
             return RedirectToAction("DesaparecimentoVulneravel", "Vulneravels", new { id = tut.Id });
+        }
+
+        public ActionResult EditarDadosPessoais(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                EditarInformacoesPessoais edt = new EditarInformacoesPessoais();
+                Tutorias tut = db.Tutorias.Find(id);
+                Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+                Vulneravel des = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
+                Mais_infos min = db.Mais_Infos.Where(x => x.VulneravelId == des.Id).ToList().FirstOrDefault();
+
+                edt.Altura = Convert.ToString(min.Altura);
+                edt.CorCabelo = min.Cabelo;
+                edt.CorOlhos = min.Olhos;
+                edt.Cpf = pes.Cpf;
+
+                switch (pes.Cutis)
+                {
+                    case "Amarela":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Amarela;
+                        break;
+
+                    case "Branca":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Branca;
+                        break;
+
+                    case "Indigena":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Indígena;
+                        break;
+
+                    case "Negra":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Negra;
+                        break;
+
+                    case "Parda":
+                        edt.Cutis = EditarInformacoesPessoais.Etinias.Parda;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                switch (min.TipoSanguineo)
+                {
+                    case "APositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.APositivo;
+                        break;
+
+                    case "ANegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ANegativo;
+                        break;
+
+                    case "ABPositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABPositivo;
+                        break;
+
+                    case "ABNegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ABNegativo;
+                        break;
+
+                    case "OPositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.OPositivo;
+                        break;
+
+                    case "ONegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.ONegativo;
+                        break;
+
+                    case "BPositivo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BPositivo;
+                        break;
+
+                    case "BNegativo":
+                        edt.TipoSanguineo = EditarInformacoesPessoais.TipoSanguineos.BNegativo;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                switch (pes.Sexo)
+                {
+                    case "Masculino":
+                        edt.Sexo = EditarInformacoesPessoais.Sexos.Masculino;
+                        break;
+
+                    case "Feminino":
+                        edt.Sexo = EditarInformacoesPessoais.Sexos.Feminino;
+                        break;
+
+                    case "Outro":
+                        edt.Sexo = EditarInformacoesPessoais.Sexos.Outro;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                edt.DataNascimento = pes.DataNascimento;
+                edt.Descricao = min.Descricao;
+                edt.Nome = pes.Nome;
+                edt.Peso = Convert.ToString(min.Peso);
+                edt.Rg = pes.Rg;
+                edt.Codigo = des.Id;
+                return View(edt);
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar editar esse desaparecido";
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarDadosPessoais(EditarInformacoesPessoais edt)
+        {
+            if (ModelState.IsValid)
+            {
+                Vulneravel des = db.Vulneravel.Find(edt.Codigo);
+                if (des != null)
+                {
+                    Pessoa pes = db.Pessoa.Find(des.PessoaId);
+                    Tutorias tut = db.Tutorias.Where(x => x.PessoaId == pes.Id).ToList().FirstOrDefault();
+
+                    string auxRg = pes.Rg;
+                    string auxCpf = pes.Cpf;
+                    pes.Rg = "";
+                    pes.Cpf = "";
+
+                    db.SaveChanges();
+
+                    if (db.Pessoa.Where(x => x.Cpf == edt.Cpf).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Cpf", "CPF já cadastrado");
+                        pes.Rg = auxRg;
+                        pes.Cpf = auxCpf;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+
+                    if (db.Pessoa.Where(x => x.Rg == edt.Rg).ToList().Count > 0)
+                    {
+                        ModelState.AddModelError("Rg", "RG já cadastrado");
+                        pes.Rg = auxRg;
+                        pes.Cpf = auxCpf;
+                        db.SaveChanges();
+                        return View(edt);
+                    }
+
+                    pes.Nome = edt.Nome;
+                    pes.Rg = edt.Rg;
+                    pes.Cpf = edt.Cpf;
+                    pes.DataNascimento = edt.DataNascimento;
+                    pes.Sexo = Convert.ToString(edt.Sexo);
+                    pes.Cutis = Convert.ToString(edt.Cutis);
+                    db.SaveChanges();
+
+                    Mais_infos min = db.Mais_Infos.Where(x => x.VulneravelId == des.Id).ToList().FirstOrDefault();
+                    min.Altura = Convert.ToDecimal(edt.Altura);
+                    min.Cabelo = edt.CorCabelo;
+                    min.Descricao = edt.Descricao;
+                    min.Olhos = edt.CorOlhos;
+                    min.Peso = Convert.ToDecimal(edt.Peso);
+                    min.TipoSanguineo = Convert.ToString(edt.TipoSanguineo);
+                    db.SaveChanges();
+
+                    return RedirectToAction("ListOneVulneravel", "Vulneravels", new { id = tut.Id });
+                }
+            }
+            TempData["MSG"] = "warning|Preencha todos os campos";
+            return View(edt);
+        }
+
+        public ActionResult EditarMaisInfos(int? id)
+        {
+
+            if (User.Identity.IsAuthenticated)
+            {
+                int resId = Convert.ToInt32(Request.Cookies.Get("userId").Value);
+                Tutorias desTut = db.Tutorias.Find(id);
+                Tutorias validation = db.Tutorias.Where(x => x.ResponsavelId == resId && x.PessoaId == desTut.PessoaId).ToList().FirstOrDefault();
+                if (validation == null)
+                {
+                    TempData["MSG"] = "warning|Não foi você quem cadastrou esse desaparecido";
+                    return RedirectToAction("Index", "Home");
+                }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                FinalRegisterDesaparecido edt = new FinalRegisterDesaparecido();
+                Tutorias tut = db.Tutorias.Find(id);
+                Pessoa pes = db.Pessoa.Find(tut.PessoaId);
+                Vulneravel des = db.Vulneravel.Where(x => x.PessoaId == tut.PessoaId).ToList().LastOrDefault();
+                Mais_infos min = db.Mais_Infos.Where(x => x.VulneravelId == des.Id).ToList().FirstOrDefault();
+
+                edt.codigo = des.Id;
+                edt.deficienciaFisicaText = min.DeficienciaFisica;
+                edt.deficienciaMentalText = min.DeficienciaMental;
+                edt.doencaText = min.Doencas;
+                edt.restricaoAlimentarText = min.RestricaoAlimentar;
+                edt.restricaoMedicamentosText = min.RestricaoMedicamentos;
+
+                if (min.DeficienciaFisica != "Não tem ou não foi informado")
+                {
+                    edt.deficienciaFisicaRadio = "yes";
+                }
+
+                if (min.DeficienciaMental != "Não tem ou não foi informado")
+                {
+                    edt.deficienciaMentalRadio = "yes";
+                }
+
+                if (min.Doencas != "Não tem ou não foi informado")
+                {
+                    edt.doencaRadio = "yes";
+                }
+
+                if (min.RestricaoAlimentar != "Não tem ou não foi informado")
+                {
+                    edt.restricaoAlimentarRadio = "yes";
+                }
+
+                if (min.RestricaoMedicamentos != "Não tem ou não foi informado")
+                {
+                    edt.restricaoMedicamentosRadio = "yes";
+                }
+
+                return View(edt);
+            }
+            TempData["MSG"] = "warning|Logue antes de tentar editar esse desaparecido";
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarMaisInfos(FinalRegisterDesaparecido edt)
+        {
+            if (ModelState.IsValid)
+            {
+                Mais_infos inf = db.Mais_Infos.Where(x => x.VulneravelId == edt.codigo).ToList().FirstOrDefault();
+                Vulneravel vul = db.Vulneravel.Find(edt.codigo);
+                Tutorias tut = db.Tutorias.Where(x => x.PessoaId == vul.PessoaId).ToList().FirstOrDefault();
+                if (edt.deficienciaFisicaRadio == "yes")
+                {
+                    if (edt.deficienciaFisicaText != null)
+                    {
+                        inf.DeficienciaFisica = edt.deficienciaFisicaText;
+                    }
+                    else
+                    {
+                        inf.DeficienciaFisica = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.DeficienciaFisica = "Não tem ou não foi informado";
+                }
+
+
+                if (edt.deficienciaMentalRadio == "yes")
+                {
+                    if (edt.deficienciaMentalText != null)
+                    {
+                        inf.DeficienciaMental = edt.deficienciaMentalText;
+                    }
+                    else
+                    {
+                        inf.DeficienciaMental = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.DeficienciaMental = "Não tem ou não foi informado";
+                }
+
+                if (edt.doencaRadio == "yes")
+                {
+                    if (edt.doencaText != null)
+                    {
+                        inf.Doencas = edt.doencaText;
+                    }
+                    else
+                    {
+                        inf.Doencas = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.Doencas = "Não tem ou não foi informado";
+                }
+
+                if (edt.restricaoAlimentarRadio == "yes")
+                {
+                    if (edt.restricaoAlimentarText != null)
+                    {
+                        inf.RestricaoAlimentar = edt.restricaoAlimentarText;
+                    }
+                    else
+                    {
+                        inf.RestricaoAlimentar = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.RestricaoAlimentar = "Não tem ou não foi informado";
+                }
+
+                if (edt.restricaoMedicamentosRadio == "yes")
+                {
+                    if (edt.restricaoMedicamentosText != null)
+                    {
+                        inf.RestricaoMedicamentos = edt.restricaoMedicamentosText;
+                    }
+                    else
+                    {
+                        inf.RestricaoMedicamentos = "Tem porem não foi informado";
+                    }
+                }
+                else
+                {
+                    inf.RestricaoMedicamentos = "Não tem ou não foi informado";
+                }
+
+                db.SaveChanges();
+
+                return RedirectToAction("ListOneVulneravel", "Vulneravels", new { id = tut.Id });
+
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -8,13 +8,30 @@
     flex-direction: row;
 }
 
+.navbar-header {
+    float: left;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
 .navBarContainer {
     height: 100vh;
     width: 13%;
     position: fixed;
+    display: flex;
+    justify-content: center;
+
     -webkit-box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.63);
     box-shadow: 1px 0px 20px 5px rgba(50, 50, 50, 0.15);
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15%;
 }
 
 .menulink {
@@ -23,18 +40,24 @@
 }
 
 .menuContainer {
-    margin-top: 60px;
-    margin-left: 15px;
+    margin-top: 20%;
+}
+
+.menuLogoLink {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
 }
 
 .img-logo {
     height: 75px;
     width: 120px;
-    margin: 35px 60px;
 }
 
 .link {
     margin-top: 20px;
+
+    font-weight: 600;
 }
 
 
@@ -53,18 +76,19 @@
 
 .btnEntrar {
     display: flex;
+    width: 50%;
     align-items: center;
-    width: 44%;
-    height: 30px;
+    justify-content: center;
+    padding: 4px 0;
     background-color: #2c88d9;
     border-radius: 15px;
     color: #ffffff;
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
-    margin: 0 25px;
     text-decoration: none;
     transition: .2s;
+    margin-bottom: 6px;
 }
 
 .btnEntrar:hover {

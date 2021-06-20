@@ -1,0 +1,104 @@
+﻿@model Dory2.Models.EditarInformacoesPessoais
+
+@{
+    ViewBag.Title = "EditarDadosPessoais";
+    Layout = "~/Views/Shared/_Register.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+<h1 class="title">Atualize os dados pessoais</h1>
+<p class="subtitle">Mantenha sempre os dados atualizados</p>
+<div class="form-horizontal">
+    <div class="form-group form-Box2">
+        @Html.HiddenFor(model => model.Codigo)
+        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome" } })
+        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger mensagem-erro" })
+    </div>
+
+    <div class="form-container">
+        <div class="form-group form-Box">
+            @*@Html.LabelFor(model => model.Cpf, htmlAttributes: new { @class = "control-label" })*@
+            @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control", @placeholder = "CPF" } })
+            @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box">
+            @Html.EditorFor(model => model.Rg, new { htmlAttributes = new { @class = "form-control", @placeholder = "RG" } })
+            @Html.ValidationMessageFor(model => model.Rg, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-group form-Box">
+            @Html.EditorFor(model => model.CorOlhos, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cor dos olhos" } })
+            @Html.ValidationMessageFor(model => model.CorOlhos, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box">
+            @Html.EditorFor(model => model.CorCabelo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cor do cabelo" } })
+            @Html.ValidationMessageFor(model => model.CorCabelo, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-group form-Box">
+            @Html.TextBoxFor(model => model.DataNascimento, "{0:yyyy-MM-dd}", htmlAttributes: new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(model => model.CorOlhos, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box">
+            @Html.EnumDropDownListFor(model => model.Cutis, "Selecionar", new { @class = "form-control", @style = "min-width: 250px" })
+            @Html.ValidationMessageFor(model => model.Cutis, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-group form-Box">
+            @Html.EnumDropDownListFor(model => model.TipoSanguineo, "Selecionar", new { @class = "form-control", @style = "min-width: 250px" })
+            @Html.ValidationMessageFor(model => model.TipoSanguineo, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box">
+            @Html.EnumDropDownListFor(model => model.Sexo, "Selecionar", new { @class = "form-control", @style = "min-width: 250px" })
+            @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-group form-Box">
+            @Html.EditorFor(model => model.Altura, new { htmlAttributes = new { @class = "form-control", @placeholder = "Altura" } })
+            @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+
+        <div class="form-group form-Box">
+            @Html.EditorFor(model => model.Peso, new { htmlAttributes = new { @class = "form-control", @placeholder = "Peso" } })
+            @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger mensagem-erro" })
+        </div>
+    </div>
+
+    <div class="form-group form-Box2">
+        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adicione uma breve descrição sobre a pessoa" } })
+        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger mensagem-erro" })
+    </div>
+
+
+
+    <div class="form-container">
+        <div class="button-Container">
+            @*@Html.ActionLink("Voltar", "Index")*@
+            <input type="button" value="Voltar" onClick="history.go(-1)">
+        </div>
+
+        <div class="button-Container">
+            <input type="submit" value="Salvar alterações" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

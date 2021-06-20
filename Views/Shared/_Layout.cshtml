@@ -7,6 +7,8 @@
     <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap" rel="stylesheet">
     <link href="~/Content/Home.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
@@ -14,47 +16,44 @@
 <body>
     <div class="homeContent">
         <div class="navBarContainer">
-            <div class="">
-                <div class="navbar-header">
+            @*<div class="">*@
+            <div class="navbar-header">
+                <div class="menuLogoLink">
                     <a href="~/Home">
                         <img src="~/Images/Logo 3.0.png" alt="logo" class="img-logo" />
                     </a>
-                    <div class="menuContainer">
-                        <div class="menulink"><a href="~/Home" class="link">Home</a></div>
-                        <div class="menulink"><a href="~/Home#about" class="link">Sobre nós</a></div>
-                        <div class="menulink"><a href="~/Desaparecido/ListDesaparecidoTest" class="link">Desaparecido</a></div>
-                    </div>
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="menuContainer">
-                            <div class="menulink"><a href="~/Desaparecido/ListMeusDesaparecidos" class="link">Meus Desaparecidos</a></div>
-                            <div class="menulink"><a href="~/Desaparecido/InitialRegisterDesaparecido" class="link">Cadastrar Desaparecidos</a></div>
-                            <div class="menulink"><a href="~/Vulneravels/ListMeusVulneraveis" class="link">Meus Vulneráveis</a></div>
-                            <div class="menulink"><a href="~/Vulneravels/InitialRegisterVulneravel" class="link">Cadastrar Vulneravel</a></div>
-                            <div class="menulink"><p class="link">Estatísticas</p></div>
-                        </div>
-
-                        <div class="menuContainer">
-                            <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@Request.Cookies.Get("loginData").Value</a></div>
-                            <div class="menulink"><p class="link">Dory Gold</p></div>
-                            <div class="menulink"><a href="~/Responsavels/Sair" class="link">Sair</a></div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="menuContainer">
-                            <div class="btnEntrar">
-                                <a href="~/Responsavels/Acesso" class="btnEntrar">Entrar</a>
-                            </div>
-                            <div class="menulink"><a href="~/Responsavels/Cadastro" class="link2">Cadastrar</a></div>
-                            <script src="https://use.fontawesome.com/62e43a72a9.js"></script>
-
-                        </div>
-                    }
+                </div>
+                <div class="menuContainer">
+                    <div class="menulink"><a href="~/Home" class="link">Home</a></div>
+                    <div class="menulink"><a href="~/Home#about" class="link">Sobre nós</a></div>
+                    <div class="menulink"><a href="~/Desaparecido/ListDesaparecidoTest" class="link">Desaparecido</a></div>
                 </div>
 
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="menuContainer">
+                        <div class="menulink"><a href="~/Desaparecido/ListMeusDesaparecidos" class="link">Meus Desaparecidos</a></div>
+                        <div class="menulink"><a href="~/Desaparecido/InitialRegisterDesaparecido" class="link">Cadastrar Desaparecidos</a></div>
+                        <div class="menulink"><a href="~/Vulneravels/ListMeusVulneraveis" class="link">Meus Vulneráveis</a></div>
+                        <div class="menulink"><a href="~/Vulneravels/InitialRegisterVulneravel" class="link">Cadastrar Vulneravel</a></div>
+                    </div>
+
+                    <div class="menuContainer">
+                        <div class="menulink"><a href="~/Responsavels/Perfil/@Request.Cookies.Get("userId").Value" class="link">@Request.Cookies.Get("loginData").Value</a></div>
+                        @*<div class="menulink"><p class="link">Dory Gold</p></div>*@
+                        <div class="menulink"><a href="~/Responsavels/Sair" class="link">Sair</a></div>
+                    </div>
+                }
+                else
+                {
+                    <div class="buttonContainer">
+                        <a href="~/Responsavels/Acesso" class="btnEntrar">Entrar</a>
+                        <a href="~/Responsavels/Cadastro">Cadastrar</a>
+                    </div>
+                }
             </div>
+
+            @*</div>*@
         </div>
         <div class="contentContainer">
             @RenderBody()
@@ -65,6 +64,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @*<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>tinymce.init({ selector: 'textarea' });</script>*@
+    <script src="https://use.fontawesome.com/62e43a72a9.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @if (TempData["MSG"] != null)
     {
