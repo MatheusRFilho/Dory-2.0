@@ -213,6 +213,7 @@ namespace Dory2.Controllers
 
                 db.SaveChanges();
 
+                TempData["MSG"] = "success|Cadastro efetuado com sucesso, o desaparecido já está visível no Dory e pode ser visualizado na sessão de Meus Desaparecidos";
                 return RedirectToAction("Index", "Home");
             }
             return View();

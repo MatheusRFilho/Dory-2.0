@@ -295,6 +295,7 @@ namespace Dory2.Controllers
 
                 db.SaveChanges();
 
+                TempData["MSG"] = "success|Cadastro efetuado com sucesso, o vulnerável já pode ser visualizado na sessão de Meus Vulneráveis";
                 return RedirectToAction("Index", "Home");
 
             }
