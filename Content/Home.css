@@ -2,7 +2,7 @@
     padding: 0px;
 }
 
-a, h1, h1, h3, h4, h5, h6 {
+a, h1, h1, h3, h4, h5, h6, input, button {
     font-family: 'Inter', 'sans-serif' !important;
 }
 
@@ -131,6 +131,7 @@ a, h1, h1, h3, h4, h5, h6 {
     display: flex;
     flex: 1;
     flex-direction: row;
+    width: 80%;
 }
 
 .img-not-found {
@@ -140,6 +141,12 @@ a, h1, h1, h3, h4, h5, h6 {
 
 .text-not-found {
     width: 40%;
+    margin: auto auto;
+}
+
+.text-encontrado {
+    align-self: center;
+    font-size: 24px;
     margin: auto auto;
 }
 

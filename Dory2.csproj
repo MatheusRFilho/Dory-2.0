@@ -166,6 +166,7 @@
     <Content Include="Content\Perfil.css" />
     <Content Include="Content\register-forms.css" />
     <Content Include="Content\viestapessoa.css" />
+    <Content Include="Images\banner 1.png" />
     <Content Include="Images\banner 2.jpg" />
     <Content Include="Images\banner 3.jpg" />
     <Content Include="Images\edit.svg" />

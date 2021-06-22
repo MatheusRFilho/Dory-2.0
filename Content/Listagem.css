@@ -8,18 +8,19 @@
     margin: 0 auto;
     grid-gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 0 100px;
+    padding: 0 15%;
 }
 
 .card-desaparecido {
     width: 250px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     border: 1px solid #C3CFD9;
     border-radius: 5px;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .list-name {
